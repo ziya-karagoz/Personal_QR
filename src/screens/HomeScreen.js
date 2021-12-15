@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View, StatusBar, TouchableOpacity } from "react-native";
 import { Header } from "react-native/Libraries/NewAppScreen";
 import {
   widthPercentageToDP as wp,
@@ -14,16 +14,18 @@ import Icon from "react-native-vector-icons/Entypo";
 function HomeScreen(props) {
   return (
     <View style={styles.container}>
-      <StatusBar hidden />
-      <View>
-        <HeaderBar style={styles.headerBar}></HeaderBar>
+      <View  style={styles.headerBar}>
+        <HeaderBar style = {{flex:1}}></HeaderBar>
       </View>
 
-      <View>
-        <Icon name='circle-with-plus' style={styles.icon}></Icon>
+      <View style = {styles.body}>
+        <TouchableOpacity>
+          <Icon name="circle-with-plus" style = {styles.icon}></Icon>
+        </TouchableOpacity>
       </View>
-      <View>
-        <FooterBar style={styles.footerBar}></FooterBar>
+      
+      <View style={styles.footerBar}>
+        <FooterBar style = {{flex:1, backgroundColor: "rgba(242,242,242,1)"}}></FooterBar>
       </View>
     </View>
   );
@@ -31,27 +33,25 @@ function HomeScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: wp("100"),
-    heigth: hp("100"),
+    height: hp("100"),
+    width: wp("100")
+
   },
   headerBar: {
-    height: 75,
-    width: wp("100"),
+    flex: 1
   },
   footerBar: {
-    height: 75,
-    width: wp("100"),
-    backgroundColor: "rgba(242,242,242,1)",
-    marginTop: 500,
-    alignSelf: "flex-end",
+    flex: 1,
+
+  },
+  body: {
+    flex: 6,
   },
   icon: {
     color: "rgba(128,128,128,1)",
     fontSize: 60,
-    alignSelf: "flex-end",
-    marginBottom: 106,
-    marginRight: 23,
+    marginLeft: "75%",
+    marginTop: "110%"
   },
 });
 
