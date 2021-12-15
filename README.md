@@ -13,6 +13,7 @@ gender: "Male",
 qrBlock: {
 qr1: {
 qrId: 61b740082a29928aa126171d,
+qrName:"Arabam icin",
 messageBlock: {
 message1: "Geldin mi?"
 message2: "Sinavlar obsdedir.";
