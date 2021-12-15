@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, StatusBar, TouchableOpacity } from "react-native";
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
+
+//Component imports
 import HeaderBar from "../components/molecules/HeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import Icon from "react-native-vector-icons/Entypo";
@@ -20,16 +27,18 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: hp("100%"),
+    width: wp("100%"),
   },
   footerbar: {
     height: 75,
-    width: 360,
+    width: wp("100%"),
     backgroundColor: "rgba(242,242,242,1)",
     marginTop: 645,
   },
   headerBar: {
     height: 75,
-    width: 360,
+    width: wp("100%"),
     marginTop: -720,
   },
   icon: {
