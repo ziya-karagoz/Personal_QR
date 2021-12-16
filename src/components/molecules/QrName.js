@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-function TextIn(props) {
+function QrName(props) {
   return (
     <View style={styles.container}>
       <TextInput
@@ -26,4 +26,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TextIn;
+export default QrName;

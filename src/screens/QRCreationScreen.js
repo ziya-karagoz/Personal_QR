@@ -5,6 +5,7 @@ import {
   Text,
   StatusBar,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -13,12 +14,13 @@ import {
 
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
-import TextInput from "../components/molecules/TextInput";
+import QrName from "../components/molecules/QrName";
 import AddMessageButton from "../components/molecules/AddMessageButton";
+import MessageBlock from "../components/molecules/MessageBlock";
 
 import Icon from "react-native-vector-icons/Entypo";
 
-function QRCreationScreen({ navigation }) {
+function QRCreationScreen(props) {
   return (
     <View style={styles.container}>
       <View style={styles.headerBar}>
@@ -28,17 +30,25 @@ function QRCreationScreen({ navigation }) {
       </View>
 
       <View style={styles.body1}>
-        <View style={{ flex: 1 }}></View>
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <Image
+            style={styles.image}
+            resizeMode='contain'
+            source={require("../Assets/Images/QR.png")}
+          ></Image>
+        </View>
         <View style={{ flex: 1 }}>
           <View style={styles.qrAdı}>
             <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
-            <TextInput></TextInput>
+            <QrName></QrName>
           </View>
           <AddMessageButton></AddMessageButton>
         </View>
       </View>
 
-      <View style={styles.body2} props={navigation}></View>
+      <View style={styles.body2}>
+        <MessageBlock></MessageBlock>
+      </View>
 
       <View style={styles.footerBar}>
         <FooterBar
@@ -70,6 +80,9 @@ const styles = StyleSheet.create({
 
   body2: {
     flex: 4.5,
+    alignItems: "center",
+    alignContent: "center",
+    paddingBottom: 30,
   },
 
   icon: {
@@ -82,6 +95,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
+  },
+  image: {
+    width: 130,
+    height: 130,
+    alignSelf: "center",
   },
 });
 
