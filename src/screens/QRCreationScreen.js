@@ -38,8 +38,8 @@ function QRCreationScreen(props) {
           ></Image>
         </View>
         <View style={{ flex: 1 }}>
-          <View style={styles.qrAdı}>
-            <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
+          <View style={styles.qrAdi}>
+            <Text style={{ marginTop: "10%" }}>Qr Adi:</Text>
             <QrName></QrName>
           </View>
           <AddMessageButton></AddMessageButton>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
 
-  qrAdı: {
+  qrAdi: {
     height: 60,
     flexDirection: "row",
     alignItems: "center",

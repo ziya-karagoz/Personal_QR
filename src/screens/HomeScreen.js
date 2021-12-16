@@ -12,6 +12,9 @@ import FooterBar from "../components/molecules/FooterBar";
 import Icon from "react-native-vector-icons/Entypo";
 
 function HomeScreen({ navigation }) {
+  const createQRPressHandler = () => {
+    navigation.navigate("QRCreation");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.headerBar}>
@@ -19,7 +22,10 @@ function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.body}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={createQRPressHandler}
+          style={styles.touchableIcon}
+        >
           <Icon name='circle-with-plus' style={styles.icon}></Icon>
         </TouchableOpacity>
       </View>
@@ -50,8 +56,14 @@ const styles = StyleSheet.create({
   icon: {
     color: "rgba(128,128,128,1)",
     fontSize: 60,
-    marginLeft: "75%",
-    marginTop: "110%",
+    height: "100%",
+    width: "100%",
+  },
+  touchableIcon: {
+    left: "75%",
+    top: "82%",
+    height: "10%",
+    width: "15%",
   },
 });
 

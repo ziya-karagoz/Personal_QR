@@ -1,39 +1,93 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TextInput, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 function MessageBlock(props) {
-    return (
-      <View style={styles.container}>
-        <View style = {{flex:1, flexDirection:"row",}}>
-            <View style = {{flex:1, justifyContent:"center"}}>
-                <Text>Soru1</Text>
-            </View>
-            <TextInput
-                multiline  
-                placeholder="_______________"
-                clearTextOnFocus={true}
-                style={styles.textInput}
-            ></TextInput>
-            <View style={{flex:1}}></View>
+  return (
+    <View style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ marginTop: "10%", marginLeft: "15%" }}>Soru1:</Text>
         </View>
-        <View style = {{flex:1}}></View>
+
+        <View style={{ flex: 4 }}>
+          <TextInput
+            multiline
+            placeholder='_______________'
+            clearTextOnFocus={true}
+            style={styles.textInput}
+          ></TextInput>
+        </View>
+
+        <View style={{ flex: 1 }}>
+          <TouchableOpacity>
+            <Image
+              style={styles.icon}
+              resizeMode='contain'
+              source={require("../../Assets/Images/editIcon.png")}
+            ></Image>
+          </TouchableOpacity>
+        </View>
       </View>
-    );
-  }
-  
-  const styles = StyleSheet.create({
-    container: {
-      width: "90%",
-      height: "30%",
-      backgroundColor: "gray",
-      opacity: 20
-    },
-    textInput: {
-      color: "#121212",
-      height: 50,
-      width: 100,
-      flex:1
-    }
-  });
-  
-  export default MessageBlock;
+
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+          borderTopColor: "black",
+          borderTopWidth: 0.7,
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <Text style={{ left: "5%", top: "2%" }}>Cevap1:</Text>
+        </View>
+
+        <View style={{ flex: 4 }}>
+          <TextInput
+            multiline
+            placeholder='_______________'
+            clearTextOnFocus={true}
+            style={styles.textInput2}
+          ></TextInput>
+        </View>
+
+        <View style={{ flex: 1 }}></View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    width: "90%",
+    height: "35%",
+    backgroundColor: "#E6E6E6",
+  },
+  textInput: {
+    color: "#121212",
+    top: "4%",
+  },
+  textInput2: {
+    color: "#121212",
+    top: "-3%",
+  },
+  icon: {
+    height: "65%",
+    width: "65%",
+    alignSelf: "center",
+    top: "7%",
+  },
+});
+
+export default MessageBlock;
