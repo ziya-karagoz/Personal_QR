@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
-function HeaderBar(props) {
+function CreationHeaderBar(props) {
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity style={styles.btnWrapper1}>
@@ -16,13 +16,18 @@ function HeaderBar(props) {
           ]}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper2}>
+      <TouchableOpacity style={styles.btnWrapper1}>
         <MaterialCommunityIconsIcon
           name='qrcode-edit'
           style={styles.mainIcon}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper2}></TouchableOpacity>
+      <TouchableOpacity style={styles.btnWrapper1}>
+        <MaterialCommunityIconsIcon
+          name='palette'
+          style={styles.paletteIcon}
+        ></MaterialCommunityIconsIcon>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -43,17 +48,18 @@ const styles = StyleSheet.create({
     fontSize: 24,
     opacity: 0.8,
   },
-  btnWrapper2: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
   mainIcon: {
     backgroundColor: "transparent",
     color: "#616161",
     fontSize: 24,
     opacity: 0.8,
   },
+  paletteIcon: {
+    color: "rgba(128,128,128,0.68)",
+    fontSize: 40,
+    opacity: 0.9,
+    backgroundColor: "transparent"
+  },
 });
 
-export default HeaderBar;
+export default CreationHeaderBar;

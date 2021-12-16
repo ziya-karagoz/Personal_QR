@@ -11,6 +11,7 @@ import {
 import QRCode from "react-native-qrcode-svg";
 
 import HomeScreen from "./src/screens/HomeScreen";
+import QRCreationScreen from "./src/screens/QRCreationScreen";
 
 export default function App() {
   const [inputText, setInputText] = useState("");
@@ -59,8 +60,11 @@ export default function App() {
     //     </TouchableOpacity>
     //   </View>
     // </SafeAreaView>
+    // <SafeAreaView>
+    //   <HomeScreen />
+    // </SafeAreaView>
     <SafeAreaView>
-      <HomeScreen />
+      <QRCreationScreen/>
     </SafeAreaView>
   );
 }
