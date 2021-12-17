@@ -32,7 +32,7 @@ function HomeScreen({ navigation }) {
 
       <View style={styles.footerBar}>
         <FooterBar
-          style={{ flex: 1, backgroundColor: "rgba(242,242,242,1)" }}
+          style={{ flex: 1 }}
         ></FooterBar>
       </View>
     </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   touchableIcon: {
     left: "75%",
     top: "82%",
-    height: "10%",
+    height: "12%",
     width: "15%",
   },
 });

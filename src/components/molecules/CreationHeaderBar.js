@@ -34,7 +34,7 @@ function CreationHeaderBar(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(242,242,242,1)",
+    backgroundColor: "rgba(0,0,0,0.07)",
     flexDirection: "row",
     width: "100%",
   },

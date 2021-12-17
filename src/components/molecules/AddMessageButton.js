@@ -3,8 +3,8 @@ import { StyleSheet, View, Text, ViewBase, TouchableOpacity } from "react-native
 
 function AddMessageButton(props) {
   return (
-    <TouchableOpacity>
-        <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
+        <View >
             <View style = {styles.text}>
                 <Text>Mesaj Ekle</Text>
             </View>
@@ -18,7 +18,8 @@ const styles = StyleSheet.create({
     width: 100,
     height: 24,
     backgroundColor: "gray",
-    marginLeft: "25%"
+    marginLeft: "25%",
+    top: "32%"
   },
   text: {
     height: 24,

@@ -21,35 +21,36 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Start'>
-        <Stack.Screen
-          name='Home'
-          component={HomeScreen}
-          options={{ headerShown: false }}
-        ></Stack.Screen>
-        <Stack.Screen
-          name='QRCreation'
-          component={QRCreationScreen}
-          options={{ headerShown: false }}
-        ></Stack.Screen>
-        <Stack.Screen
-          name='Start'
-          component={StartScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Login'
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Register'
-          component={RegisterScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name='ResetPassword' component={ResetPasswordScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName='Start'>
+    //     <Stack.Screen
+    //       name='Home'
+    //       component={HomeScreen}
+    //       options={{ headerShown: false }}
+    //     ></Stack.Screen>
+    //     <Stack.Screen
+    //       name='QRCreation'
+    //       component={QRCreationScreen}
+    //       options={{ headerShown: false }}
+    //     ></Stack.Screen>
+    //     <Stack.Screen
+    //       name='Start'
+    //       component={StartScreen}
+    //       options={{ headerShown: false }}
+    //     />
+    //     <Stack.Screen
+    //       name='Login'
+    //       component={LoginScreen}
+    //       options={{ headerShown: false }}
+    //     />
+    //     <Stack.Screen
+    //       name='Register'
+    //       component={RegisterScreen}
+    //       options={{ headerShown: false }}
+    //     />
+    //     <Stack.Screen name='ResetPassword' component={ResetPasswordScreen} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+    <QRCreationScreen></QRCreationScreen>
   );
 }

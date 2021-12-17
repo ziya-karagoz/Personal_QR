@@ -46,7 +46,7 @@ function FooterBar(props) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(255,255,255,1)",
+    backgroundColor: "rgba(0,0,0,0.07)",
     flexDirection: "row",
     width: "100%",
   },

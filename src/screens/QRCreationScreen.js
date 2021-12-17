@@ -6,6 +6,9 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  ScrollView,
+  SafeAreaView,
+  KeyboardAvoidingView
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -19,9 +22,11 @@ import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
 
 import Icon from "react-native-vector-icons/Entypo";
+import { ceil } from "react-native-reanimated";
 
 function QRCreationScreen(props) {
   return (
+  
     <View style={styles.container}>
       <View style={styles.headerBar}>
         <CreationHeaderBar style={{ flex: 1 }}>
@@ -39,20 +44,27 @@ function QRCreationScreen(props) {
         </View>
         <View style={{ flex: 1 }}>
           <View style={styles.qrAdi}>
-            <Text style={{ marginTop: "10%" }}>Qr Adi:</Text>
+            <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
             <QrName></QrName>
           </View>
           <AddMessageButton></AddMessageButton>
         </View>
       </View>
 
-      <View style={styles.body2}>
-        <MessageBlock></MessageBlock>
-      </View>
+      
+        <View style= {styles.body2}>
+
+          <ScrollView contentContainerStyle = {{alignItems: "center", flex:4.5}}>
+            <MessageBlock></MessageBlock>
+            <MessageBlock></MessageBlock>
+            <MessageBlock></MessageBlock>
+          </ScrollView>
+
+        </View>
 
       <View style={styles.footerBar}>
         <FooterBar
-          style={{ flex: 1, backgroundColor: "rgba(242,242,242,1)" }}
+          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.07)" }}
         ></FooterBar>
       </View>
     </View>
@@ -80,8 +92,6 @@ const styles = StyleSheet.create({
 
   body2: {
     flex: 4.5,
-    alignItems: "center",
-    alignContent: "center",
     paddingBottom: 30,
   },
 
@@ -97,6 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image: {
+    top: "3%",
     width: 130,
     height: 130,
     alignSelf: "center",

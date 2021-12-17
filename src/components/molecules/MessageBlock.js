@@ -10,6 +10,7 @@ import {
 
 function MessageBlock(props) {
   return (
+    
     <View style={styles.container}>
       <View
         style={{
@@ -53,6 +54,7 @@ function MessageBlock(props) {
           <Text style={{ left: "5%", top: "2%" }}>Cevap1:</Text>
         </View>
 
+        
         <View style={{ flex: 4 }}>
           <TextInput
             multiline
@@ -70,6 +72,7 @@ function MessageBlock(props) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: "2%",
     width: "90%",
     height: "35%",
     backgroundColor: "#E6E6E6",
