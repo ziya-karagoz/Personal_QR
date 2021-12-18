@@ -8,17 +8,17 @@ import {
 } from "react-native";
 
 const DATA = [
-  {qrAdi: "Arabam için"},
-  {qrAdi: "Evim için"},
-  {qrAdi: "Okul için"},
-  {qrAdi: "Sınav sonuçları"},
-  {qrAdi: "Kendime hatırlatma"},
-  {qrAdi: "Malzeme listesi"},
-  {qrAdi: "Yapacaklar listem"},
-  {qrAdi: "Ajanda"},
+  {qrAdi: 'Arabam için'},
+  {qrAdi: 'Evim için'},
+  {qrAdi: 'Okul için'},
+  {qrAdi: 'Sınav sonuçları'},
+  {qrAdi: 'Kendime hatırlatma'},
+  {qrAdi: 'Malzeme listesi'},
+  {qrAdi: 'Yapacaklar listem'},
+  {qrAdi: 'Ajanda'},
 ];
 
-const Item = (qrAdi) => (
+const Item = ({qrAdi}) => (
   <View style={styles.container}>
       <View style={styles.body1}>
         <Text style = {{ }}>{qrAdi}</Text>
@@ -33,7 +33,7 @@ const Item = (qrAdi) => (
 
 function ExistingQR(props) {
   const renderItem = ({ item }) => (
-    <Item ></Item>
+    <Item qrAdi={item.qrAdi} ></Item>
   );
   return (
     <FlatList
