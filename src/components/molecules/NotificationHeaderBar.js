@@ -47,18 +47,21 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 24,
     opacity: 0.8,
+    top: 10
   },
   mainIcon: {
     backgroundColor: "transparent",
     color: "#616161",
     fontSize: 24,
     opacity: 0.8,
+    top: 10
   },
   deleteIcon: {
     color: "rgba(128,128,128,0.68)",
     fontSize: 35,
     opacity: 0.9,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    top: 10
   },
 });
 

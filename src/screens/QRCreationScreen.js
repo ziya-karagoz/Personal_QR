@@ -51,6 +51,7 @@ function QRCreationScreen(props) {
               <MessageBlock></MessageBlock>
               <MessageBlock></MessageBlock>
               <MessageBlock></MessageBlock>
+              
             </ScrollView>  
       </SafeAreaView>
 

@@ -29,6 +29,7 @@ function NotificationScreen(props) {
           <NotificationBlock></NotificationBlock>
           <NotificationBlock></NotificationBlock>
           <NotificationBlock></NotificationBlock>
+          
         </ScrollView>  
       </SafeAreaView>
 

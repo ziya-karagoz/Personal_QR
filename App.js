@@ -53,9 +53,9 @@ export default function App() {
     //     <Stack.Screen name='ResetPassword' component={ResetPasswordScreen} />
     //   </Stack.Navigator>
     // </NavigationContainer>
-    //<QRCreationScreen></QRCreationScreen>
+    <QRCreationScreen></QRCreationScreen>
     //<NotificationScreen></NotificationScreen>
     //<PaletteScreen></PaletteScreen>
-    <HomeScreen>  </HomeScreen>
+    //<HomeScreen></HomeScreen>
     );
 }

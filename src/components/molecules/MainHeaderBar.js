@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
-function CreationHeaderBar(props) {
+function MainHeaderBar(props) {
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity style={styles.btnWrapper1}>
@@ -23,10 +24,9 @@ function CreationHeaderBar(props) {
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
       <TouchableOpacity style={styles.btnWrapper1}>
-        <MaterialCommunityIconsIcon
-          name='palette'
-          style={styles.paletteIcon}
-        ></MaterialCommunityIconsIcon>
+        <Icon
+          name='add-circle-outline' style={styles.icon}
+        ></Icon>
       </TouchableOpacity>
     </View>
   );
@@ -49,6 +49,11 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     top: 10
   },
+  btnWrapper2: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   mainIcon: {
     backgroundColor: "transparent",
     color: "#616161",
@@ -56,13 +61,13 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     top: 10
   },
-  paletteIcon: {
-    color: "rgba(128,128,128,0.68)",
-    fontSize: 40,
-    opacity: 0.9,
+  icon:{
+    fontSize:35,
+    opacity:0.8,
     backgroundColor: "transparent",
+    color: "#616161",
     top: 10
-  },
+  }
 });
 
-export default CreationHeaderBar;
+export default MainHeaderBar;

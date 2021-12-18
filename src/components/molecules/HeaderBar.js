@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 24,
     opacity: 0.8,
+    top: 10
   },
   btnWrapper2: {
     flex: 1,
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     color: "#616161",
     fontSize: 24,
     opacity: 0.8,
+    top: 10
   },
 });
 

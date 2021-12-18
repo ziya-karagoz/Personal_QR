@@ -4,7 +4,8 @@ import {
   View,
   Text,
   Image,
-  FlatList
+  FlatList,
+  TouchableOpacity
 } from "react-native";
 
 const DATA = [
@@ -19,14 +20,14 @@ const DATA = [
 ];
 
 const Item = ({qrAdi}) => (
-  <View style={styles.container}>
+  <TouchableOpacity style={styles.container}>
       <View style={styles.body1}>
         <Text style = {{ }}>{qrAdi}</Text>
       </View>
       <View style={styles.body2}>
         <Image style = {styles.qrImage} source={require("../../Assets/Images/QR.png")}></Image>
       </View>
-    </View>
+    </TouchableOpacity>
 );
 
 
