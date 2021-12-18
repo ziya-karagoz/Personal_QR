@@ -1,27 +1,35 @@
-import React, { Component } from "react";
-import { StyleSheet, View, StatusBar, TouchableOpacity } from "react-native";
-import { Header } from "react-native/Libraries/NewAppScreen";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import React, {} from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+
 
 import HeaderBar from "../components/molecules/HeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 
+
 import Icon from "react-native-vector-icons/Entypo";
+import ExistingQR from "../components/molecules/ExistingQR";
+
+
+
+
 
 function HomeScreen({ navigation }) {
   const createQRPressHandler = () => {
     navigation.navigate("QRCreation");
   };
+ 
+  
   return (
+
     <View style={styles.container}>
       <View style={styles.headerBar}>
         <HeaderBar style={{ flex: 1 }}></HeaderBar>
       </View>
 
       <View style={styles.body}>
+
+        <ExistingQR></ExistingQR>
+
         <TouchableOpacity
           onPress={createQRPressHandler}
           style={styles.touchableIcon}
@@ -41,8 +49,7 @@ function HomeScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("100"),
-    width: wp("100"),
+    flex:1
   },
   headerBar: {
     flex: 1,
@@ -56,12 +63,11 @@ const styles = StyleSheet.create({
   icon: {
     color: "rgba(128,128,128,1)",
     fontSize: 60,
-    height: "100%",
-    width: "100%",
+    flex:1,
   },
   touchableIcon: {
     left: "75%",
-    top: "82%",
+    top: "85%",
     height: "12%",
     width: "15%",
   },

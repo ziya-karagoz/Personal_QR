@@ -3,12 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  StatusBar,
-  TouchableOpacity,
   Image,
   ScrollView,
   SafeAreaView,
-  KeyboardAvoidingView
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -21,18 +18,13 @@ import QrName from "../components/molecules/QrName";
 import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
 
-import Icon from "react-native-vector-icons/Entypo";
-import { ceil } from "react-native-reanimated";
-
 function QRCreationScreen(props) {
   return (
   
     <View style={styles.container}>
-      <View style={styles.headerBar}>
-        <CreationHeaderBar style={{ flex: 1 }}>
-          <Icon name='palette' style={styles.icon}></Icon>
-        </CreationHeaderBar>
-      </View>
+
+      <CreationHeaderBar style={styles.headerBar}>
+      </CreationHeaderBar>
 
       <View style={styles.body1}>
         <View style={{ flex: 1, justifyContent: "center" }}>
@@ -40,6 +32,7 @@ function QRCreationScreen(props) {
             style={styles.image}
             resizeMode='contain'
             source={require("../Assets/Images/QR.png")}
+            
           ></Image>
         </View>
         <View style={{ flex: 1 }}>
@@ -52,21 +45,18 @@ function QRCreationScreen(props) {
       </View>
 
       
-        <View style= {styles.body2}>
+      <SafeAreaView style= {styles.body2}>        
+        <ScrollView contentContainerStyle = {{ flexGrow: 1, alignItems:"center" }}>
+              <MessageBlock></MessageBlock>
+              <MessageBlock></MessageBlock>
+              <MessageBlock></MessageBlock>
+              <MessageBlock></MessageBlock>
+            </ScrollView>  
+      </SafeAreaView>
 
-          <ScrollView contentContainerStyle = {{alignItems: "center", flex:4.5}}>
-            <MessageBlock></MessageBlock>
-            <MessageBlock></MessageBlock>
-            <MessageBlock></MessageBlock>
-          </ScrollView>
+      <FooterBar style={ styles.footerBar }
+      ></FooterBar>
 
-        </View>
-
-      <View style={styles.footerBar}>
-        <FooterBar
-          style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.07)" }}
-        ></FooterBar>
-      </View>
     </View>
   );
 }
@@ -88,11 +78,12 @@ const styles = StyleSheet.create({
   body1: {
     flex: 1.5,
     flexDirection: "row",
+    borderTopWidth: 3,
+    borderBottomWidth: 3,
   },
 
   body2: {
     flex: 4.5,
-    paddingBottom: 30,
   },
 
   icon: {
@@ -108,8 +99,8 @@ const styles = StyleSheet.create({
   },
   image: {
     top: "3%",
-    width: 130,
-    height: 130,
+    width: 120,
+    height: 120,
     alignSelf: "center",
   },
 });
