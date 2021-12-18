@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-// Component Imports
+// Component
 import HeaderBar from "../components/molecules/HeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import { ColorPicker } from "react-native-color-picker";
