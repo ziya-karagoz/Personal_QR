@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
 import {
@@ -36,8 +35,7 @@ function NotificationScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    height: hp("100"),
-    width: wp("100"),
+    flex:8
   },
 
   headerBar: {

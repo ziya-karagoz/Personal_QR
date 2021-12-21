@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import FooterBar from "../components/molecules/FooterBar";
 import HeaderBar from "../components/molecules/HeaderBar";
@@ -8,7 +8,9 @@ function AccountSettingScreen(){
     return(
         <View style={styles.container}>
             <HeaderBar style = {styles.header}></HeaderBar>
-            <View style = {styles.body}></View>
+            <View style = {styles.body}>
+                <Text >BURASI HESAP AYALARI</Text>
+            </View>
             <FooterBar style = {styles.footer}></FooterBar>
         </View>
     )
