@@ -6,6 +6,10 @@ export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
+<<<<<<< Updated upstream
+=======
+  // runs on component mount, asks for camera  permission
+>>>>>>> Stashed changes
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
