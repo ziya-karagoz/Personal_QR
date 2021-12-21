@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     },
     body:{
         flex:6
+        
     },
     footer:{
         flex:1
