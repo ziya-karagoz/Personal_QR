@@ -9,6 +9,7 @@ import RegisterScreen from "../screens/RegisterScreen";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
 import NotificationScreen from "../screens/NotificationScreen";
 import PaletteScreen from "../screens/PaletteScreen";
+import ScannerScreen from "../screens/ScannerScreen"
 
 
 const Stack = createStackNavigator();
@@ -51,6 +52,11 @@ function StackNavigator() {
             component={PaletteScreen}
             options={{ headerShown: false }}
             />
+            <Stack.Screen
+            name='Scanner'
+            component={ScannerScreen}
+            options={{ headerShown: false }}
+        />
             <Stack.Screen name='ResetPassword' component={ResetPasswordScreen} />
     </Stack.Navigator>
 );}
