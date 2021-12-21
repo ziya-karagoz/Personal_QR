@@ -1,26 +1,18 @@
-import React, {} from "react";
+import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 
 
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
-
-
 import ExistingQR from "../components/molecules/ExistingQR";
 
 
 
 
 
-function HomeScreen({ navigation }) {
-  const createQRPressHandler = () => {
-    navigation.navigate("QRCreation");
-  };
- 
-  
+function HomeScreen() {
   return (
-
-    <View style={styles.container}>
+    <View style={styles.container} >
       <View style={styles.headerBar}>
         <MainHeaderBar style={{ flex: 1 }}></MainHeaderBar>
       </View>

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
 function FooterBar(props) {
+
+  const navigation = useNavigation();
+
   return (
     <View style={[styles.container, props.style]}>
       <TouchableOpacity style={styles.btnWrapper1}>
@@ -26,14 +30,14 @@ function FooterBar(props) {
           QR Tara
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper2}>
+      <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.btnWrapper2}>
         <MaterialCommunityIconsIcon
           name='home-variant'
           style={styles.icon1}
         ></MaterialCommunityIconsIcon>
         <Text style={styles.anaSayfa}>Ana Sayfa</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper4}>
+      <TouchableOpacity onPress={() => navigation.navigate('Notification')} style={styles.btnWrapper4}>
         <MaterialCommunityIconsIcon
           name='bell-ring'
           style={styles.icon3}

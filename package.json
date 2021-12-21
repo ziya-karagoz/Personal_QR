@@ -9,8 +9,10 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-navigation/drawer": "^6.1.8",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
+    "@react-navigation/stack": "^6.0.11",
     "expo": "~43.0.0",
     "expo-splash-screen": "~0.13.3",
     "expo-status-bar": "~1.1.0",
@@ -21,8 +23,11 @@
     "react-dom": "17.0.1",
     "react-native": "0.66.4",
     "react-native-color-picker": "^0.6.0",
+    "react-native-drawer": "^2.5.1",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
+    "react-native-material-drawer": "0.0.5",
+    "react-native-navbar": "^2.1.0",
     "react-native-paper": "^4.11.1",
     "react-native-qrcode-svg": "^6.1.1",
     "react-native-reanimated": "~2.2.0",

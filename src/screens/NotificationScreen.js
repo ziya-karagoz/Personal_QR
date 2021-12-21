@@ -24,13 +24,7 @@ function NotificationScreen(props) {
       </NotificationHeaderBar>
       
       <SafeAreaView style= {styles.body}>        
-        <ScrollView contentContainerStyle = {{ flexGrow: 1, alignItems:"center" }}>
-          <NotificationBlock></NotificationBlock>
-          <NotificationBlock></NotificationBlock>
-          <NotificationBlock></NotificationBlock>
-          <NotificationBlock></NotificationBlock>
-          
-        </ScrollView>  
+        <NotificationBlock></NotificationBlock>  
       </SafeAreaView>
 
       <FooterBar style={ styles.footerBar }

@@ -4,7 +4,6 @@ import {
   View,
   Text,
   Image,
-  ScrollView,
   SafeAreaView,
 } from "react-native";
 import {
@@ -18,7 +17,7 @@ import QrName from "../components/molecules/QrName";
 import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
 
-function QRCreationScreen(props) {
+function QRCreationScreen(navigation) {
   return (
   
     <View style={styles.container}>
@@ -46,13 +45,7 @@ function QRCreationScreen(props) {
 
       
       <SafeAreaView style= {styles.body2}>        
-        <ScrollView contentContainerStyle = {{ flexGrow: 1, alignItems:"center" }}>
-              <MessageBlock></MessageBlock>
-              <MessageBlock></MessageBlock>
-              <MessageBlock></MessageBlock>
-              <MessageBlock></MessageBlock>
-              
-            </ScrollView>  
+         <MessageBlock></MessageBlock>
       </SafeAreaView>
 
       <FooterBar style={ styles.footerBar }

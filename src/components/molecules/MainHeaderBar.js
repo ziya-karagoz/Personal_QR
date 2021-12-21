@@ -2,28 +2,30 @@ import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
-function MainHeaderBar(props) {
-  return (
-    <View style={[styles.container, props.style]}>
-      <TouchableOpacity style={styles.btnWrapper1}>
-        <MaterialCommunityIconsIcon
-          name='account-outline'
-          style={[
-            styles.profileIcon,
-            {
-              color: props.active ? "#007AFF" : "#616161",
-            },
-          ]}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
+
+
+function MainHeaderBar( ) {
+  const navigation = useNavigation();
+  return (  
+    <View style={styles.container} >
+      <TouchableOpacity   onPress={() =>     
+      navigation.dispatch(DrawerActions.openDrawer())} style={styles.btnWrapper1}>
+          <MaterialCommunityIconsIcon
+            name='account-outline'
+            style={
+              styles.profileIcon
+            }
+          ></MaterialCommunityIconsIcon>
+        </TouchableOpacity>
       <TouchableOpacity style={styles.btnWrapper1}>
         <MaterialCommunityIconsIcon
           name='qrcode-edit'
           style={styles.mainIcon}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper1}>
+      <TouchableOpacity onPress={() => navigation.navigate('QRCreation')} style={styles.btnWrapper1}>
         <Icon
           name='add-circle-outline' style={styles.icon}
         ></Icon>
@@ -34,6 +36,7 @@ function MainHeaderBar(props) {
 
 const styles = StyleSheet.create({
   container: {
+    height:90,
     backgroundColor: "rgba(0,0,0,0.07)",
     flexDirection: "row",
     width: "100%",
@@ -47,7 +50,8 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     fontSize: 24,
     opacity: 0.8,
-    top: 10
+    top: 10,
+    color: "#616161",
   },
   btnWrapper2: {
     flex: 1,

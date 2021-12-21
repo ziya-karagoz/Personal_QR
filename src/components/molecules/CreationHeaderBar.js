@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
 function CreationHeaderBar(props) {
+
+  const navigation = useNavigation();
+
   return (
     <View style={[styles.container, props.style]}>
-      <TouchableOpacity style={styles.btnWrapper1}>
+      <TouchableOpacity onPress={() =>     
+      navigation.dispatch(DrawerActions.openDrawer())} style={styles.btnWrapper1}>
         <MaterialCommunityIconsIcon
           name='account-outline'
           style={[
@@ -22,7 +27,7 @@ function CreationHeaderBar(props) {
           style={styles.mainIcon}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper1}>
+      <TouchableOpacity onPress={()=> navigation.navigate('Palette')} style={styles.btnWrapper1}>
         <MaterialCommunityIconsIcon
           name='palette'
           style={styles.paletteIcon}
