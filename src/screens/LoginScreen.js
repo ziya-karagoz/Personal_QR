@@ -10,17 +10,26 @@ import BackButton from "../components/molecules/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-import { FetchLoginData } from "../server/server";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
 
   useEffect(() => {
-    FetchLoginData();
+    //axios.get("http://localhost:5000/testmail/testpsasword");
   }, []);
 
-  const onLoginPressed = () => {
+  const onLoginPressed = async () => {
+    let res = await fetch(
+      "http://192.168.1.45:5000/api/user/check/" +
+        email.value +
+        "/" +
+        password.value
+    );
+    let res2 = await res.json();
+    console.log("res : ", res2);
+
+    /*
     const emailError = emailValidator(email.value);
     const passwordError = passwordValidator(password.value);
     if (emailError || passwordError) {
@@ -32,6 +41,7 @@ export default function LoginScreen({ navigation }) {
       index: 0,
       routes: [{ name: "Home" }],
     });
+    */
   };
 
   return (
