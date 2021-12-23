@@ -53,21 +53,21 @@ export default function ScannerScreen({ navigation }) {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
+      <Image
+        style={styles.scanIcon}
+        source={require("../Assets/Images/scan.png")}
+      ></Image>
+      <View style={{flex:1}}>
       <TouchableOpacity
-        style={styles.backBtn}
+        style = {styles.backBtn} 
         onPress={() => navigation.goBack()}
       >
         <Image
-          style={styles.backIcon}
-          resizeMode='contain'
+          style = {styles.backIcon}
           source={require("../Assets/Images/cancel.png")}
         ></Image>
       </TouchableOpacity>
-      <Image
-        style={styles.scanIcon}
-        resizeMode='contain'
-        source={require("../Assets/Images/scan.png")}
-      ></Image>
+      </View>
     </View>
   );
 }
@@ -79,19 +79,23 @@ const styles = StyleSheet.create({
 
   backBtn: {
     flex: 1,
-    marginTop: "175%",
-    marginLeft: "45%",
+    width:50,
+    height:50,
+    alignSelf:"center"
+    
   },
   backIcon: {
     flex: 1,
-    width: 70,
-    height: 70,
+    width: 200,
     resizeMode: "contain",
+    alignSelf: "center",
+    bottom: "30%"
+    
   },
   scanIcon: {
-    flex: 1,
-    position: "absolute",
-    marginTop: "60%",
-    marginRight: "40%",
+    flex: 8,
+    alignSelf: "center",
+    resizeMode: "contain",
+    width:400
   },
 });
