@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/molecules/Background";
@@ -10,10 +10,15 @@ import BackButton from "../components/molecules/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import { FetchLoginData } from "../server/server";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+
+  useEffect(() => {
+    FetchLoginData();
+  }, []);
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value);
