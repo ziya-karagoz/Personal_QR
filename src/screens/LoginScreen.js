@@ -10,38 +10,25 @@ import BackButton from "../components/molecules/BackButton";
 import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
+import axios from "axios";
+import { storaAt, storeSil, checkUser } from "../store/features/user/userSlice";
+import { useDispatch } from "react-redux";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
-
-  useEffect(() => {
-    //axios.get("http://localhost:5000/testmail/testpsasword");
-  }, []);
+  const dispath = useDispatch();
 
   const onLoginPressed = async () => {
-    let res = await fetch(
-      "http://192.168.1.45:5000/api/user/check/" +
-        email.value +
-        "/" +
-        password.value
-    );
-    let res2 = await res.json();
-    console.log("res : ", res2);
+    // const emailError = emailValidator(email.value);
+    // const passwordError = passwordValidator(password.value);
+    // if (emailError || passwordError) {
+    //   setEmail({ ...email, error: emailError });
+    //   setPassword({ ...password, error: passwordError });
+    //   return;
+    // }
 
-    /*
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Home" }],
-    });
-    */
+    dispath(checkUser(email.value));
   };
 
   return (
