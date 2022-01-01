@@ -1,11 +1,5 @@
-import React, { Component } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-} from "react-native";
+import React, { Component, useState } from "react";
+import { StyleSheet, View, Text, Image, SafeAreaView } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -18,12 +12,10 @@ import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
 
 function QRCreationScreen(navigation) {
+  const [qrName, setQrName] = useState({ value: "", error: "" });
   return (
-  
     <View style={styles.container}>
-
-      <CreationHeaderBar style={styles.headerBar}>
-      </CreationHeaderBar>
+      <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
 
       <View style={styles.body1}>
         <View style={{ flex: 1, justifyContent: "center" }}>
@@ -31,7 +23,6 @@ function QRCreationScreen(navigation) {
             style={styles.image}
             resizeMode='contain'
             source={require("../Assets/Images/QR.png")}
-            
           ></Image>
         </View>
         <View style={{ flex: 1 }}>
@@ -43,14 +34,11 @@ function QRCreationScreen(navigation) {
         </View>
       </View>
 
-      
-      <SafeAreaView style= {styles.body2}>        
-         <MessageBlock></MessageBlock>
+      <SafeAreaView style={styles.body2}>
+        <MessageBlock></MessageBlock>
       </SafeAreaView>
 
-      <FooterBar style={ styles.footerBar }
-      ></FooterBar>
-
+      <FooterBar style={styles.footerBar}></FooterBar>
     </View>
   );
 }

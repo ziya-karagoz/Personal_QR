@@ -11,24 +11,23 @@ import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
 import axios from "axios";
-import { storaAt, storeSil, checkUser } from "../store/features/user/userSlice";
-import { useDispatch } from "react-redux";
+import { localIP } from "../constants";
+import { login } from "../store/userState";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
-  const dispath = useDispatch();
 
-  const onLoginPressed = async () => {
-    // const emailError = emailValidator(email.value);
-    // const passwordError = passwordValidator(password.value);
-    // if (emailError || passwordError) {
-    //   setEmail({ ...email, error: emailError });
-    //   setPassword({ ...password, error: passwordError });
-    //   return;
-    // }
+  const onLoginPressed = () => {
+    const emailError = emailValidator(email.value);
+    const passwordError = passwordValidator(password.value);
 
-    dispath(checkUser(email.value));
+    if (emailError || passwordError) {
+      setEmail({ ...email, error: emailError });
+      setPassword({ ...password, error: passwordError });
+      return;
+    }
+    login(email.value, password.value, navigation);
   };
 
   return (

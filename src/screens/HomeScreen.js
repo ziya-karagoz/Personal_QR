@@ -1,14 +1,17 @@
-import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React, { Component, useEffect } from "react";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import ExistingQR from "../components/molecules/ExistingQR";
-import { useSelector } from "react-redux";
+import userState, { degistir } from "../store/userState";
+import { useSnapshot } from "valtio";
 
 function HomeScreen() {
-  const { email, password } = useSelector((state) => state.user.userData);
-  console.log(email, " ", password);
+  const { user, loading } = useSnapshot(userState);
+  useEffect(() => {
+    console.log("user  :", loading);
+  }, [loading]);
   return (
     <View style={styles.container}>
       <View style={styles.headerBar}>
