@@ -1,11 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-function QrName(props) {
+function QrName({ setQrName }) {
   return (
     <View style={styles.container}>
       <TextInput
-        placeholder="_______________"
+        onChangeText={(value) => {
+          setQrName(value);
+        }}
+        placeholder='_______________'
         clearTextOnFocus={true}
         style={styles.textInput}
       ></TextInput>
@@ -22,8 +25,8 @@ const styles = StyleSheet.create({
   textInput: {
     color: "#121212",
     height: 50,
-    width: 100
-  }
+    width: 100,
+  },
 });
 
 export default QrName;

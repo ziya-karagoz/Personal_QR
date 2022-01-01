@@ -1,5 +1,6 @@
 import { proxy } from "valtio";
 import axios from "axios";
+import { localIP } from "../constants";
 
 const userState = proxy({
   user: {},
@@ -8,7 +9,7 @@ const userState = proxy({
 const login = (email, password, navigation) => {
   userState.loading = true;
   axios
-    .post("http://10.60.147.98:5000/api/user/login", {
+    .post(`http://${localIP}:5000/api/user/login`, {
       email,
       password,
     })
@@ -29,7 +30,7 @@ const login = (email, password, navigation) => {
 const register = (username, email, password, navigation) => {
   userState.loading = true;
   axios
-    .post("http://10.60.147.98:5000/api/user/register", {
+    .post(`http://${localIP}:5000/api/user/register`, {
       username,
       email,
       password,

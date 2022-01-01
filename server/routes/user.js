@@ -1,5 +1,7 @@
 const express = require("express");
+
 const userRoute = express.Router();
+
 const User = require("../model/user");
 
 userRoute.post("/login", (req, res) => {

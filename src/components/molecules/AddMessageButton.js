@@ -1,33 +1,41 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text, ViewBase, TouchableOpacity } from "react-native";
+import React, { Component, useState, useEffect } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ViewBase,
+  TouchableOpacity,
+} from "react-native";
 
-function AddMessageButton(props) {
+function AddMessageButton() {
+  const addMessageButtonHandler = () => {};
+
   return (
-    <TouchableOpacity style={styles.container}>
-        <View >
-            <View style = {styles.text}>
-                <Text>Mesaj Ekle</Text>
-            </View>
+    <TouchableOpacity style={styles.btn} onPress={addMessageButtonHandler}>
+      <View>
+        <View style={styles.btnText}>
+          <Text>Mesaj Ekle</Text>
         </View>
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  btn: {
     width: 100,
     height: 24,
     backgroundColor: "gray",
     marginLeft: "25%",
-    top: "32%"
+    top: "32%",
   },
-  text: {
+  btnText: {
     height: 24,
     width: 100,
     color: "black",
     alignItems: "center",
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
 
 export default AddMessageButton;
