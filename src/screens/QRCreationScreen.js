@@ -6,6 +6,7 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -27,17 +28,29 @@ function QRCreationScreen(navigation) {
   const { user } = useSnapshot(userState);
 
   const [qrName, setQrName] = useState("");
+  const [messageOne, setMessageOne] = useState("");
+  const [messageTwo, setMessageTwo] = useState("");
 
   const addMessageButtonHandler = () => {
-    console.log("deneme");
+    // burada bütün girdiler alındıktan sonra post metodu ile servera gönderilecek
+    axios
+      .post(`http://${localIP}:5000/api/qr/qrgenerate`, {
+        user: user,
+        qr: {
+          qrName: qrName,
+          message: {
+            messageOne: messageOne,
+            messageTwo: messageTwo,
+          },
+        },
+      })
+      .then((response) => {
+        console.log("RES: ", response.data);
+      })
+      .catch((err) => {
+        console.log("ERR :", err);
+      });
   };
-
-  // Buradan devam edilecek
-  // Frontend degisecek
-  // butun girdiler alindiktan sonra qr olusturulacak
-  useEffect(() => {
-    axios.post(`http://${localIP}:5000/api/qr/qrgenerate`, {});
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -70,7 +83,22 @@ function QRCreationScreen(navigation) {
       </View>
 
       <SafeAreaView style={styles.body2}>
-        <MessageBlock></MessageBlock>
+        {/* Burada onceden bu vardi
+          <MessageBlock></MessageBlock>
+      */}
+        <Text>Mesaj: </Text>
+        <View style={styles.msgbody}>
+          <TextInput
+            multiline
+            numberOfLines={10}
+            onChangeText={(value) => {
+              setMessageOne(value);
+            }}
+            placeholder='_______________'
+            clearTextOnFocus={true}
+            style={styles.textInput}
+          ></TextInput>
+        </View>
       </SafeAreaView>
 
       <FooterBar style={styles.footerBar}></FooterBar>
@@ -133,6 +161,16 @@ const styles = StyleSheet.create({
     color: "black",
     alignItems: "center",
     justifyContent: "center",
+  },
+  msgbody: {
+    width: 100,
+    height: 30,
+    marginLeft: "1.5%",
+  },
+  textInput: {
+    color: "#121212",
+    height: 50,
+    width: 100,
   },
 });
 

@@ -10,7 +10,7 @@ export default function StartScreen({ navigation }) {
     <Background>
       <Logo />
       <Header>Personal QR</Header>
-      <Paragraph>The easiest way to stay connected.</Paragraph>
+      <Paragraph>Have a QR, Use it Everywhere</Paragraph>
       <Button mode='contained' onPress={() => navigation.navigate("Login")}>
         Login
       </Button>
