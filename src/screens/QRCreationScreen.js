@@ -35,14 +35,12 @@ function QRCreationScreen(navigation) {
     // burada bütün girdiler alındıktan sonra post metodu ile servera gönderilecek
     axios
       .post(`http://${localIP}:5000/api/qr/qrgenerate`, {
-        user: user,
-        qr: {
-          qrName: qrName,
-          message: {
-            messageOne: messageOne,
-            messageTwo: messageTwo,
-          },
+        message: {
+          messageOne: messageOne,
+          messageTwo: messageTwo,
         },
+        user,
+        qrName,
       })
       .then((response) => {
         console.log("RES: ", response.data);

@@ -5,24 +5,27 @@ const qrRoute = express.Router();
 const User = require("../model/user");
 const QrBlock = require("../model/qrBlock");
 const Qr = require("../model/qr");
-const messageBlock = require("../model/messageBlock");
-const Message = require("../model/message");
+const MessageBlock = require("../model/messageBlock");
 
 qrRoute.post("/qrgenerate", (req, res) => {
-  let { user } = req.body;
-  let { qr } = req.body;
-  let { qrName, message } = qr;
+  let { user, message, qrName } = req.body;
+  MessageBlock.create({ messages: [message] }).then((mb) => {
+    Qr.create({ qrName, messageBlock: mb._id }).then((qr) => {
+      console.log("RES :", qr);
 
-  // Message.create(message).then((mess) => {
-  //   messageBlock.create([...mess]);
-  // });
+      User.findOne(user).then((usr) => {
+        console.log("USER: ", usr);
+        QrBlock.updateOne(
+          { _id: usr.qrBlock },
 
-  // QrBlock olusturulduktan sonra User Collectiona eklenmesi
-  // User.findOne({ email: user.email, password: user.password })
-  //   .exec()
-  //   .then((user) => {});
-
-  res.status(200).send({ message: "Basarili", deneme: message.messageOne });
+          { $push: { qr: qr._id } }
+        )
+          .exec()
+          .then((i) => console.log("I : ", i))
+          .catch((e) => console.log("E ", e));
+      });
+    });
+  });
 });
 
 module.exports = qrRoute;
