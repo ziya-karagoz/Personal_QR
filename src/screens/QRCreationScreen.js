@@ -20,11 +20,10 @@ import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
 import userState from "../store/userState";
 import { useSnapshot } from "valtio";
+import qrState from "../store/qrState";
+import { qrGenerate } from "../store/qrState";
 
-import axios from "axios";
-import { localIP } from "../constants";
-
-function QRCreationScreen(navigation) {
+function QRCreationScreen({ navigation }) {
   const { user } = useSnapshot(userState);
 
   const [qrName, setQrName] = useState("");
@@ -32,22 +31,7 @@ function QRCreationScreen(navigation) {
   const [messageTwo, setMessageTwo] = useState("");
 
   const addMessageButtonHandler = () => {
-    // burada bütün girdiler alındıktan sonra post metodu ile servera gönderilecek
-    axios
-      .post(`http://${localIP}:5000/api/qr/qrgenerate`, {
-        message: {
-          messageOne: messageOne,
-          messageTwo: messageTwo,
-        },
-        user,
-        qrName,
-      })
-      .then((response) => {
-        console.log("RES: ", response.data);
-      })
-      .catch((err) => {
-        console.log("ERR :", err);
-      });
+    qrGenerate(navigation, user, qrName, messageOne, messageTwo);
   };
 
   return (

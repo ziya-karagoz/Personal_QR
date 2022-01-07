@@ -5,10 +5,20 @@ import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import ExistingQR from "../components/molecules/ExistingQR";
 import userState from "../store/userState";
+import qrState from "../store/qrState";
+import { displayQrList } from "../store/qrState";
 import { useSnapshot } from "valtio";
 
 function HomeScreen() {
   const { user } = useSnapshot(userState);
+  const { qrs } = useSnapshot(qrState);
+
+  useEffect(() => {
+    displayQrList(user);
+  }, []);
+  useEffect(() => {
+    console.log("qrs: ", qrs);
+  }, [qrs]);
 
   return (
     <View style={styles.container}>

@@ -33,7 +33,12 @@ function FooterBar(props) {
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
+        }}
         style={styles.btnWrapper2}
       >
         <MaterialCommunityIconsIcon

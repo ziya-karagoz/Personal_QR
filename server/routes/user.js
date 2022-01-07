@@ -12,18 +12,18 @@ userRoute.post("/login", (req, res) => {
     .exec()
     .then((user) => {
       if (user.length > 0) {
-        res.status(200).send(user[0]);
+        return res.status(200).send(user[0]);
       } else {
-        res.status(400).send({ message: "User not found" });
+        return res.status(400).send({ message: "User not found" });
       }
     });
 });
 
 userRoute.post("/register", (req, res) => {
   let user = req.body;
+
   QrBlock.create({ qr: [] }).then((qrblck) => {
     User.create({ ...user, qrBlock: qrblck._id }).then((user) => {
-      console.log("obje: ", user);
       return res.status(200).json({ message: "User created", user });
     });
   });
