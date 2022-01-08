@@ -16,9 +16,6 @@ function HomeScreen() {
   useEffect(() => {
     displayQrList(user);
   }, []);
-  useEffect(() => {
-    console.log("qrs: ", qrs);
-  }, [qrs]);
 
   return (
     <View style={styles.container}>

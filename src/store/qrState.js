@@ -36,6 +36,7 @@ const displayQrList = (user) => {
     })
     .then((response) => {
       qrState.loading = false;
+
       qrState.qrs = response.data;
     })
     .catch((err) => {
