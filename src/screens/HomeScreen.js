@@ -4,21 +4,8 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import ExistingQR from "../components/molecules/ExistingQR";
-import userState from "../store/userState";
-import qrState from "../store/qrState";
-import { displayQrList } from "../store/qrState";
-import { useSnapshot } from "valtio";
 
 function HomeScreen() {
-  const { user } = useSnapshot(userState);
-  const { qrs } = useSnapshot(qrState);
-
-  useEffect(() => {
-    displayQrList(user);
-  }, []);
-  useEffect(() => {
-    console.log("qrs: ", qrs);
-  }, [qrs]);
 
   return (
     <View style={styles.container}>
@@ -26,7 +13,9 @@ function HomeScreen() {
         <MainHeaderBar style={{ flex: 1 }}></MainHeaderBar>
       </View>
 
-      <View style={styles.body}></View>
+      <View style={styles.body}>
+        <ExistingQR></ExistingQR>
+      </View>
 
       <View style={styles.footerBar}>
         <FooterBar style={{ flex: 1 }}></FooterBar>
