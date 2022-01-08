@@ -37,10 +37,18 @@ qrRoute.post("/displayQrs", (req, res) => {
     .populate("qr")
     .then((qrblk) => {
       qrs = qrblk.qr;
-      console.log("qrs: ", qrs);
       return res.status(200).json({ qrs });
     })
     .catch((e) => console.log("ERR :", e));
+});
+
+qrRoute.post("/scanQr", (req, res) => {
+  let { qrURL } = req.body;
+  if (qrURL != "") {
+    console.log("QR url: ", qrURL);
+    return res.status(200).json({ message: "OK" });
+  }
+  return;
 });
 
 module.exports = qrRoute;
