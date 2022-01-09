@@ -7,6 +7,7 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import QRCode from 'react-native-qrcode-svg';
 import userState from "../../store/userState";
 import { displayQrList } from "../../store/qrState";
@@ -14,34 +15,39 @@ import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
 
 
-
 let DATA ;
 
-const Item = ({qrName, qrId}) => (
-  <TouchableOpacity style={styles.container}>
+const Item = ({qrName, qrId}) => {
+  const navigation = useNavigation();
+  return (
+  <TouchableOpacity onPress={() => navigation.navigate('QREdit', {qrAdi: qrName, qrId: qrId})} style={styles.container}>
       <View style={styles.body1}>
         <Text style = {{ }}>{qrName}</Text>
       </View>
       <View style={styles.body2}>
         <QRCode value = {qrId} />
       </View>
-    </TouchableOpacity>
-);
+  </TouchableOpacity>
+);}
 
 
 
-function ExistingQR(props) {
+function ExistingQR({props}) {
+  
   const { user } = useSnapshot(userState);
   const { qrs } = useSnapshot(qrState);
   
   useEffect(() => {
     displayQrList(user);
   }, []);
-
+  useEffect(() => {
+    console.log(qrs)
+  }, [qrs])
+  
   DATA = qrs.qrs;
 
   const renderItem = ({ item }) => (
-    <Item qrName={item.qrName} qrId={item._id} ></Item>
+    <Item qrName={item.qrName} qrId={item._id}  ></Item>
   );
 
   return (
