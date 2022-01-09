@@ -8,9 +8,10 @@ import {
   Image,
   FlatList
 } from "react-native";
-import QREditScreen from "../../screens/QREditScreen";
 
 
+
+let DATA
 const Item = ({msj1, msj2}) => (
 
   <View style={styles.container}>
@@ -28,9 +29,15 @@ const Item = ({msj1, msj2}) => (
         </View>
 
         <View style={{ flex: 4 }}>
-          <Text style= {styles.mesaj}>
-            {msj1}
-          </Text>
+        <TextInput
+            multiline
+            numberOfLines={10}
+            onChangeText={(value) => {
+              setMessageOne(value);
+            }}
+            placeholder= {msj1}
+            style={styles.mesaj}
+          ></TextInput>
         </View>
 
         <View style={{ flex: 1 }}>
@@ -58,9 +65,15 @@ const Item = ({msj1, msj2}) => (
 
         
         <View style={{ flex: 4 }}>
-          <Text style = {styles.yanit}>
-            {msj2}
-          </Text>
+        <TextInput
+            multiline
+            numberOfLines={10}
+            onChangeText={(value) => {
+              setMessageOne(value);
+            }}
+            placeholder= {msj2}
+            style={styles.yanit}
+          ></TextInput>
         </View>
 
         <View style={{ flex: 1 }}></View>
@@ -69,15 +82,16 @@ const Item = ({msj1, msj2}) => (
 );
 
 const renderItem = ({ item }) => (
-  <Item msj1={item[0].messageOne} msj2={item[0].messageTwo} ></Item>
+  <Item msj1={item.messageOne} msj2={item.messageTwo} ></Item>
 );
 
-function MessageBlock({parentToChild}) {
-  const DATA = parentToChild
-  console.log("data yazdirildi: " + DATA)
+function MessageBlock(mesajlar, {setMessageOne, setMessageTwo}) {
+  DATA = mesajlar.mesajlar.mesajlar
+
   return (
     <FlatList
         data={DATA}
+        
         renderItem={renderItem}
         contentContainerStyle = {{alignItems:"center"}}
       />
@@ -93,11 +107,12 @@ const styles = StyleSheet.create({
   },
   mesaj: {
     color: "#121212",
-    top: "8%",
+    bottom: "26%"
+
   },
   yanit: {
     color: "#121212",
-    top: "3%",
+    bottom: "32%"
   },
   icon: {
     height: "65%",

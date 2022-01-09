@@ -68,13 +68,26 @@ function QRCreationScreen({ navigation }) {
         {/* Burada onceden bu vardi
           <MessageBlock></MessageBlock>
       */}
-        <Text>Mesaj: </Text>
+        <Text>Mesaj1: </Text>
         <View style={styles.msgbody}>
           <TextInput
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
               setMessageOne(value);
+            }}
+            placeholder='_______________'
+            clearTextOnFocus={true}
+            style={styles.textInput}
+          ></TextInput>
+        </View>
+        <Text>Mesaj2: </Text>
+        <View style={styles.msgbody}>
+          <TextInput
+            multiline
+            numberOfLines={10}
+            onChangeText={(value) => {
+              setMessageTwo(value);
             }}
             placeholder='_______________'
             clearTextOnFocus={true}

@@ -65,34 +65,8 @@ function QREditScreen({ navigation, route }) {
 
       <SafeAreaView style={styles.body2}>
 
-         <MessageBlock parentToChild = {{mesajlar}}></MessageBlock>
+         <MessageBlock mesajlar = {{mesajlar}} setMessage = {setMessageOne, setMessageTwo}></MessageBlock>
 
-        {/* <Text>Mesaj1: </Text>
-        <View style={styles.msgbody}>
-          <TextInput
-            multiline
-            numberOfLines={10}
-            onChangeText={(value) => {
-              setMessageOne(value);
-            }}
-            placeholder='_______________'
-            clearTextOnFocus={true}
-            style={styles.textInput}
-          ></TextInput>
-        </View>
-        <Text>Mesaj2: </Text>
-        <View style={styles.msgbody}>
-          <TextInput
-            multiline
-            numberOfLines={10}
-            onChangeText={(value) => {
-              setMessageTwo(value);
-            }}
-            placeholder='_______________'
-            clearTextOnFocus={true}
-            style={styles.textInput}
-          ></TextInput>
-        </View> */}
       </SafeAreaView>
 
       <FooterBar style={styles.footerBar}></FooterBar>
