@@ -45,5 +45,18 @@ const displayQrList = (user) => {
     });
 };
 
-export { qrGenerate, displayQrList };
+const getQrMessages = (data) => {
+  axios
+    .post(`http://${localIP}:5000/api/qr/scanQr`, { data })
+    .then((response) => {
+      const { message } = response.data;
+
+      alert("Qr Mesaji: " + message[0].messageOne);
+    })
+    .catch((e) => {
+      alert("Hata : ", e);
+    });
+};
+
+export { qrGenerate, displayQrList, getQrMessages };
 export default qrState;
