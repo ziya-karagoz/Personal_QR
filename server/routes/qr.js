@@ -38,6 +38,7 @@ qrRoute.post("/displayQrs", (req, res) => {
     .populate({ path: "qr", populate: { path: "messageBlock" } })
     .then((qrblk) => {
       qrs = qrblk.qr;
+      console.log("qrs: ", qrs);
       return res.status(200).json({ qrs });
     })
     .catch((e) => console.log("ERR :", e));
