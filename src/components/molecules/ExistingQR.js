@@ -45,9 +45,9 @@ function ExistingQR({props}) {
   }, [qrs])
   
   DATA = qrs.qrs;
-
+  
   const renderItem = ({ item }) => (
-    <Item qrName={item.qrName} qrId={item._id} mesajlar={item.}  ></Item>
+    <Item qrName={item.qrName} qrId={item._id} mesajlar={item.messageBlock.messages}  ></Item>
   );
 
   return (

@@ -34,7 +34,6 @@ function QREditScreen({ navigation, route }) {
   const addMessageButtonHandler = () => {
     qrEdit(navigation, user, qrName, messageOne, messageTwo);
   };
-    
   return (
     <View style={styles.container}>
       <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
@@ -66,9 +65,9 @@ function QREditScreen({ navigation, route }) {
 
       <SafeAreaView style={styles.body2}>
 
-        {/* <MessageBlock></MessageBlock> */}
+         <MessageBlock parentToChild = {{mesajlar}}></MessageBlock>
 
-        <Text>Mesaj1: </Text>
+        {/* <Text>Mesaj1: </Text>
         <View style={styles.msgbody}>
           <TextInput
             multiline
@@ -93,7 +92,7 @@ function QREditScreen({ navigation, route }) {
             clearTextOnFocus={true}
             style={styles.textInput}
           ></TextInput>
-        </View>
+        </View> */}
       </SafeAreaView>
 
       <FooterBar style={styles.footerBar}></FooterBar>

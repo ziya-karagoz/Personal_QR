@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import QREditScreen from "../../screens/QREditScreen";
 
-let DATA
+
 const Item = ({msj1, msj2}) => (
 
   <View style={styles.container}>
@@ -69,11 +69,12 @@ const Item = ({msj1, msj2}) => (
 );
 
 const renderItem = ({ item }) => (
-  <Item msj1={item.} msj2={item.} ></Item>
+  <Item msj1={item[0].messageOne} msj2={item[0].messageTwo} ></Item>
 );
 
-function MessageBlock(props) {
-  DATA = QREditScreen.mesajlar
+function MessageBlock({parentToChild}) {
+  const DATA = parentToChild
+  console.log("data yazdirildi: " + DATA)
   return (
     <FlatList
         data={DATA}
