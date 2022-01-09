@@ -35,7 +35,7 @@ qrRoute.post("/displayQrs", (req, res) => {
   let { user } = req.body;
   let qrs = [];
   QrBlock.findOne({ _id: user.qrBlock })
-    .populate("qr")
+    .populate({ path: "qr", populate: { path: "messageBlock" } })
     .then((qrblk) => {
       qrs = qrblk.qr;
       return res.status(200).json({ qrs });
