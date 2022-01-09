@@ -1,31 +1,29 @@
-import React, { Component } from "react";
+import React, { Component,useEffect } from "react";
 import {
   StyleSheet,
   View,
-  Text,
+  Text,   
   Image,
   FlatList,
   TouchableOpacity
 } from "react-native";
+import QRCode from 'react-native-qrcode-svg';
+import userState from "../../store/userState";
+import { displayQrList } from "../../store/qrState";
+import { useSnapshot } from "valtio";
+import qrState from "../../store/qrState";
 
-const DATA = [
-  {qrAdi: 'Arabam için'},
-  {qrAdi: 'Evim için'},
-  {qrAdi: 'Okul için'},
-  {qrAdi: 'Sınav sonuçları'},
-  {qrAdi: 'Kendime hatırlatma'},
-  {qrAdi: 'Malzeme listesi'},
-  {qrAdi: 'Yapacaklar listem'},
-  {qrAdi: 'Ajanda'},
-];
 
-const Item = ({qrAdi}) => (
+
+let DATA ;
+
+const Item = ({qrName, qrId}) => (
   <TouchableOpacity style={styles.container}>
       <View style={styles.body1}>
-        <Text style = {{ }}>{qrAdi}</Text>
+        <Text style = {{ }}>{qrName}</Text>
       </View>
       <View style={styles.body2}>
-        <Image style = {styles.qrImage} source={require("../../Assets/Images/QR.png")}></Image>
+        <QRCode value = {qrId} />
       </View>
     </TouchableOpacity>
 );
@@ -33,9 +31,19 @@ const Item = ({qrAdi}) => (
 
 
 function ExistingQR(props) {
+  const { user } = useSnapshot(userState);
+  const { qrs } = useSnapshot(qrState);
+  
+  useEffect(() => {
+    displayQrList(user);
+  }, []);
+
+  DATA = qrs.qrs;
+
   const renderItem = ({ item }) => (
-    <Item qrAdi={item.qrAdi} ></Item>
+    <Item qrName={item.qrName} qrId={item._id} ></Item>
   );
+
   return (
     <FlatList
         data={DATA}
@@ -65,7 +73,8 @@ const styles = StyleSheet.create({
   },
   body2:{
     flex:3,
-    justifyContent:"center"
+    justifyContent:"center",
+    alignItems:"center"
   },
   qrImage:{
     height: "85%",
