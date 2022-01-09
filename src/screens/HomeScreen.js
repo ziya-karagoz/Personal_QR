@@ -23,7 +23,9 @@ function HomeScreen() {
         <MainHeaderBar style={{ flex: 1 }}></MainHeaderBar>
       </View>
 
-      <View style={styles.body}></View>
+      <View style={styles.body}>
+        <ExistingQR></ExistingQR>
+      </View>
 
       <View style={styles.footerBar}>
         <FooterBar style={{ flex: 1 }}></FooterBar>
