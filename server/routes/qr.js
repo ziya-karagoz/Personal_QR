@@ -1,12 +1,13 @@
 const express = require("express");
 
 const qrRoute = express.Router();
+const mongoose = require("mongoose");
 
 const User = require("../model/user");
 const QrBlock = require("../model/qrBlock");
 const Qr = require("../model/qr");
 const MessageBlock = require("../model/messageBlock");
-const user = require("../model/user");
+const messageBlock = require("../model/messageBlock");
 
 qrRoute.post("/qrgenerate", (req, res) => {
   let { user, message, qrName } = req.body;
@@ -43,12 +44,16 @@ qrRoute.post("/displayQrs", (req, res) => {
 });
 
 qrRoute.post("/scanQr", (req, res) => {
-  let { qrURL } = req.body;
-  if (qrURL != "") {
-    console.log("QR url: ", qrURL);
-    return res.status(200).json({ message: "OK" });
-  }
-  return;
+  let { data } = req.body;
+
+  Qr.findById(data)
+    .exec()
+    .then((qrr) => {
+      MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
+        console.log("Messages: ", messageBlock.messages);
+        return res.status(200).json({ message: messageBlock.messages });
+      });
+    });
 });
 
 module.exports = qrRoute;

@@ -10,7 +10,12 @@ function FooterBar(props) {
     <View style={[styles.container, props.style]}>
       <TouchableOpacity
         style={styles.btnWrapper1}
-        onPress={() => navigation.navigate("Scanner")}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Scanner" }],
+          });
+        }}
       >
         <MaterialCommunityIconsIcon
           name='barcode-scan'
