@@ -27,11 +27,10 @@ import { TabRouter } from "@react-navigation/native";
 
 function QREditScreen({ navigation, route }) {
   const { user } = useSnapshot(userState);
-
   const [qrName, setQrName] = useState("");
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
-  const {qrAdi, qrId} = route.params; 
+  const {qrAdi, qrId, mesajlar} = route.params; 
   const addMessageButtonHandler = () => {
     qrEdit(navigation, user, qrName, messageOne, messageTwo);
   };

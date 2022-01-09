@@ -17,10 +17,10 @@ import qrState from "../../store/qrState";
 
 let DATA ;
 
-const Item = ({qrName, qrId}) => {
+const Item = ({qrName, qrId, mesajlar}) => {
   const navigation = useNavigation();
   return (
-  <TouchableOpacity onPress={() => navigation.navigate('QREdit', {qrAdi: qrName, qrId: qrId})} style={styles.container}>
+  <TouchableOpacity onPress={() => navigation.navigate('QREdit', {qrAdi: qrName, qrId: qrId, mesajlar: mesajlar})} style={styles.container}>
       <View style={styles.body1}>
         <Text style = {{ }}>{qrName}</Text>
       </View>
@@ -47,7 +47,7 @@ function ExistingQR({props}) {
   DATA = qrs.qrs;
 
   const renderItem = ({ item }) => (
-    <Item qrName={item.qrName} qrId={item._id}  ></Item>
+    <Item qrName={item.qrName} qrId={item._id} mesajlar={item.}  ></Item>
   );
 
   return (

@@ -8,35 +8,10 @@ import {
   Image,
   FlatList
 } from "react-native";
+import QREditScreen from "../../screens/QREditScreen";
 
-const DATA = [
-  {
-    mesaj: 'Ders işlenecek mi?', 
-    yanit: 'Telafi Cumartesi günüdür.'
-  },
-  {
-    mesaj: 'Arabanızı çeker misiniz?', 
-    yanit: 'Biraz sonra geliyorum.'
-  },
-  {
-    mesaj: 'Yapılacaklar listesi', 
-    yanit: 'Çamaşırlar makineden çıkacak. Bulaşıklar yerine dizilecek. Rapor oluşturulacak. Mailler kontrol edilecek.'
-  },
-  {
-    mesaj: 'Market listesi', 
-    yanit: 'Kaşar, tereyağı, reçel, yumurta, zeytin, domates'
-  },
-  {
-    mesaj: 'Ders notları için link', 
-    yanit: 'www.gercekolmayanlink.com/dersler/bm405/no/dersnotlari'
-  },
-  {
-    mesaj: 'Görüşme saati aralıkları', 
-    yanit: 'Pzts:13.30-14.30, Salı:09.00-09.30, Cuma:17.00-18.00'
-  },
-]
-
-const Item = ({mesaj, yanit}) => (
+let DATA
+const Item = ({msj1, msj2}) => (
 
   <View style={styles.container}>
       <View
@@ -54,7 +29,7 @@ const Item = ({mesaj, yanit}) => (
 
         <View style={{ flex: 4 }}>
           <Text style= {styles.mesaj}>
-            {mesaj}
+            {msj1}
           </Text>
         </View>
 
@@ -84,7 +59,7 @@ const Item = ({mesaj, yanit}) => (
         
         <View style={{ flex: 4 }}>
           <Text style = {styles.yanit}>
-            {yanit}
+            {msj2}
           </Text>
         </View>
 
@@ -94,10 +69,11 @@ const Item = ({mesaj, yanit}) => (
 );
 
 const renderItem = ({ item }) => (
-  <Item mesaj={item.mesaj} yanit={item.yanit} ></Item>
+  <Item msj1={item.} msj2={item.} ></Item>
 );
 
 function MessageBlock(props) {
+  DATA = QREditScreen.mesajlar
   return (
     <FlatList
         data={DATA}
