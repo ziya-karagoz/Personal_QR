@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -12,8 +12,10 @@ import {
 
 
 let DATA
-const Item = ({msj1, msj2}) => (
-
+const Item = ({msj1, msj2, childTP}) => {
+   const [childMessageOne, setChildMessageOne] = useState("");
+   const [childMessageTwo, setChildMessageTwo] = useState("");
+return (
   <View style={styles.container}>
       <View
         style={{
@@ -33,7 +35,8 @@ const Item = ({msj1, msj2}) => (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setMessageOne(value);
+              setChildMessageOne(value);
+              childTP(childMessageOne, childMessageTwo)
             }}
             placeholder= {msj1}
             style={styles.mesaj}
@@ -69,7 +72,8 @@ const Item = ({msj1, msj2}) => (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setMessageOne(value);
+              setChildMessageTwo(value);
+              childTP(childMessageOne, childMessageTwo)
             }}
             placeholder= {msj2}
             style={styles.yanit}
@@ -79,19 +83,21 @@ const Item = ({msj1, msj2}) => (
         <View style={{ flex: 1 }}></View>
       </View>
     </View>
-);
+);}
 
-const renderItem = ({ item }) => (
-  <Item msj1={item.messageOne} msj2={item.messageTwo} ></Item>
-);
 
-function MessageBlock(mesajlar, {setMessageOne, setMessageTwo}) {
+
+function MessageBlock(mesajlar, childToParentIn) {
   DATA = mesajlar.mesajlar.mesajlar
-
+  const childTP = childToParentIn
+  const renderItem = ( { item } ) => (
+    <Item msj1={item.messageOne} msj2={item.messageTwo} childTP = {childTP} ></Item>
+  );
+  console.log("fonksiyon: " + childTP)
+  
   return (
     <FlatList
-        data={DATA}
-        
+        data={DATA}       
         renderItem={renderItem}
         contentContainerStyle = {{alignItems:"center"}}
       />

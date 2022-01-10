@@ -25,15 +25,23 @@ import qrState from "../store/qrState";
 import { qrGenerate } from "../store/qrState";
 import { TabRouter } from "@react-navigation/native";
 
+
+
 function QREditScreen({ navigation, route }) {
   const { user } = useSnapshot(userState);
-  const [qrName, setQrName] = useState("");
+  const childToParent = ({childMessageOne, childMessageTwo}) => {
+    setMessageOne = childMessageOne
+    setMessageTwo = childMessageTwo
+  }
+
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
   const {qrAdi, qrId, mesajlar} = route.params; 
   const addMessageButtonHandler = () => {
     qrEdit(navigation, user, qrName, messageOne, messageTwo);
   };
+
+  console.log("fonkat1: " + childToParent)
   return (
     <View style={styles.container}>
       <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
@@ -65,7 +73,7 @@ function QREditScreen({ navigation, route }) {
 
       <SafeAreaView style={styles.body2}>
 
-         <MessageBlock mesajlar = {{mesajlar}} setMessage = {setMessageOne, setMessageTwo}></MessageBlock>
+         <MessageBlock mesajlar = {{mesajlar}} childToParentIn = {childToParent}></MessageBlock>
 
       </SafeAreaView>
 
