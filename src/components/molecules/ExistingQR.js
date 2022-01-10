@@ -42,9 +42,6 @@ function ExistingQR({ props }) {
   useEffect(() => {
     displayQrList(user);
   }, []);
-  useEffect(() => {
-    console.log(qrs);
-  }, [qrs]);
 
   DATA = qrs.qrs;
 

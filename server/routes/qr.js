@@ -38,7 +38,6 @@ qrRoute.post("/displayQrs", (req, res) => {
     .populate({ path: "qr", populate: { path: "messageBlock" } })
     .then((qrblk) => {
       qrs = qrblk.qr;
-      console.log("qrs: ", qrs);
       return res.status(200).json({ qrs });
     })
     .catch((e) => console.log("ERR :", e));
@@ -50,6 +49,7 @@ qrRoute.post("/scanQr", (req, res) => {
   Qr.findById(data)
     .exec()
     .then((qrr) => {
+      console.log("QRR: ", qrr);
       MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
         console.log("Messages: ", messageBlock.messages);
         return res.status(200).json({ message: messageBlock.messages });
