@@ -15,8 +15,10 @@ const setqrText = (data) => {
 const setqrTextFlag = (data) => {
   phoneState.qrTextFlag = data;
 };
+
 const getQrMessages = (data) => {
-  axios
+  if(data.length> 0){
+    axios
     .post(`http://${localIP}:5000/api/qr/scanQr`, { data })
     .then((response) => {
       const { message } = response.data;
@@ -28,6 +30,8 @@ const getQrMessages = (data) => {
     .catch((e) => {
       alert("Hata : ", e);
     });
+  }
+  
 };
 
 export { getQrMessages, setqrText, setqrTextFlag };

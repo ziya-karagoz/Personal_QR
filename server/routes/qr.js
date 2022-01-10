@@ -45,8 +45,9 @@ qrRoute.post("/displayQrs", (req, res) => {
 
 qrRoute.post("/scanQr", (req, res) => {
   let { data } = req.body;
-
-  Qr.findById(data)
+  console.log("Data: ", data)
+var id = mongoose.Types.ObjectId(data);
+  Qr.findById(id)
     .exec()
     .then((qrr) => {
       console.log("QRR: ", qrr);

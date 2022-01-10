@@ -11,10 +11,10 @@ function HomeScreen() {
   const { qrText, qrTextFlag } = useSnapshot(phoneState);
 
   useEffect(() => {
-    if (qrText.length > 0 && qrTextFlag) {
+    
       getQrMessages(qrText);
       setqrTextFlag(false);
-    }
+    
   }, [qrText]);
 
   return (
