@@ -29,6 +29,7 @@ import { TabRouter } from "@react-navigation/native";
 
 function QREditScreen( {route} ) {
   const {qrAdi, qrId, mesajlar} = route.params; 
+  console.log(qrId)
   return (
     <View style={styles.container}>
       <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
@@ -59,7 +60,7 @@ function QREditScreen( {route} ) {
 
       <SafeAreaView style={styles.body2}>
 
-         <MessageBlock mesajlar = {{mesajlar}} ></MessageBlock>
+         <MessageBlock mesajlar = {{mesajlar}} qrId = {{qrId}} ></MessageBlock>
 
       </SafeAreaView>
 

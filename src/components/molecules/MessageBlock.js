@@ -10,13 +10,17 @@ import {
 } from "react-native";
 import { useSnapshot } from "valtio";
 import userState from "../../store/userState";
+import {qrEdit} from "../../store/qrState"
 let DATA
-const Item = ({msj1, msj2}) => {
-  const { user } = useSnapshot(userState);
+let all
+const Item = (props) => {
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
+  const qrId = props.qrId
+  const msj1 = props.msj1
+  const msj2 = props.msj2
   const addMessageButtonHandler = () => {
-    qrEdit(user, qrName, messageOne, messageTwo);
+    qrEdit(qrId, messageOne, messageTwo);
   };
 return (
   <View style={styles.container}>
@@ -65,7 +69,7 @@ return (
         }}
       >
         <View style={{ flex: 1 }}>
-          <Text style={{ left: "5%", top: "2%" }}>Cevap:</Text>
+          <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
         </View>
 
         
@@ -88,16 +92,19 @@ return (
 
 
 
-function MessageBlock(mesajlar) {
-  DATA = mesajlar.mesajlar.mesajlar
-  const renderItem = ( { item } ) => (
-    <Item msj1={item.messageOne} msj2={item.messageTwo}></Item>
-  );
+function MessageBlock({mesajlar, qrId}) {
+  DATA = mesajlar.mesajlar
+  all = qrId.qrId
+
+  const renderItem = (  {item}, qrId ) => {
+    return(
+    <Item msj1={item.messageOne} msj2={item.messageTwo} qrId = {qrId}  ></Item>
+  );}
   
   return (
     <FlatList
         data={DATA}       
-        renderItem={renderItem}
+        renderItem={(item) => renderItem(item, all)}
         contentContainerStyle = {{alignItems:"center"}}
       />
   );

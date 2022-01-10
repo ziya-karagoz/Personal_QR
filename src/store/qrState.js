@@ -58,5 +58,18 @@ const getQrMessages = (data) => {
     });
 };
 
-export { qrGenerate, displayQrList, getQrMessages };
+
+const qrEdit = (qrId, messageOne, messageTwo) => {
+  axios
+    .post(`http://${localIP}:5000/api/qr/qrEdit`, { qrId,  messageOne, messageTwo })
+    .then((response) => {
+      console.log("RES: ", response.data);
+      
+    })
+    .catch((e) => {
+      console.log("ERRo: ", e);
+    });
+}
+
+export { qrGenerate, displayQrList, getQrMessages, qrEdit };
 export default qrState;

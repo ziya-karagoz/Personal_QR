@@ -56,4 +56,21 @@ qrRoute.post("/scanQr", (req, res) => {
     });
 });
 
+qrRoute.post("/qrEdit", (req, res) => {
+ const {qrId, messageOne, messageTwo} = req.body;
+ Qr.findById(qrId)
+ .exec()
+ .then((qrr) => {
+   MessageBlock.findByIdAndUpdate(qrr.messageBlock,{$set: {
+    'messages.0.messageOne': messageOne,
+    'messages.0.messageTwo': messageTwo
+}}).exec().then((messageBlock) => {
+     console.log("Messages: ", messageBlock);
+     return res.status(200).json({message: "OK"})
+   });
+ });
+
+  
+})
+
 module.exports = qrRoute;
