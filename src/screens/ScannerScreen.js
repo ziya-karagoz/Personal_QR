@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import axios from "axios";
-import { localIP } from "../constants";
-import { getQrMessages } from "../store/qrState";
+import { useSnapshot } from "valtio";
+import phoneState from "../store/phoneState";
+import { setqrText, setqrTextFlag } from "../store/phoneState";
+
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [qrMessage, setQrMessage] = useState("");
+  const [text, setText] = useState("Not yet scanned");
+  const { qrText, qrTextFlag } = useSnapshot(phoneState);
+
+  useEffect(() => {
+    console.log("qrTexT: ", qrText);
+  }, [qrText]);
+
   const askForCameraPermission = () => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -23,8 +30,9 @@ export default function ScannerScreen({ navigation }) {
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-
-    getQrMessages(data);
+    setText(data);
+    setqrText(data);
+    setqrTextFlag(true);
   };
 
   // Check permissions and return the screens
@@ -56,16 +64,18 @@ export default function ScannerScreen({ navigation }) {
           style={{ height: 400, width: 400 }}
         />
       </View>
-      <Text style={styles.maintext}></Text>
+      <Text style={styles.maintext}>{text}</Text>
 
-      <Button
-        title={"Go Back"}
-        onPress={() => {
-          setScanned(false);
-          navigation.navigate("Home");
-        }}
-        color='tomato'
-      />
+      {scanned && (
+        <Button
+          title={"Go Back"}
+          onPress={() => {
+            setScanned(false);
+            navigation.navigate("Home");
+          }}
+          color='tomato'
+        />
+      )}
     </View>
   );
 }

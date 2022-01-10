@@ -49,6 +49,7 @@ qrRoute.post("/scanQr", (req, res) => {
   Qr.findById(data)
     .exec()
     .then((qrr) => {
+      console.log("QRR: ", qrr);
       MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
         console.log("Messages: ", messageBlock.messages);
         return res.status(200).json({ message: messageBlock.messages });
