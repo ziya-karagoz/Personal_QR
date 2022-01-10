@@ -8,13 +8,16 @@ import {
   Image,
   FlatList
 } from "react-native";
-
-
-
+import { useSnapshot } from "valtio";
+import userState from "../../store/userState";
 let DATA
-const Item = ({msj1, msj2, childTP}) => {
-   const [childMessageOne, setChildMessageOne] = useState("");
-   const [childMessageTwo, setChildMessageTwo] = useState("");
+const Item = ({msj1, msj2}) => {
+  const { user } = useSnapshot(userState);
+  const [messageOne, setMessageOne] = useState("");
+  const [messageTwo, setMessageTwo] = useState("");
+  const addMessageButtonHandler = () => {
+    qrEdit(user, qrName, messageOne, messageTwo);
+  };
 return (
   <View style={styles.container}>
       <View
@@ -35,8 +38,7 @@ return (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setChildMessageOne(value);
-              childTP(childMessageOne, childMessageTwo)
+              setMessageOne(value);
             }}
             placeholder= {msj1}
             style={styles.mesaj}
@@ -44,7 +46,7 @@ return (
         </View>
 
         <View style={{ flex: 1 }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={addMessageButtonHandler}>
             <Image
               style={styles.icon}
               resizeMode='contain'
@@ -72,8 +74,7 @@ return (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setChildMessageTwo(value);
-              childTP(childMessageOne, childMessageTwo)
+              setMessageTwo(value);
             }}
             placeholder= {msj2}
             style={styles.yanit}
@@ -87,13 +88,11 @@ return (
 
 
 
-function MessageBlock(mesajlar, childToParentIn) {
+function MessageBlock(mesajlar) {
   DATA = mesajlar.mesajlar.mesajlar
-  const childTP = childToParentIn
   const renderItem = ( { item } ) => (
-    <Item msj1={item.messageOne} msj2={item.messageTwo} childTP = {childTP} ></Item>
+    <Item msj1={item.messageOne} msj2={item.messageTwo}></Item>
   );
-  console.log("fonksiyon: " + childTP)
   
   return (
     <FlatList
