@@ -45,7 +45,23 @@ const displayQrList = (user) => {
     });
 };
 
+const qrEdit = (qrId, messageOne, messageTwo) => {
+  qrState.loading = true;
+  axios
+    .post(`http://${localIP}:5000/api/qr/qrEdit`, {
+      qrId,
+      messageOne,
+      messageTwo,
+    })
+    .then((response) => {
+      qrState.loading = false;
+      console.log("Message: ", response.data);
+    })
+    .catch((err) => {
+      qrState.loading = false;
+      console.log("ERR :", err);
+    });
+};
 
-
-export { qrGenerate, displayQrList };
+export { qrGenerate, displayQrList, qrEdit };
 export default qrState;
