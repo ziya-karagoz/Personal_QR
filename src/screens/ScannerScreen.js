@@ -4,6 +4,8 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { useSnapshot } from "valtio";
 import phoneState from "../store/phoneState";
 import { setqrText, setqrTextFlag, getQrMessages } from "../store/phoneState";
+import axios from "axios";
+import { localIP } from "../constants";
 
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -11,12 +13,10 @@ export default function ScannerScreen({ navigation }) {
   const [text, setText] = useState("Not yet scanned");
   const { qrText, qrTextFlag } = useSnapshot(phoneState);
   const [modalVisible, setModalVisible] = useState(false);
-  let msgs;
-  
+  const [messageFromServer, setMessageFromServer] = useState({});
+
   useEffect(() => {
     console.log("qrTexT: ", qrText);
-    msgs = getQrMessages(qrText);
-    console.log(getQrMessages(qrText));
   }, [qrText]);
 
   const askForCameraPermission = () => {
@@ -35,11 +35,16 @@ export default function ScannerScreen({ navigation }) {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     setModalVisible(true);
-    setText(data);
-    setqrText(data);
-    setqrTextFlag(true);
-    console.log("sussiekrim");
-    console.log(JSON.stringify(msgs));
+    axios
+      .post(`http://${localIP}:5000/api/qr/scanQr`, { data })
+      .then((response) => {
+        const { message } = response.data;
+        setMessageFromServer(message[0]);
+        console.log(messageFromServer);
+      })
+      .catch((e) => {
+        alert("Hata : ", e);
+      });
   };
 
   // Check permissions and return the screens
@@ -70,26 +75,28 @@ export default function ScannerScreen({ navigation }) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
         />
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>{msgs}</Text>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Kapat</Text>
-            </Pressable>
+        <Modal
+          animationType='slide'
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>
+                {messageFromServer.messageOne}
+              </Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.textStyle}>Kapat</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   modalView: {
     margin: 20,
@@ -142,16 +149,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   buttonOpen: {
     backgroundColor: "#F194FF",
@@ -162,10 +169,10 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
