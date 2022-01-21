@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Text, View, StyleSheet, Button, Modal, Pressable } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useSnapshot } from "valtio";
 import phoneState from "../store/phoneState";
-import { setqrText, setqrTextFlag } from "../store/phoneState";
+import { setqrText, setqrTextFlag, getQrMessages } from "../store/phoneState";
 
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const { qrText, qrTextFlag } = useSnapshot(phoneState);
-
+  const [modalVisible, setModalVisible] = useState(false);
+  let msgs;
+  
   useEffect(() => {
     console.log("qrTexT: ", qrText);
+    msgs = getQrMessages(qrText);
+    console.log(getQrMessages(qrText));
   }, [qrText]);
 
   const askForCameraPermission = () => {
@@ -30,9 +34,12 @@ export default function ScannerScreen({ navigation }) {
   // What happens when we scan the bar code
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+    setModalVisible(true);
     setText(data);
     setqrText(data);
     setqrTextFlag(true);
+    console.log("sussiekrim");
+    console.log(JSON.stringify(msgs));
   };
 
   // Check permissions and return the screens
@@ -63,6 +70,26 @@ export default function ScannerScreen({ navigation }) {
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
         />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>{msgs}</Text>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Kapat</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       </View>
       <Text style={styles.maintext}>{text}</Text>
 
@@ -100,4 +127,45 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     backgroundColor: "tomato",
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
 });

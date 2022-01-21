@@ -23,9 +23,7 @@ const getQrMessages = (data) => {
     .then((response) => {
       const { message } = response.data;
 
-      alert(
-        "Mesaj: " + message[0].messageOne + "\nCevap: " + message[0].messageTwo
-      );
+      return message[0]
     })
     .catch((e) => {
       alert("Hata : ", e);
