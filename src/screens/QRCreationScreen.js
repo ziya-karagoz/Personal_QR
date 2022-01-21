@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     height: hp("100"),
     width: wp("100"),
   },
+
   container2: {
     marginTop: "2%",
     width: 380,
@@ -212,12 +213,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   image: {
     top: "3%",
     width: 120,
     height: 120,
     alignSelf: "center",
   },
+
   btn: {
     width: 100,
     height: 24,
@@ -225,6 +228,7 @@ const styles = StyleSheet.create({
     marginLeft: "25%",
     top: "32%",
   },
+
   btnText: {
     height: 24,
     width: 100,
@@ -232,31 +236,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   msgbody: {
     width: 100,
     height: 30,
     marginLeft: "1.5%",
   },
+
   textInput: {
     color: "#121212",
     height: 50,
     width: 100,
   },
+
   mesaj: {
     color: "#121212",
     bottom: "26%"
 
   },
+
   yanit: {
     color: "#121212",
     bottom: "32%"
   },
+
   icon: {
     height: "65%",
     width: "65%",
     alignSelf: "center",
     top: "7%",
   },
+  
 });
 
 export default QRCreationScreen;

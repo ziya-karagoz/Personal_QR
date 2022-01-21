@@ -11,10 +11,7 @@ function FooterBar(props) {
       <TouchableOpacity
         style={styles.btnWrapper1}
         onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Scanner" }],
-          });
+          navigation.navigate("Scanner")
         }}
       >
         <MaterialCommunityIconsIcon
@@ -39,10 +36,7 @@ function FooterBar(props) {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "Home" }],
-          });
+         navigation.navigate("Home")
         }}
         style={styles.btnWrapper2}
       >
