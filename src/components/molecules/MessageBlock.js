@@ -20,6 +20,7 @@ const Item = (props) => {
   const msj1 = props.msj1
   const msj2 = props.msj2
   const addMessageButtonHandler = () => {
+    console.log(messageOne + "bakayım  " + messageTwo);
     qrEdit(qrId, messageOne, messageTwo);
   };
 return (
@@ -42,7 +43,9 @@ return (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setMessageOne(value);
+              if(value != ""){
+                setMessageOne(value);
+              }
             }}
             placeholder= {msj1}
             style={styles.mesaj}
@@ -78,7 +81,9 @@ return (
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              setMessageTwo(value);
+              if(value != ""){
+                setMessageTwo(value);
+              }
             }}
             placeholder= {msj2}
             style={styles.yanit}

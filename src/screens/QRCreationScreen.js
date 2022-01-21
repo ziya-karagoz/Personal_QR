@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
+  FlatList
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -17,22 +18,114 @@ import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import QrName from "../components/molecules/QrName";
 import AddMessageButton from "../components/molecules/AddMessageButton";
-import MessageBlock from "../components/molecules/MessageBlock";
 import userState from "../store/userState";
 import { useSnapshot } from "valtio";
 import qrState from "../store/qrState";
 import { qrGenerate } from "../store/qrState";
 
-function QRCreationScreen({ navigation }) {
-  const { user } = useSnapshot(userState);
+let DATA;
 
-  const [qrName, setQrName] = useState("");
+const Item = (props) => {
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
+  const callBackFunction = props.callBackFunction;
+
+
+  return (
+    <View style={styles.container2}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            borderLeftWidth: 3,
+            borderRightWidth: 3,
+            borderTopWidth:3
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={{ marginTop: "10%", marginLeft: "15%" }}>Mesaj:</Text>
+          </View>
+  
+          <View style={{ flex: 4 }}>
+          <TextInput
+              multiline
+              numberOfLines={10}
+              placeholder= "___________"
+              style={styles.mesaj}
+              onChangeText={(value) => {
+              setMessageOne(value);
+              callBackFunction(messageOne, messageTwo);
+            }}
+            ></TextInput>
+          </View>
+  
+          <View style={{ flex: 1 }}>
+            <TouchableOpacity>
+              <Image
+                style={styles.icon}
+                resizeMode='contain'
+                source={require("../Assets/Images/editIcon.png")}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+        </View>
+  
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            borderTopColor: "black",
+            borderWidth: 3,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
+          </View>
+  
+          
+          <View style={{ flex: 4 }}>
+          <TextInput
+              multiline
+              numberOfLines={10}
+              placeholder= "___________"
+              style={styles.yanit}
+              onChangeText={(value) => {
+              setMessageTwo(value);
+              callBackFunction(messageOne, messageTwo);
+            }}
+            ></TextInput>
+          </View>
+  
+          <View style={{ flex: 1 }}></View>
+        </View>
+      </View>
+  );}
+
+function QRCreationScreen({ navigation }) {
+  const { user } = useSnapshot(userState);
+  const [qrName, setQrName] = useState("");
+  let messageOne
+  let messageTwo
 
   const addMessageButtonHandler = () => {
     qrGenerate(navigation, user, qrName, messageOne, messageTwo);
   };
+
+  const callBackFunction = (itemMessageOne, itemMessageTwo) => {
+    messageOne = itemMessageOne,
+    messageTwo = itemMessageTwo
+  }
+
+  DATA = [
+    1,
+  ]
+
+  
+
+  const renderItem = (item, callBackFunction) => {
+    return(
+    <Item callBackFunction = {callBackFunction}></Item>
+  );}
 
   return (
     <View style={styles.container}>
@@ -57,7 +150,7 @@ function QRCreationScreen({ navigation }) {
           >
             <View>
               <View style={styles.btnText}>
-                <Text>Mesaj Ekle</Text>
+                <Text>Kaydet</Text>
               </View>
             </View>
           </TouchableOpacity>
@@ -65,35 +158,11 @@ function QRCreationScreen({ navigation }) {
       </View>
 
       <SafeAreaView style={styles.body2}>
-        {/* Burada onceden bu vardi
-          <MessageBlock></MessageBlock>
-      */}
-        <Text>Mesaj1: </Text>
-        <View style={styles.msgbody}>
-          <TextInput
-            multiline
-            numberOfLines={10}
-            onChangeText={(value) => {
-              setMessageOne(value);
-            }}
-            placeholder='_______________'
-            clearTextOnFocus={true}
-            style={styles.textInput}
-          ></TextInput>
-        </View>
-        <Text>Mesaj2: </Text>
-        <View style={styles.msgbody}>
-          <TextInput
-            multiline
-            numberOfLines={10}
-            onChangeText={(value) => {
-              setMessageTwo(value);
-            }}
-            placeholder='_______________'
-            clearTextOnFocus={true}
-            style={styles.textInput}
-          ></TextInput>
-        </View>
+        <FlatList
+        data={DATA}       
+        renderItem={(item) => renderItem(item, callBackFunction)}
+        contentContainerStyle = {{alignItems:"center"}}
+        />
       </SafeAreaView>
 
       <FooterBar style={styles.footerBar}></FooterBar>
@@ -105,6 +174,12 @@ const styles = StyleSheet.create({
   container: {
     height: hp("100"),
     width: wp("100"),
+  },
+  container2: {
+    marginTop: "2%",
+    width: 380,
+    height: 150,
+    backgroundColor: "#E6E6E6",
   },
 
   headerBar: {
@@ -166,6 +241,21 @@ const styles = StyleSheet.create({
     color: "#121212",
     height: 50,
     width: 100,
+  },
+  mesaj: {
+    color: "#121212",
+    bottom: "26%"
+
+  },
+  yanit: {
+    color: "#121212",
+    bottom: "32%"
+  },
+  icon: {
+    height: "65%",
+    width: "65%",
+    alignSelf: "center",
+    top: "7%",
   },
 });
 
