@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     width: 180,
     height: 190,
     backgroundColor: "#E6E6E6",
-    marginLeft: "5%"
+    marginLeft: "5%",
+    borderRadius: 20,
   },
   body1:{
     flex:1,
@@ -73,18 +74,15 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     alignItems: "center",
-    justifyContent:"center"
+    justifyContent:"center",
+    borderRadius: 20,
   },
   body2:{
     flex:3,
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    bottom: "5%",
   },
-  qrImage:{
-    height: "85%",
-    width: "60%",
-    alignSelf: "center"
-  }
 });
 
 export default ExistingQR;

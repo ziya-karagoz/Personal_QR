@@ -29,9 +29,6 @@ return (
         style={{
           flex: 1,
           flexDirection: "row",
-          borderLeftWidth: 3,
-          borderRightWidth: 3,
-          borderTopWidth:3
         }}
       >
         <View style={{ flex: 1 }}>
@@ -68,7 +65,7 @@ return (
           flex: 1,
           flexDirection: "row",
           borderTopColor: "black",
-          borderWidth: 3,
+          borderTopWidth: 3,
         }}
       >
         <View style={{ flex: 1 }}>
@@ -121,6 +118,8 @@ const styles = StyleSheet.create({
     width: 380,
     height: 150,
     backgroundColor: "#E6E6E6",
+    borderWidth: 3,
+    borderRadius : 20,
   },
   mesaj: {
     color: "#121212",

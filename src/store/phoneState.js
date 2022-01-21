@@ -22,7 +22,7 @@ const getQrMessages = (data) => {
     .post(`http://${localIP}:5000/api/qr/scanQr`, { data })
     .then((response) => {
       const { message } = response.data;
-
+      
       return message[0]
     })
     .catch((e) => {

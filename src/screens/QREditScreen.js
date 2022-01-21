@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     marginLeft: "25%",
     top: "32%",
+    borderRadius : 20,
   },
   btnText: {
     height: 24,

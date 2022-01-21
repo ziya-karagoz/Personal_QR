@@ -40,7 +40,6 @@ export default function ScannerScreen({ navigation }) {
       .then((response) => {
         const { message } = response.data;
         setMessageFromServer(message[0]);
-        console.log(messageFromServer);
       })
       .catch((e) => {
         alert("Hata : ", e);
@@ -86,7 +85,7 @@ export default function ScannerScreen({ navigation }) {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>
-                {messageFromServer.messageOne}
+                Mesaj: {messageFromServer.messageOne + "\n"} Yanıt: {messageFromServer.messageTwo}
               </Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
@@ -107,7 +106,7 @@ export default function ScannerScreen({ navigation }) {
             setScanned(false);
             navigation.navigate("Home");
           }}
-          color='tomato'
+          color='#616161'
         />
       )}
     </View>
@@ -132,10 +131,10 @@ const styles = StyleSheet.create({
     width: 300,
     overflow: "hidden",
     borderRadius: 30,
-    backgroundColor: "tomato",
+    backgroundColor: "#616161",
   },
   centeredView: {
-    flex: 1,
+    flex: 3,
     justifyContent: "center",
     alignItems: "center",
     marginTop: 22,
@@ -160,11 +159,8 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#616161",
   },
   textStyle: {
     color: "white",
