@@ -47,6 +47,7 @@ const displayQrList = (user) => {
 
 const qrEdit = (qrId, messageOne, messageTwo) => {
   qrState.loading = true;
+  let msg;
   axios
     .post(`http://${localIP}:5000/api/qr/qrEdit`, {
       qrId,
@@ -55,12 +56,15 @@ const qrEdit = (qrId, messageOne, messageTwo) => {
     })
     .then((response) => {
       qrState.loading = false;
-      console.log("Message: ", response.data);
+
+      msg = response.data;
+      console.log("MSG: ", msg);
     })
     .catch((err) => {
       qrState.loading = false;
       console.log("ERR :", err);
     });
+  return msg;
 };
 
 export { qrGenerate, displayQrList, qrEdit };

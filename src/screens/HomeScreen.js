@@ -4,19 +4,8 @@ import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import ExistingQR from "../components/molecules/ExistingQR";
-import { useSnapshot } from "valtio";
-import phoneState from "../store/phoneState";
-import { getQrMessages, setqrTextFlag } from "../store/phoneState";
+
 function HomeScreen() {
-  const { qrText, qrTextFlag } = useSnapshot(phoneState);
-
-  useEffect(() => {
-    
-      getQrMessages(qrText);
-      setqrTextFlag(false);
-    
-  }, [qrText]);
-
   return (
     <View style={styles.container}>
       <View style={styles.headerBar}>

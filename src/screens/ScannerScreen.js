@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Modal, Pressable } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { useSnapshot } from "valtio";
-import phoneState from "../store/phoneState";
-import { setqrText, setqrTextFlag, getQrMessages } from "../store/phoneState";
 import axios from "axios";
 import { localIP } from "../constants";
 
@@ -11,13 +8,8 @@ export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
-  const { qrText, qrTextFlag } = useSnapshot(phoneState);
   const [modalVisible, setModalVisible] = useState(false);
   const [messageFromServer, setMessageFromServer] = useState({});
-
-  useEffect(() => {
-    console.log("qrTexT: ", qrText);
-  }, [qrText]);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -32,18 +24,18 @@ export default function ScannerScreen({ navigation }) {
   }, []);
 
   // What happens when we scan the bar code
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     setModalVisible(true);
-    axios
-      .post(`http://${localIP}:5000/api/qr/scanQr`, { data })
-      .then((response) => {
-        const { message } = response.data;
-        setMessageFromServer(message[0]);
-      })
-      .catch((e) => {
-        alert("Hata : ", e);
-      });
+    let res = await axios.post(`http://${localIP}:5000/api/qr/scanQr`, {
+      data,
+    });
+    if (res.status === 200) {
+      const { message } = res.data;
+      setMessageFromServer(message[0]);
+    } else {
+      alert("Hata : ", res.data);
+    }
   };
 
   // Check permissions and return the screens
@@ -71,7 +63,7 @@ export default function ScannerScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.barcodebox}>
         <BarCodeScanner
-          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+          onBarCodeScanned={handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
         />
         <Modal
@@ -85,7 +77,8 @@ export default function ScannerScreen({ navigation }) {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>
-                Mesaj: {messageFromServer.messageOne + "\n"} Yanıt: {messageFromServer.messageTwo}
+                Mesaj: {messageFromServer.messageOne + "\n"} Yanıt:{" "}
+                {messageFromServer.messageTwo}
               </Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}

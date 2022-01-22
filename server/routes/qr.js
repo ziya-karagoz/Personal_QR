@@ -45,34 +45,55 @@ qrRoute.post("/displayQrs", (req, res) => {
 
 qrRoute.post("/scanQr", (req, res) => {
   let { data } = req.body;
-  console.log("Data: ", data)
-var id = mongoose.Types.ObjectId(data);
+  console.log("Data: ", data);
+  var id = mongoose.Types.ObjectId(data);
   Qr.findById(id)
     .exec()
     .then((qrr) => {
       console.log("QRR: ", qrr);
       MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
-        console.log("Messages: ", messageBlock.messages);
         return res.status(200).json({ message: messageBlock.messages });
       });
     });
 });
 
 qrRoute.post("/qrEdit", (req, res) => {
- const {qrId, messageOne, messageTwo} = req.body;
- Qr.findById(qrId)
- .exec()
- .then((qrr) => {
-   MessageBlock.findByIdAndUpdate(qrr.messageBlock,{$set: {
-    'messages.0.messageOne': messageOne,
-    'messages.0.messageTwo': messageTwo
-}}).exec().then((messageBlock) => {
-     console.log("Messages: ", messageBlock);
-     return res.status(200).json({message: "OK"})
-   });
- });
+  const { qrId, messageOne, messageTwo } = req.body;
+  Qr.findById(qrId)
+    .exec()
+    .then((qrr) => {
+      console.log("qrr: ", qrr);
+      MessageBlock.findByIdAndUpdate(qrr.messageBlock, {
+        $set: {
+          "messages.0.messageOne": messageOne,
+          "messages.0.messageTwo": messageTwo,
+        },
+      })
+        .exec()
+        .then((messageBlock) => {
+          console.log("Messages: ", messageBlock);
+          return res.status(200).json({ messageOne, messageTwo });
+        });
+    });
+});
 
-  
-})
+// qrRoute.post("/qrEdit", (req, res) => {
+//   const { qrId, messageOne, messageTwo } = req.body;
+//   Qr.findById(qrId)
+//     .exec()
+//     .then((qrr) => {
+//       MessageBlock.findByIdAndUpdate(qrr.messageBlock, {
+//         $set: {
+//           "messages.0.messageOne": messageOne,
+//           "messages.0.messageTwo": messageTwo,
+//         },
+//       })
+//         .exec()
+//         .then((messageBlock) => {
+//           console.log("Messages: ", messageBlock);
+//           return res.status(200).json({ message: "OK" });
+//         });
+//     });
+// });
 
 module.exports = qrRoute;
