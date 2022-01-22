@@ -1,50 +1,22 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DrawerActions, useNavigation,} from "@react-navigation/native";
-function FooterBar(props) {
+import { DrawerActions, useNavigation, CommonActions} from "@react-navigation/native";
+function FooterBarNav(props) {
   const navigation = useNavigation();
 
   return (
     <View style={[styles.container, props.style]}>
-      <TouchableOpacity
+      <View 
         style={styles.btnWrapper1}
-        onPress={() => {
-          navigation.reset({
-            index: 1,
-            routes: [
-              {name: 'Home'},
-              {name: 'Scanner'}
-              ],
-          });
-        }}
       >
-        <MaterialCommunityIconsIcon
-          name='barcode-scan'
-          style={[
-            styles.icon,
-            {
-              color: props.active ? "#007AFF" : "#616161",
-            },
-          ]}
-        ></MaterialCommunityIconsIcon>
-        <Text
-          style={[
-            styles.qrTara,
-            {
-              color: props.active ? "#007AFF" : "#9E9E9E",
-            },
-          ]}
-        >
-          QR Tara
-        </Text>
-      </TouchableOpacity>
+      </View>
       <TouchableOpacity
         onPress={() => {
           navigation.reset({
             index: 0,
             routes: [
-              {name: 'Home'},
+              {name: 'Ana Sayfa'},
               ],
           });
         }}
@@ -127,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FooterBar;
+export default FooterBarNav;

@@ -11,11 +11,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Component Imports
 
 import NavBar from "./src/components/molecules/NavBar";
+import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
 
 export default function App() {
   return (
     <NavigationContainer>
-      <NavBar></NavBar>
+      <StackNavigatorLogin></StackNavigatorLogin>
     </NavigationContainer>
   );
 }
