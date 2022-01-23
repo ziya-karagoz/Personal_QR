@@ -7,8 +7,8 @@ const qrState = proxy({
   loading: false,
 });
 
-const qrGenerate = (navigation, user, qrName, messageOne, messageTwo) => {
-  axios
+const qrGenerate = async (navigation, user, qrName, messageOne, messageTwo) => {
+  let res = await axios
     .post(`http://${localIP}:5000/api/qr/qrgenerate`, {
       message: {
         messageOne: messageOne,
@@ -26,6 +26,7 @@ const qrGenerate = (navigation, user, qrName, messageOne, messageTwo) => {
     .catch((err) => {
       console.log("ERR :", err);
     });
+  return res;
 };
 
 const displayQrList = (user) => {
@@ -47,7 +48,6 @@ const displayQrList = (user) => {
 
 const qrEdit = (qrId, messageOne, messageTwo) => {
   qrState.loading = true;
-  let msg;
   axios
     .post(`http://${localIP}:5000/api/qr/qrEdit`, {
       qrId,
@@ -56,15 +56,11 @@ const qrEdit = (qrId, messageOne, messageTwo) => {
     })
     .then((response) => {
       qrState.loading = false;
-
-      msg = response.data;
-      console.log("MSG: ", msg);
     })
     .catch((err) => {
       qrState.loading = false;
       console.log("ERR :", err);
     });
-  return msg;
 };
 
 export { qrGenerate, displayQrList, qrEdit };

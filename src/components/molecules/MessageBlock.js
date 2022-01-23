@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  ToastAndroid,
 } from "react-native";
 import { qrEdit } from "../../store/qrState";
 let DATA;
@@ -17,8 +18,9 @@ const Item = (props) => {
   const qrId = props.qrId;
   let msj1 = props.msj1;
   let msj2 = props.msj2;
-  const addMessageButtonHandler = () => {
-    qrEdit(qrId, messageOne, messageTwo);
+  const addMessageButtonHandler = async () => {
+    const res = await qrEdit(qrId, messageOne, messageTwo);
+    ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
     <View style={styles.container}>

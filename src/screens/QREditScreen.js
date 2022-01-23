@@ -13,41 +13,28 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import QRCode from 'react-native-qrcode-svg';
+import QRCode from "react-native-qrcode-svg";
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
-import QrName from "../components/molecules/QrName";
-import AddMessageButton from "../components/molecules/AddMessageButton";
 import MessageBlock from "../components/molecules/MessageBlock";
-import userState from "../store/userState";
-import { useSnapshot } from "valtio";
-import qrState from "../store/qrState";
-import { qrGenerate } from "../store/qrState";
-import { TabRouter } from "@react-navigation/native";
 
-
-
-function QREditScreen( {route} ) {
-  const {qrAdi, qrId, mesajlar} = route.params; 
+function QREditScreen({ route }) {
+  const { qrAdi, qrId, mesajlar } = route.params;
   return (
     <View style={styles.container}>
       <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
       <View style={styles.body1}>
         <View style={{ flex: 1, justifyContent: "center", left: "25%" }}>
-          <QRCode value = {qrId} />
+          <QRCode value={qrId} />
         </View>
         <View style={{ flex: 1 }}>
           <View style={styles.qrAdi}>
             <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
             <View style={styles.container2}>
-              <Text
-              style={styles.textInput}
-              >{qrAdi}</Text>
+              <Text style={styles.textInput}>{qrAdi}</Text>
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.btn}
-          >
+          <TouchableOpacity style={styles.btn}>
             <View>
               <View style={styles.btnText}>
                 <Text>Mesaj Ekle</Text>
@@ -58,9 +45,7 @@ function QREditScreen( {route} ) {
       </View>
 
       <SafeAreaView style={styles.body2}>
-
-         <MessageBlock mesajlar = {{mesajlar}} qrId = {{qrId}} ></MessageBlock>
-
+        <MessageBlock mesajlar={{ mesajlar }} qrId={{ qrId }}></MessageBlock>
       </SafeAreaView>
 
       <FooterBar style={styles.footerBar}></FooterBar>
@@ -78,7 +63,7 @@ const styles = StyleSheet.create({
     height: 30,
     marginLeft: "1.5%",
     alignItems: "center",
-    top: "7.5%"
+    top: "7.5%",
   },
   headerBar: {
     flex: 1,
@@ -122,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: "gray",
     marginLeft: "25%",
     top: "32%",
-    borderRadius : 20,
+    borderRadius: 20,
   },
   btnText: {
     height: 24,
