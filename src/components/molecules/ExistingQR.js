@@ -7,7 +7,9 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+
 import QRCode from "react-native-qrcode-svg";
+
 import { useNavigation } from "@react-navigation/native";
 import userState from "../../store/userState";
 import { displayQrList } from "../../store/qrState";
@@ -18,16 +20,13 @@ let DATA;
 const Item = ({ qrName, qrId, mesajlar }) => {
   const navigation = useNavigation();
   const [qrSVG, setQrSVG] = useState("");
-  const [qrSVGPath, setQrSVGPath] = useState("");
-
+  const [imageSource, setImageSource] = useState("");
   const handleLongPress = () => {
     console.log(qrName);
-
     qrSVG.toDataURL((data) => {
-      console.log("DATA: ", data);
-      const shareImageBase64 = {
-        url: `data:image/png;base64,${data}`,
-      };
+      setImageSource("data:image/png;base64," + data);
+
+      console.log("DATA: ", imageSource);
     });
   };
 

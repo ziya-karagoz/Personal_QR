@@ -98,11 +98,9 @@ export default function ScannerScreen({ navigation }) {
           onPress={() => {
             setScanned(false);
             navigation.reset({
-            index: 0,
-            routes: [
-              {name: 'Home'},
-              ],
-          });
+              index: 0,
+              routes: [{ name: "Home" }],
+            });
           }}
           color='#616161'
         />
