@@ -30,26 +30,26 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     });
 
     const fileName = FileSystem.documentDirectory + imageSource;
-    // await FileSystem.makeDirectoryAsync(
-    //   FileSystem.documentDirectory + "deneme"
+    await FileSystem.makeDirectoryAsync(
+      FileSystem.documentDirectory + "deneme"
+    );
+    // await FileSystem.writeAsStringAsync(
+    //   FileSystem.documentDirectory + "deneme/" + qrName + ".png",
+    //   imageSource
     // );
-    await FileSystem.writeAsStringAsync(
-      FileSystem.documentDirectory + "deneme/" + qrName + ".png",
-      imageSource
-    );
-    const cevap = await FileSystem.getInfoAsync(
-      FileSystem.documentDirectory + "deneme/" + qrName + ".png"
-    );
-    console.log("oldu: ", cevap.uri);
+    // const cevap = await FileSystem.getInfoAsync(
+    //   FileSystem.documentDirectory + "deneme/" + qrName + ".png"
+    // );
+    // console.log("oldu: ", cevap.uri);
 
-    FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
-      console.log(cUri);
-      IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
-        data: cUri,
-        flags: 1,
-      });
-      console.log("HAHASDFSF");
-    });
+    // FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
+    //   console.log(cUri);
+    //   IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
+    //     data: cUri,
+    //     flags: 1,
+    //   });
+    //   console.log("HAHASDFSF");
+    // });
   };
 
   return (
