@@ -29,27 +29,33 @@ const Item = ({ qrName, qrId, mesajlar }) => {
       setImageSource("data:image/png;base64," + data);
     });
 
-    const fileName = FileSystem.documentDirectory + imageSource;
-    await FileSystem.makeDirectoryAsync(
-      FileSystem.documentDirectory + "deneme"
-    );
-    // await FileSystem.writeAsStringAsync(
-    //   FileSystem.documentDirectory + "deneme/" + qrName + ".png",
-    //   imageSource
-    // );
-    // const cevap = await FileSystem.getInfoAsync(
-    //   FileSystem.documentDirectory + "deneme/" + qrName + ".png"
-    // );
-    // console.log("oldu: ", cevap.uri);
+    const base64Form = imageSource.split("data:image/png;base64,")[1];
 
-    // FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
-    //   console.log(cUri);
-    //   IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
-    //     data: cUri,
-    //     flags: 1,
-    //   });
-    //   console.log("HAHASDFSF");
-    // });
+    // const fileName = FileSystem.documentDirectory + imageSource;
+    // await FileSystem.makeDirectoryAsync(
+    //   FileSystem.documentDirectory + "deneme"
+    // );
+
+    await FileSystem.writeAsStringAsync(
+      FileSystem.documentDirectory + "deneme/" + qrName + ".png",
+      base64Form, 
+      {
+        encoding: FileSystem.EncodingType.Base64
+      }
+    );
+    const cevap = await FileSystem.getInfoAsync(
+      FileSystem.documentDirectory + "deneme/" + qrName + ".png"
+    );
+    console.log("oldu: ", cevap.uri);
+
+    FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
+      console.log("data: " + cUri);
+      IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
+        data: cUri,
+        flags: 1,
+      });
+      console.log("--------------------");
+    });
   };
 
   return (
