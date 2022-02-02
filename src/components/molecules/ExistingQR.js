@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import QRCode from "react-native-qrcode-svg";
+import * as FileSystem from "expo-file-system";
+import * as IntentLauncher from "expo-intent-launcher";
 
 import { useNavigation } from "@react-navigation/native";
 import userState from "../../store/userState";
@@ -21,12 +23,32 @@ const Item = ({ qrName, qrId, mesajlar }) => {
   const navigation = useNavigation();
   const [qrSVG, setQrSVG] = useState("");
   const [imageSource, setImageSource] = useState("");
-  const handleLongPress = () => {
-    console.log(qrName);
+
+  const handleLongPress = async () => {
     qrSVG.toDataURL((data) => {
       setImageSource("data:image/png;base64," + data);
+    });
 
-      console.log("DATA: ", imageSource);
+    const fileName = FileSystem.documentDirectory + imageSource;
+    // await FileSystem.makeDirectoryAsync(
+    //   FileSystem.documentDirectory + "deneme"
+    // );
+    await FileSystem.writeAsStringAsync(
+      FileSystem.documentDirectory + "deneme/" + qrName + ".png",
+      imageSource
+    );
+    const cevap = await FileSystem.getInfoAsync(
+      FileSystem.documentDirectory + "deneme/" + qrName + ".png"
+    );
+    console.log("oldu: ", cevap.uri);
+
+    FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
+      console.log(cUri);
+      IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
+        data: cUri,
+        flags: 1,
+      });
+      console.log("HAHASDFSF");
     });
   };
 

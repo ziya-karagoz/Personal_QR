@@ -14,10 +14,10 @@ import NavBar from "./src/components/molecules/NavBar";
 import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
 
 export default function App() {
-  // return (
-  //   <NavigationContainer>
-  //     <StackNavigatorLogin></StackNavigatorLogin>
-  //   </NavigationContainer>
-  // );
-  return <NotificationsDeneme />;
+  return (
+    <NavigationContainer>
+      <StackNavigatorLogin></StackNavigatorLogin>
+    </NavigationContainer>
+  );
+  // return <NotificationsDeneme />;
 }
