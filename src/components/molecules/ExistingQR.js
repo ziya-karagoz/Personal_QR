@@ -29,13 +29,16 @@ const Item = ({ qrName, qrId, mesajlar }) => {
       setImageSource("data:image/png;base64," + data);
     });
 
-    const fileName = FileSystem.documentDirectory + imageSource;
+    const base64Code = imageSource.split("data:image/png;base64,")[1];
     // await FileSystem.makeDirectoryAsync(
     //   FileSystem.documentDirectory + "deneme"
     // );
     await FileSystem.writeAsStringAsync(
       FileSystem.documentDirectory + "deneme/" + qrName + ".png",
-      imageSource
+      base64Code,
+      {
+        encoding: FileSystem.EncodingType.Base64,
+      }
     );
     const cevap = await FileSystem.getInfoAsync(
       FileSystem.documentDirectory + "deneme/" + qrName + ".png"
