@@ -24,35 +24,45 @@ const Item = ({ qrName, qrId, mesajlar }) => {
   const [qrSVG, setQrSVG] = useState("");
   const [imageSource, setImageSource] = useState("");
 
-  const handleLongPress = async () => {
-    qrSVG.toDataURL((data) => {
-      setImageSource("data:image/png;base64," + data);
+  const handlePress = async () => {
+    await qrSVG.toDataURL((data) => {
+      setImageSource(data);
     });
+  };
+  const saveQRAsImage = async (qrImagesDirectory, fileName, imageSource) => {
+    //Get folder
+    const folder = await FileSystem.getInfoAsync(qrImagesDirectory);
 
-    const base64Code = imageSource.split("data:image/png;base64,")[1];
-    // await FileSystem.makeDirectoryAsync(
-    //   FileSystem.documentDirectory + "deneme"
-    // );
+    // Check if folder does not exist, create one furthermore
+    if (!folder.exists) {
+      await FileSystem.makeDirectoryAsync(qrImagesDirectory);
+    }
+
+    // Write file into the source of program
     await FileSystem.writeAsStringAsync(
-      FileSystem.documentDirectory + "deneme/" + qrName + ".png",
-      base64Code,
+      qrImagesDirectory + fileName,
+      imageSource,
       {
         encoding: FileSystem.EncodingType.Base64,
       }
     );
-    const cevap = await FileSystem.getInfoAsync(
-      FileSystem.documentDirectory + "deneme/" + qrName + ".png"
-    );
-    console.log("oldu: ", cevap.uri);
+    const ans = await FileSystem.getInfoAsync(qrImagesDirectory + fileName);
 
-    FileSystem.getContentUriAsync(cevap.uri).then((cUri) => {
+    // Make the file accessible through mobile phone
+    FileSystem.getContentUriAsync(ans.uri).then((cUri) => {
       console.log(cUri);
+      //Open save image options
       IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
         data: cUri,
         flags: 1,
       });
-      console.log("HAHASDFSF");
     });
+  };
+
+  const handleLongPress = async () => {
+    const qrImagesDirectory = FileSystem.documentDirectory + "qrImages/";
+    const fileName = qrName + ".png";
+    saveQRAsImage(qrImagesDirectory, fileName, imageSource);
   };
 
   return (
@@ -66,6 +76,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
       }
       style={styles.container}
       onLongPress={handleLongPress}
+      onPressIn={handlePress}
     >
       <View style={styles.body1}>
         <Text style={{}}>{qrName}</Text>
@@ -84,7 +95,7 @@ function ExistingQR({ props }) {
   useEffect(() => {
     displayQrList(user);
   }, []);
-
+  console.log("denem");
   DATA = qrs.qrs;
 
   const renderItem = ({ item }) => (
