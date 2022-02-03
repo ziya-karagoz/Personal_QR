@@ -72,7 +72,7 @@ export default function NotificationsDeneme() {
 async function schedulePushNotification() {
   await Notifications.scheduleNotificationAsync({
     content: {
-      title: "You've got mail! 📬",
+      title: "QR Okundu!",
       body: "Here is the notification body",
       data: { data: "goes here" },
     },

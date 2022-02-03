@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DrawerActions, useNavigation, CommonActions} from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 function FooterBarNav(props) {
   const navigation = useNavigation();
 
