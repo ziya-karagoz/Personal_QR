@@ -1,26 +1,17 @@
 import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import allStyles from "./Styles";
+
+
+const styles = allStyles
 
 export default function BackButton({ goBack }) {
   return (
-    <TouchableOpacity onPress={goBack} style={styles.container}>
+    <TouchableOpacity onPress={goBack} style={styles.backButtonContainer}>
       <Image
-        style={styles.image}
+        style={styles.backButtonImage}
         source={require("../../Assets/Images/arrow_back.png")}
       />
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    top: 10 + getStatusBarHeight(),
-    left: 4,
-  },
-  image: {
-    width: 24,
-    height: 24,
-  },
-});

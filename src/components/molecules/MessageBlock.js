@@ -1,6 +1,5 @@
 import React, { Component, useState } from "react";
 import {
-  StyleSheet,
   View,
   TextInput,
   Text,
@@ -10,20 +9,23 @@ import {
   ToastAndroid,
 } from "react-native";
 import { qrEdit } from "../../store/qrState";
+import allStyles from "./Styles";
 let DATA;
 let all;
+const styles = allStyles;
 const Item = (props) => {
-  const [messageOne, setMessageOne] = useState("");
-  const [messageTwo, setMessageTwo] = useState("");
-  const qrId = props.qrId;
   let msj1 = props.msj1;
   let msj2 = props.msj2;
+
+  const [message, setMessage] = useState({messageOne:msj1, messageTwo:msj2});
+  const qrId = props.qrId;
+
   const addMessageButtonHandler = async () => {
-    const res = await qrEdit(qrId, messageOne, messageTwo);
+    const res = await qrEdit(qrId, message.messageOne, message.messageTwo);
     ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.blockContainer}>
       <View
         style={{
           flex: 1,
@@ -39,9 +41,8 @@ const Item = (props) => {
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              if (value != "") {
-                setMessageOne(value);
-              }
+                if(value === "") setMessage({...message, messageOne: msj1});
+                else setMessage({...message, messageOne: value});
             }}
             placeholder={msj1}
             style={styles.mesaj}
@@ -51,7 +52,7 @@ const Item = (props) => {
         <View style={{ flex: 1 }}>
           <TouchableOpacity onPress={addMessageButtonHandler}>
             <Image
-              style={styles.icon}
+              style={styles.editIcon}
               resizeMode='contain'
               source={require("../../Assets/Images/editIcon.png")}
             ></Image>
@@ -76,12 +77,11 @@ const Item = (props) => {
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              if (value != "") {
-                setMessageTwo(value);
-              }
+              if(value === "") setMessage({...message, messageTwo: msj2});
+              else  setMessage({...message, messageTwo: value});
             }}
             placeholder={msj2}
-            style={styles.yanit}
+            style={styles.cevap}
           ></TextInput>
         </View>
 
@@ -105,34 +105,9 @@ function MessageBlock({ mesajlar, qrId }) {
     <FlatList
       data={DATA}
       renderItem={(item) => renderItem(item, all)}
-      contentContainerStyle={{ alignItems: "center" }}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: "2%",
-    width: 380,
-    height: 150,
-    backgroundColor: "#E6E6E6",
-    borderWidth: 3,
-    borderRadius: 20,
-  },
-  mesaj: {
-    color: "#121212",
-    bottom: "26%",
-  },
-  yanit: {
-    color: "#121212",
-    bottom: "32%",
-  },
-  icon: {
-    height: "65%",
-    width: "65%",
-    alignSelf: "center",
-    top: "7%",
-  },
-});
+ 
 
 export default MessageBlock;

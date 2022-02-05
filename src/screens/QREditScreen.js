@@ -1,42 +1,38 @@
 import React, { Component, useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
-  Image,
   SafeAreaView,
   TouchableOpacity,
-  TextInput,
 } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import QRCode from "react-native-qrcode-svg";
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import MessageBlock from "../components/molecules/MessageBlock";
+import allStyles from "../components/molecules/Styles";
+
+const styles = allStyles;
 
 function QREditScreen({ route }) {
   const { qrAdi, qrId, mesajlar } = route.params;
   return (
-    <View style={styles.container}>
-      <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
+    <View style={{flex: 1}}>
+      <CreationHeaderBar ></CreationHeaderBar>
       <View style={styles.body1}>
-        <View style={{ flex: 1, justifyContent: "center", left: "25%" }}>
+        <View style={styles.editScreenQrImage}>
           <QRCode value={qrId} />
         </View>
         <View style={{ flex: 1 }}>
-          <View style={styles.qrAdi}>
+          <View style={styles.editScreenQrAdi}>
             <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
-            <View style={styles.container2}>
+            <View style={styles.editScreenBody}>
               <Text style={styles.textInput}>{qrAdi}</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.btn}>
+          <TouchableOpacity style={styles.button}>
             <View>
-              <View style={styles.btnText}>
+              <View style={styles.buttonText}>
                 <Text>Mesaj Ekle</Text>
               </View>
             </View>
@@ -48,89 +44,9 @@ function QREditScreen({ route }) {
         <MessageBlock mesajlar={{ mesajlar }} qrId={{ qrId }}></MessageBlock>
       </SafeAreaView>
 
-      <FooterBar style={styles.footerBar}></FooterBar>
+      <FooterBar></FooterBar>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: hp("100"),
-    width: wp("100"),
-  },
-  container2: {
-    width: 100,
-    height: 30,
-    marginLeft: "1.5%",
-    alignItems: "center",
-    top: "7.5%",
-  },
-  headerBar: {
-    flex: 1,
-  },
-
-  footerBar: {
-    flex: 1,
-  },
-
-  body1: {
-    flex: 1.5,
-    flexDirection: "row",
-    borderTopWidth: 3,
-    borderBottomWidth: 3,
-  },
-
-  body2: {
-    flex: 4.5,
-  },
-
-  icon: {
-    color: "rgba(128,128,128,1)",
-    fontSize: 40,
-  },
-
-  qrAdi: {
-    height: 60,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  image: {
-    top: "3%",
-    width: 120,
-    height: 120,
-    alignSelf: "center",
-  },
-  btn: {
-    width: 100,
-    height: 24,
-    backgroundColor: "gray",
-    marginLeft: "25%",
-    top: "32%",
-    borderRadius: 20,
-  },
-  btnText: {
-    height: 24,
-    width: 100,
-    color: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  msgbody: {
-    width: 100,
-    height: 30,
-    marginLeft: "5.5%",
-  },
-  textInput: {
-    color: "#121212",
-    height: 50,
-    width: 100,
-  },
-  textInput2: {
-    color: "#121212",
-    height: 50,
-    width: 100,
-  },
-});
 
 export default QREditScreen;

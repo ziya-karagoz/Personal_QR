@@ -17,8 +17,11 @@ import userState from "../../store/userState";
 import { displayQrList } from "../../store/qrState";
 import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
+import allStyles from "./Styles";
 
 let DATA;
+const styles = allStyles;
+
 const Item = ({ qrName, qrId, mesajlar }) => {
   const navigation = useNavigation();
   const [qrSVG, setQrSVG] = useState("");
@@ -74,14 +77,14 @@ const Item = ({ qrName, qrId, mesajlar }) => {
           mesajlar: mesajlar,
         })
       }
-      style={styles.container}
+      style={styles.existingQrContainer}
       onLongPress={handleLongPress}
       onPressIn={handlePress}
     >
-      <View style={styles.body1}>
+      <View style={styles.existingQrBody1}>
         <Text style={{}}>{qrName}</Text>
       </View>
-      <View style={styles.body2}>
+      <View style={styles.existingQrBody2}>
         <QRCode value={qrId} getRef={(c) => setQrSVG(c)} />
       </View>
     </TouchableOpacity>
@@ -108,32 +111,6 @@ function ExistingQR({ props }) {
   return <FlatList data={DATA} renderItem={renderItem} numColumns={2} />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: "2%",
-    width: 180,
-    height: 190,
-    backgroundColor: "#E6E6E6",
-    marginLeft: "5%",
-    borderRadius: 20,
-  },
-  body1: {
-    flex: 1,
-    backgroundColor: "gray",
-    marginTop: 5,
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 20,
-  },
-  body2: {
-    flex: 3,
-    justifyContent: "center",
-    alignItems: "center",
-    bottom: "5%",
-  },
-});
+
 
 export default ExistingQR;

@@ -9,13 +9,13 @@ export default function StartScreen({ navigation }) {
   return (
     <Background>
       <Logo />
-      <Header>Personal QR</Header>
-      <Paragraph>Have a QR, Use it Everywhere</Paragraph>
+      <Header>Kişisel QR</Header>
+      <Paragraph>Size özel QR'(lar) edinin!</Paragraph>
       <Button mode='outlined' onPress={() => navigation.navigate("Login")}>
-        Login
+        Giriş
       </Button>
       <Button mode='outlined' onPress={() => navigation.navigate("Register")}>
-        Sign Up
+        Kayıt Ol
       </Button>
     </Background>
   );

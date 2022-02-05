@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from "react";
-import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
+import React from "react";
+import { StyleSheet, View} from "react-native";
 
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";

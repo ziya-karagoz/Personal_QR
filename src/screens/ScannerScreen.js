@@ -3,6 +3,9 @@ import { Text, View, StyleSheet, Button, Modal, Pressable } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { localIP } from "../constants";
+import allStyles from "../components/molecules/Styles";
+
+const styles = allStyles
 
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -41,14 +44,14 @@ export default function ScannerScreen({ navigation }) {
   // Check permissions and return the screens
   if (hasPermission === null) {
     return (
-      <View style={styles.container}>
+      <View style={styles.scannerScreenContainer}>
         <Text>Requesting for camera permission</Text>
       </View>
     );
   }
   if (hasPermission === false) {
     return (
-      <View style={styles.container}>
+      <View style={styles.scannerScreenContainer}>
         <Text style={{ margin: 10 }}>No access to camera</Text>
         <Button
           title={"Allow Camera"}
@@ -60,8 +63,8 @@ export default function ScannerScreen({ navigation }) {
 
   // Return the View
   return (
-    <View style={styles.container}>
-      <View style={styles.barcodebox}>
+    <View style={styles.scannerScreenContainer}>
+      <View style={styles.scannerScreenBarcodebox}>
         <BarCodeScanner
           onBarCodeScanned={handleBarCodeScanned}
           style={{ height: 400, width: 400 }}
@@ -74,23 +77,23 @@ export default function ScannerScreen({ navigation }) {
             setModalVisible(!modalVisible);
           }}
         >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>
+          <View style={styles.scannerScreenCenteredView}>
+            <View style={styles.scannerScreenModalView}>
+              <Text style={styles.scannerScreenModalText}>
                 Mesaj: {messageFromServer.messageOne + "\n"} Yanıt:{" "}
                 {messageFromServer.messageTwo}
               </Text>
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={[styles.button, styles.scannerScreenButtonClose]}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Text style={styles.textStyle}>Kapat</Text>
+                <Text style={styles.scannerScreenTextStyle}>Kapat</Text>
               </Pressable>
             </View>
           </View>
         </Modal>
       </View>
-      <Text style={styles.maintext}>{text}</Text>
+      <Text style={styles.scannerScreenMaintext}>{text}</Text>
 
       {scanned && (
         <Button
@@ -107,64 +110,4 @@ export default function ScannerScreen({ navigation }) {
       )}
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  maintext: {
-    fontSize: 16,
-    margin: 20,
-  },
-  barcodebox: {
-    alignItems: "center",
-    justifyContent: "center",
-    height: 300,
-    width: 300,
-    overflow: "hidden",
-    borderRadius: 30,
-    backgroundColor: "#616161",
-  },
-  centeredView: {
-    flex: 3,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonClose: {
-    backgroundColor: "#616161",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-});
+} 

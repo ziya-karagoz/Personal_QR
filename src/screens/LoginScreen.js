@@ -7,12 +7,13 @@ import Header from "../components/molecules/Header";
 import Button from "../components/molecules/Button";
 import TextInputLogin from "../components/molecules/TextInputLogin";
 import BackButton from "../components/molecules/BackButton";
-import { theme } from "../core/theme";
 import { emailValidator } from "../helpers/emailValidator";
 import { passwordValidator } from "../helpers/passwordValidator";
-import axios from "axios";
-import { localIP } from "../constants";
 import { login } from "../store/userState";
+import allStyles from "../components/molecules/Styles";
+
+
+const styles = allStyles
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
@@ -34,9 +35,9 @@ export default function LoginScreen({ navigation }) {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header>Welcome back.</Header>
+      <Header>Hoşgeldiniz.</Header>
       <TextInputLogin
-        label='Email'
+        label='E-posta'
         returnKeyType='next'
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: "" })}
@@ -48,7 +49,7 @@ export default function LoginScreen({ navigation }) {
         keyboardType='email-address'
       />
       <TextInputLogin
-        label='Password'
+        label='Şifre'
         returnKeyType='done'
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: "" })}
@@ -56,40 +57,21 @@ export default function LoginScreen({ navigation }) {
         errorText={password.error}
         secureTextEntry
       />
-      <View style={styles.forgotPassword}>
+      <View style={styles.loginScreenForgotPassword}>
         <TouchableOpacity onPress={() => navigation.navigate("ResetPassword")}>
-          <Text style={styles.forgot}>Forgot your password?</Text>
+          <Text style={styles.loginScreenForgot}>Şifrenizi mi unuttunuz?</Text>
         </TouchableOpacity>
       </View>
       <Button mode='contained' onPress={onLoginPressed}>
-        Login
+        Giriş
       </Button>
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text>Hesabınız yok mu? </Text>
         <TouchableOpacity onPress={() => navigation.replace("Register")}>
-          <Text style={styles.link}>Sign up</Text>
+          <Text style={styles.link}>Kayıt ol</Text>
         </TouchableOpacity>
       </View>
     </Background>
   );
 }
 
-const styles = StyleSheet.create({
-  forgotPassword: {
-    width: "100%",
-    alignItems: "flex-end",
-    marginBottom: 24,
-  },
-  row: {
-    flexDirection: "row",
-    marginTop: 4,
-  },
-  forgot: {
-    fontSize: 13,
-    color: "#616161",
-  },
-  link: {
-    fontWeight: "bold",
-    color: "#616161",
-  },
-});

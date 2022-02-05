@@ -14,6 +14,9 @@ import { nameValidator } from "../helpers/nameValidator";
 import axios from "axios";
 import { localIP } from "../constants";
 import { register } from "../store/userState";
+import allStyles from "../components/molecules/Styles";
+
+const styles = allStyles
 
 export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState({ value: "", error: "" });
@@ -45,9 +48,9 @@ export default function RegisterScreen({ navigation }) {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header>Create Account</Header>
+      <Header>Hesap Oluştur</Header>
       <TextInputLogin
-        label='Username'
+        label='Kullanıcı Adı'
         returnKeyType='next'
         value={username.value}
         onChangeText={(text) => setUsername({ value: text, error: "" })}
@@ -55,7 +58,7 @@ export default function RegisterScreen({ navigation }) {
         errorText={username.error}
       />
       <TextInputLogin
-        label='Email'
+        label='E-posta'
         returnKeyType='next'
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: "" })}
@@ -67,7 +70,7 @@ export default function RegisterScreen({ navigation }) {
         keyboardType='email-address'
       />
       <TextInputLogin
-        label='Password'
+        label='Şifre'
         returnKeyType='done'
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: "" })}
@@ -78,27 +81,17 @@ export default function RegisterScreen({ navigation }) {
       <Button
         mode='contained'
         onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
       >
-        Sign Up
+        Kayıt Ol
       </Button>
       <View style={styles.row}>
-        <Text>Already have an account? </Text>
+        <Text>Zaten kayıtlı mısınız? </Text>
         <TouchableOpacity onPress={() => navigation.replace("Login")}>
-          <Text style={styles.link}>Login</Text>
+          <Text style={styles.link}>Giriş</Text>
         </TouchableOpacity>
       </View>
     </Background>
   );
 }
 
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: "row",
-    marginTop: 4,
-  },
-  link: {
-    fontWeight: "bold",
-    color: "gray",
-  },
-});
+
