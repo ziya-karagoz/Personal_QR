@@ -10,18 +10,17 @@ import {
 } from "react-native";
 import { qrEdit } from "../../store/qrState";
 import allStyles from "./Styles";
-let DATA;
-let all;
 const styles = allStyles;
+
 const Item = (props) => {
   let msj1 = props.msj1;
   let msj2 = props.msj2;
-
+  let index = props.index;
   const [message, setMessage] = useState({messageOne:msj1, messageTwo:msj2});
   const qrId = props.qrId;
 
   const addMessageButtonHandler = async () => {
-    const res = await qrEdit(qrId, message.messageOne, message.messageTwo);
+    const res = await qrEdit(qrId, message.messageOne, message.messageTwo, index);
     ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
@@ -61,12 +60,7 @@ const Item = (props) => {
       </View>
 
       <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          borderTopColor: "black",
-          borderTopWidth: 3,
-        }}
+        style={styles.messageBlockContainer}
       >
         <View style={{ flex: 1 }}>
           <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
@@ -92,19 +86,24 @@ const Item = (props) => {
 };
 
 function MessageBlock({ mesajlar, qrId }) {
-  DATA = mesajlar.mesajlar;
-  all = qrId.qrId;
+  let DATA = mesajlar.mesajlar;
+  let qrIds = qrId.qrId;
+  let dataArray= [];
+
+  for (let i = 0; i < DATA.length; i++) {
+    dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})    
+  }
 
   const renderItem = ({ item }, qrId) => {
     return (
-      <Item msj1={item.messageOne} msj2={item.messageTwo} qrId={qrId}></Item>
+      <Item msj1={item.messageOne} msj2={item.messageTwo} qrId={qrId} index = {item.index}></Item>
     );
   };
 
   return (
     <FlatList
-      data={DATA}
-      renderItem={(item) => renderItem(item, all)}
+      data={dataArray}
+      renderItem={(item) => renderItem(item, qrIds)}
     />
   );
 }

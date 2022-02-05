@@ -229,8 +229,13 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       height: 24,
       backgroundColor: "gray",
       marginLeft: "25%",
-      top: "32%",
+      bottom: "2%",
       borderRadius: 20,
+    },
+
+    picker: {
+      width: 170,
+      left: "12%",
     },
   
     buttonText: {
@@ -351,6 +356,12 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       alignSelf: "center",
     },
 
+    messageBlockContainer: {
+      flex: 1,
+      flexDirection: "row",
+      borderTopColor: "black",
+      borderTopWidth: 3,
+    }
   });
 
 export default allStyles;

@@ -7,11 +7,10 @@ const User = require("../model/user");
 const QrBlock = require("../model/qrBlock");
 const Qr = require("../model/qr");
 const MessageBlock = require("../model/messageBlock");
-const messageBlock = require("../model/messageBlock");
 
 qrRoute.post("/qrgenerate", (req, res) => {
   let { user, message, qrName } = req.body;
-  MessageBlock.create({ messages: [message] }).then((mb) => {
+  MessageBlock.create({ messages: message }).then((mb) => {
     Qr.create({ qrName, messageBlock: mb._id }).then((qr) => {
       User.findOne(user).then((usr) => {
         QrBlock.updateOne(
@@ -58,15 +57,15 @@ qrRoute.post("/scanQr", (req, res) => {
 });
 
 qrRoute.post("/qrEdit", (req, res) => {
-  const { qrId, messageOne, messageTwo } = req.body;
+  const { qrId, messageOne, messageTwo, index } = req.body;
   Qr.findById(qrId)
     .exec()
     .then((qrr) => {
       console.log("qrr: ", qrr);
       MessageBlock.findByIdAndUpdate(qrr.messageBlock, {
         $set: {
-          "messages.0.messageOne": messageOne,
-          "messages.0.messageTwo": messageTwo,
+          ["messages."+index+".messageOne"]: messageOne,
+          ["messages."+index+".messageTwo"]: messageTwo,
         },
       })
         .exec()

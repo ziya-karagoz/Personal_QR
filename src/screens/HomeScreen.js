@@ -7,35 +7,14 @@ import ExistingQR from "../components/molecules/ExistingQR";
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <View style={styles.headerBar}>
-        <MainHeaderBar style={{ flex: 1 }}></MainHeaderBar>
-      </View>
-
-      <View style={styles.body}>
+    <View style={{flex: 1}} >     
+        <MainHeaderBar ></MainHeaderBar>
+      <View style={{flex:6}}>
         <ExistingQR></ExistingQR>
-      </View>
-
-      <View style={styles.footerBar}>
-        <FooterBar style={{ flex: 1 }}></FooterBar>
-      </View>
+      </View>    
+        <FooterBar></FooterBar>    
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  headerBar: {
-    flex: 1,
-  },
-  footerBar: {
-    flex: 1,
-  },
-  body: {
-    flex: 6,
-  },
-});
 
 export default HomeScreen;

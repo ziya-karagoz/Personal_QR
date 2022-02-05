@@ -26,7 +26,13 @@ function MainHeaderBar( ) {
           style={styles.iconHeader}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate('QRCreation')} style={styles.btnWrapper}>
+      <TouchableOpacity onPress={() => navigation.reset({
+            index: 1,
+            routes: [
+              {name: 'Home'},
+              {name: 'QRCreation'}
+              ],
+          })} style={styles.btnWrapper}>
         <MaterialCommunityIconsIcon
           name='qrcode-plus' style={styles.iconHeader}
         ></MaterialCommunityIconsIcon>

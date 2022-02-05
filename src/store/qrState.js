@@ -7,13 +7,10 @@ const qrState = proxy({
   loading: false,
 });
 
-const qrGenerate = async (navigation, user, qrName, messageOne, messageTwo) => {
+const qrGenerate = async (navigation, user, qrName, createdMessages) => {
   let res = await axios
     .post(`http://${localIP}:5000/api/qr/qrgenerate`, {
-      message: {
-        messageOne: messageOne,
-        messageTwo: messageTwo,
-      },
+      message: createdMessages,
       user,
       qrName,
     })
@@ -46,13 +43,14 @@ const displayQrList = (user) => {
     });
 };
 
-const qrEdit = (qrId, messageOne, messageTwo) => {
+const qrEdit = (qrId, messageOne, messageTwo, index) => {
   qrState.loading = true;
   axios
     .post(`http://${localIP}:5000/api/qr/qrEdit`, {
       qrId,
       messageOne,
       messageTwo,
+      index
     })
     .then((response) => {
       qrState.loading = false;

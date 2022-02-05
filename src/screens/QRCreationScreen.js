@@ -1,6 +1,5 @@
 import React, { Component, useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   Image,
@@ -9,28 +8,30 @@ import {
   TextInput,
   FlatList
 } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import QrName from "../components/molecules/QrName";
 import userState from "../store/userState";
 import { useSnapshot } from "valtio";
-import qrState from "../store/qrState";
 import { qrGenerate } from "../store/qrState";
 import allStyles from "../components/molecules/Styles";
+import {Picker} from '@react-native-picker/picker';
 
-let DATA;
+let DATA = [];
 const styles = allStyles;
 
 const Item = (props) => {
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
-  const callBackFunction = props.callBackFunction;
+  let index = DATA.indexOf(props.item.item);
 
+
+  function setData(messageOne, messageTwo) {
+    DATA[index].messageOne = messageOne;
+    DATA[index].messageTwo = messageTwo;
+  }
+  setData(messageOne, messageTwo)
 
   return (
     <View style={styles.blockContainer}>
@@ -52,7 +53,7 @@ const Item = (props) => {
               style={styles.mesaj}
               onChangeText={(value) => {
               setMessageOne(value);
-              callBackFunction(messageOne, messageTwo);
+
             }}
             ></TextInput>
           </View>
@@ -88,7 +89,6 @@ const Item = (props) => {
               style={styles.cevap}
               onChangeText={(value) => {
               setMessageTwo(value);
-              callBackFunction(messageOne, messageTwo);
             }}
             ></TextInput>
           </View>
@@ -101,28 +101,40 @@ const Item = (props) => {
 function QRCreationScreen({ navigation }) {
   const { user } = useSnapshot(userState);
   const [qrName, setQrName] = useState("");
-  let messageOne
-  let messageTwo
-
-  const addMessageButtonHandler = () => {
-    qrGenerate(navigation, user, qrName, messageOne, messageTwo);
-  };
-
-  const callBackFunction = (itemMessageOne, itemMessageTwo) => {
-    messageOne = itemMessageOne,
-    messageTwo = itemMessageTwo
+  const [messageQuantity, setMessageQuantity] = useState(1);
+  let createdMessages = []
+  
+  const quantitySetter = (quantity = 1) => {
+    const lenght = DATA.length;
+    if (quantity< lenght){
+      for (let i = quantity; i < lenght; i++) {
+        DATA.pop();       
+      }
+    }
+    else if (lenght< quantity){
+    for (let i = lenght; i < quantity; i++) {
+      DATA.push({index: i, messageOne: "", messageTwo: ""})
+    }}
+    console.log("QUANTİTY: "+ quantity);
+    console.log("PUSHLU MU?: "+ JSON.stringify(DATA));
   }
 
-  DATA = [
-    1,
-  ]
+  if(DATA.length == 0){
+  quantitySetter(messageQuantity);
+  }
 
+  const addMessageButtonHandler = () => {
+    for (let i = 0; i < DATA.length; i++) {
+      createdMessages.push({messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})     
+    }
+    qrGenerate(navigation, user, qrName, createdMessages);
+    DATA = []
+  };
   
-
-  const renderItem = (item, callBackFunction) => {
+  const renderItem = (item) => {
     return(
-    <Item callBackFunction = {callBackFunction}></Item>
-  );}
+    <Item item = {item}></Item>
+  )};
 
   return (
     <View style={{flex: 1}}>
@@ -151,14 +163,30 @@ function QRCreationScreen({ navigation }) {
               </View>
             </View>
           </TouchableOpacity>
+          <Picker
+            style={styles.picker}
+            mode = {"dropdown"}
+            dropdownIconColor = "gray"
+            
+            onValueChange={(itemValue, itemIndex) => {
+              setMessageQuantity(itemValue)
+              quantitySetter(itemValue)
+              }}
+              selectedValue={messageQuantity}
+            >
+            <Picker.Item label="Mesaj Sayısı: 1" value= {1} />
+            <Picker.Item label="Mesaj Sayısı: 2" value= {2} />
+            <Picker.Item label="Mesaj Sayısı: 3" value= {3} />
+            <Picker.Item label="Mesaj Sayısı: 4" value= {4} />
+            <Picker.Item label="Mesaj Sayısı: 5" value= {5} />
+          </Picker>
         </View>
       </View>
 
       <SafeAreaView style={styles.body2}>
         <FlatList
         data={DATA}       
-        renderItem={(item) => renderItem(item, callBackFunction)}
-        
+        renderItem={(item) => renderItem(item)}
         />
       </SafeAreaView>
 
