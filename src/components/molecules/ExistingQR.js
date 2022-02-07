@@ -50,7 +50,6 @@ const Item = ({ qrName, qrId, mesajlar }) => {
 
     // Make the file accessible through mobile phone
     FileSystem.getContentUriAsync(ans.uri).then((cUri) => {
-      console.log(cUri);
       //Open save image options
       IntentLauncher.startActivityAsync("android.intent.action.VIEW", {
         data: cUri,
@@ -95,7 +94,6 @@ function ExistingQR({ props }) {
   useEffect(() => {
     displayQrList(user);
   }, []);
-  console.log("denem");
   DATA = qrs.qrs;
 
   const renderItem = ({ item }) => (
