@@ -6,7 +6,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  FlatList
+  FlatList,
+  KeyboardAvoidingView
 } from "react-native";
 
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";

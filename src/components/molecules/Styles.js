@@ -324,11 +324,41 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       },
       shadowOpacity: 0.25,
       shadowRadius: 4,
-      elevation: 5,
+      elevation: 8,
+    },
+
+    scannerScreenModalView2: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 20,
+      padding: 35,
+      alignItems: "center",
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 10,
     },
 
     scannerScreenButtonClose: {
+      width: 100,
+      height: 24,
+      backgroundColor: "gray",
+      borderRadius: 20,
       backgroundColor: "#616161",
+    },
+
+    scannerScreenPressableMessage: {
+      padding: 15,
+      backgroundColor: "gray",
+      borderRadius: 20,
+      backgroundColor: "#616161",
+      marginTop: "8%",
+      marginLeft: "8%",
+      marginRight: "8%"
     },
 
     scannerScreenTextStyle: {
