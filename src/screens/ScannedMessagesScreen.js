@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Text, View, FlatList, Button, Modal, Pressable, Alert, TouchableOpacity, Image } from "react-native";
 import BackButton from "../components/molecules/BackButton";
 import allStyles from "../components/molecules/Styles";
+import {useNavigation,} from "@react-navigation/native";
+
 const styles = allStyles
 
 const Item = (props) => {
@@ -41,9 +43,9 @@ const Item = (props) => {
 
 
 
-function ScannedMessagesScreen({route, navigation}) {
+function ScannedMessagesScreen({route}) {
   const {messageFromServer} = route.params
-  console.log(JSON.stringify(messageFromServer.messageFromServer));
+  const navigation = useNavigation();
   const renderItem = (item) => {
     return(
     <Item item = {item}></Item>
@@ -58,7 +60,11 @@ function ScannedMessagesScreen({route, navigation}) {
           />
         </View>
         <View style={{flex:1}}>  
-          <TouchableOpacity style={{width:40, height:40, alignSelf: "center", justifyContent:"center"}} onPress={navigation.goBack}>
+          <TouchableOpacity style={{width:40, height:40, alignSelf: "center", justifyContent:"center"}}
+             onPress={() => {navigation.reset({
+              index: 0,
+              routes: [{ name: "Scanner" }],
+            });}}>
             <Image
               style={{margin: 1, alignSelf:"center"}}
               source={require("../Assets/Images/arrow_back.png")}
