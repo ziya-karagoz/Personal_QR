@@ -4,12 +4,20 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { localIP } from "../constants";
 
+import userState from "../store/userState";
+import { useSnapshot } from "valtio";
+
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const [modalVisible, setModalVisible] = useState(false);
   const [messageFromServer, setMessageFromServer] = useState({});
+
+  const { user } = useSnapshot(userState);
+  useEffect(() => {
+    console.log("user: ", user);
+  }, []);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -28,6 +36,7 @@ export default function ScannerScreen({ navigation }) {
     setScanned(true);
     setModalVisible(true);
     let res = await axios.post(`http://${localIP}:5000/api/qr/scanQr`, {
+      user,
       data,
     });
     if (res.status === 200) {
