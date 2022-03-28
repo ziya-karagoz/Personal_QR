@@ -16,6 +16,7 @@ const login = (email, password, navigation) => {
     .then((response) => {
       userState.loading = false;
       userState.user = response.data;
+      console.log("Data: ", response.data);
       navigation.reset({
         index: 0,
         routes: [{ name: "Home" }],

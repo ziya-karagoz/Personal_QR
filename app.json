@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Personal_QR",
-    "slug": "Personal_QR",
+    "slug": "PersonalQR",
     "version": "1.0.0",
     "assetBundlePatterns": ["**/*"]
   },
