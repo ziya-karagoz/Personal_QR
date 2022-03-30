@@ -13,10 +13,10 @@ import ThermalDeneme from "./src/playground/ThermalDeneme";
 import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
 
 export default function App() {
-  // return (
-    // <NavigationContainer>
-    //   <StackNavigatorLogin></StackNavigatorLogin>
-    // </NavigationContainer>
-  // );
-   return <ThermalDeneme />;
+  return (
+    <NavigationContainer>
+      <StackNavigatorLogin></StackNavigatorLogin>
+    </NavigationContainer>
+  );
+  //  return <ThermalDeneme />;
 }

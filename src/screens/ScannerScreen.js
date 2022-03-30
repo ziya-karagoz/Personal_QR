@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, Modal, Pressable } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { localIP } from "../constants";
+import { localIP, ngrokServer } from "../constants";
 
 import userState from "../store/userState";
 import { useSnapshot } from "valtio";
@@ -15,9 +15,6 @@ export default function ScannerScreen({ navigation }) {
   const [messageFromServer, setMessageFromServer] = useState({});
 
   const { user } = useSnapshot(userState);
-  useEffect(() => {
-    console.log("user: ", user);
-  }, []);
 
   const askForCameraPermission = () => {
     (async () => {
@@ -35,12 +32,13 @@ export default function ScannerScreen({ navigation }) {
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     setModalVisible(true);
-    let res = await axios.post(`http://${localIP}:5000/api/qr/scanQr`, {
+    let res = await axios.post(`${ngrokServer}/api/qr/scanQr`, {
       user,
       data,
     });
     if (res.status === 200) {
-      const { message } = res.data;
+      const { message, qrOwner } = res.data;
+      console.log("owner: ", qrOwner);
       setMessageFromServer(message[0]);
     } else {
       alert("Hata : ", res.data);
