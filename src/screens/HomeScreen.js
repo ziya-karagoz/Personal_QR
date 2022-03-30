@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View} from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 
 import MainHeaderBar from "../components/molecules/MainHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
@@ -13,17 +13,17 @@ import axios from "axios";
 function HomeScreen() {
   const { user } = useSnapshot(userState);
   useEffect(() => {
-    pushToken = user._id;
+    const pushToken = user._id;
     registerIndieID(pushToken, 2374, "a2GpbyQUY6ZIixvld1muE8");
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: "#E5E4F2"}} >     
-        <MainHeaderBar ></MainHeaderBar>
-      <View style={{flex:6,}}>
+    <View style={{ flex: 1, backgroundColor: "#E5E4F2" }}>
+      <MainHeaderBar></MainHeaderBar>
+      <View style={{ flex: 6 }}>
         <ExistingQR></ExistingQR>
-      </View>    
-        <FooterBar></FooterBar>    
+      </View>
+      <FooterBar></FooterBar>
     </View>
   );
 }

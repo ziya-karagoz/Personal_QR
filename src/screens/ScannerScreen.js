@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, FlatList, Button, Modal, Pressable, Alert } from "react-native";
+import {
+  Text,
+  View,
+  FlatList,
+  Button,
+  Modal,
+  Pressable,
+  Alert,
+} from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { localIP } from "../constants";
+import { localIP, ngrokServer } from "../constants";
 import allStyles from "../components/molecules/Styles";
 
-const styles = allStyles
+const styles = allStyles;
 
-export default function ScannerScreen({navigation}) {
+export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
@@ -28,15 +36,16 @@ export default function ScannerScreen({navigation}) {
   // What happens when we scan the bar code
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    let res = await axios.post(`http://${localIP}:5000/api/qr/scanQr`, {
+    let res = await axios.post(`${ngrokServer}/api/qr/scanQr`, {
       data,
     });
     if (res.status === 200) {
-      const { message } = res.data;
+      const { message, qrOwner } = res.data;
+      console.log("owner: ", qrOwner);
       setMessageFromServer(message);
       navigation.navigate("Scanned", {
-        messageFromServer: messageFromServer
-      })
+        messageFromServer: messageFromServer,
+      });
     } else {
       alert("Hata : ", res.data);
     }
@@ -88,4 +97,4 @@ export default function ScannerScreen({navigation}) {
       )}
     </View>
   );
-} 
+}
