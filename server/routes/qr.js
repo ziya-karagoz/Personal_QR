@@ -53,8 +53,6 @@ qrRoute.post("/scanQr", (req, res) => {
     .then((qrr) => {
       QrBlock.findOne({ qr: { $all: [qrr._id] } })
         .then((res) => {
-          console.log("------\nRES", res._id);
-
           User.findOne({ qrBlock: { _id: res._id } }).then((ress) => {
             qrOwner = ress._id.toString();
           });
