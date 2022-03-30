@@ -45,15 +45,25 @@ qrRoute.post("/displayQrs", (req, res) => {
 
 qrRoute.post("/scanQr", (req, res) => {
   let { data } = req.body;
-  console.log("Data: ", data);
   var id = mongoose.Types.ObjectId(data);
+  let qrOwner = "";
+
   Qr.findById(id)
     .exec()
     .then((qrr) => {
-      console.log("QRR: ", qrr);
-      MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
-        return res.status(200).json({ message: messageBlock.messages });
-      });
+      QrBlock.findOne({ qr: { $all: [qrr._id] } })
+        .then((res) => {
+          User.findOne({ qrBlock: { _id: res._id } }).then((ress) => {
+            qrOwner = ress._id.toString();
+          });
+        })
+        .then(() => {
+          MessageBlock.findById(qrr.messageBlock).then((messageBlock) => {
+            return res
+              .status(200)
+              .json({ message: messageBlock.messages, qrOwner });
+          });
+        });
     });
 });
 
