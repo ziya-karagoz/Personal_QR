@@ -81,10 +81,10 @@ const Item = ({ qrName, qrId, mesajlar }) => {
       onPressIn={handlePress}
     >
       <View style={styles.existingQrBody1}>
-        <Text style={{}}>{qrName}</Text>
+        <Text style={{color: "black"}}>{qrName}</Text>
       </View>
       <View style={styles.existingQrBody2}>
-        <QRCode value={qrId} getRef={(c) => setQrSVG(c)} />
+        <QRCode value={qrId} getRef={(c) => setQrSVG(c)} backgroundColor = "#F9E6FF" />
       </View>
     </TouchableOpacity>
   );

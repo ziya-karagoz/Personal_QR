@@ -7,9 +7,9 @@ import ExistingQR from "../components/molecules/ExistingQR";
 
 function HomeScreen() {
   return (
-    <View style={{flex: 1}} >     
+    <View style={{flex: 1, backgroundColor: "#E5E4F2"}} >     
         <MainHeaderBar ></MainHeaderBar>
-      <View style={{flex:6}}>
+      <View style={{flex:6,}}>
         <ExistingQR></ExistingQR>
       </View>    
         <FooterBar></FooterBar>    

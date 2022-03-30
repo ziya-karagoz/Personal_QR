@@ -12,12 +12,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import NotificationsDeneme from "./src/playground/NotificationsDeneme";
 import NavBar from "./src/components/molecules/NavBar";
 import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
+import YeniUiDeneme from "./src/screens/YeniUiDeneme";
 
 export default function App() {
   return (
     <NavigationContainer>
       <StackNavigatorLogin></StackNavigatorLogin>
     </NavigationContainer>
+    // <YeniUiDeneme></YeniUiDeneme>
   );
   // return <NotificationsDeneme />;
 }

@@ -10,7 +10,7 @@ function FooterBar() {
   const navigation = useNavigation();
   const styles = allStyles
   return (
-    <View style={styles.barContainer}>
+    <View style={styles.barContainerBottom}>
       <TouchableOpacity
         style={styles.btnWrapper}
         

@@ -10,7 +10,7 @@ function CreationHeaderBar(props) {
   const navigation = useNavigation();
   const styles = allStyles
   return (
-    <View style={styles.barContainer}>
+    <View style={styles.barContainerCreation}>
       <TouchableOpacity onPress={() =>     
       navigation.dispatch(DrawerActions.openDrawer())} style={styles.btnWrapper}>
         <MaterialCommunityIconsIcon

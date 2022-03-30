@@ -6,9 +6,30 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
   const allStyles = StyleSheet.create({
 
     barContainer: {
-      backgroundColor: "rgba(0,0,0,0.07)",
+      backgroundColor: "#FAE1EF",
+      borderBottomEndRadius: 25,
+      borderBottomStartRadius: 25,
+      elevation: 25,
+      shadowColor: 'rgba(5,5,255,6)',
       flexDirection: "row",
-      flex: 1
+      flex: 0.62
+    },
+
+    barContainerCreation: {
+      backgroundColor: "#FAE1EF",
+      elevation: 20,
+      shadowColor: 'rgba(5,5,255,6)',
+      flexDirection: "row",
+      flex: 0.62
+    },
+
+
+    barContainerBottom: {
+      backgroundColor: "#FAE1EF",
+      elevation: 10,
+      shadowColor: 'rgba(5,5,255,6)',
+      flexDirection: "row",
+      flex: 0.6
     },
 
     btnWrapper: {
@@ -19,22 +40,23 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 
     iconFooter: {
       backgroundColor: "transparent",
-      color: "#616161",
+      color: "black",
       fontSize: 24,
-      opacity: 0.8,
+      opacity: 0.9,
     },
 
     iconHeader: {
       backgroundColor: "transparent",
-      color: "#616161",
+      color: "black",
       fontSize: 24,
-      opacity: 0.8,
-      top: 10
+      opacity: 0.9,
+      top: 10,
+      
     },
 
     iconText: {
       fontSize: 12,
-      color: "#9E9E9E",
+      color: "black",
       backgroundColor: "transparent",
       paddingTop: 4,
     },
@@ -147,21 +169,31 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       marginTop: "2%",
       width: 180,
       height: 190,
-      backgroundColor: "#E6E6E6",
+      backgroundColor: "#F0E0FF",
       marginLeft: "5%",
-      borderRadius: 20,
+      borderTopEndRadius: 60,
+      borderTopStartRadius: 12, 
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12, 
+      elevation: 10, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
 
     existingQrBody1: {
       flex: 1,
-      backgroundColor: "gray",
-      marginTop: 5,
+      backgroundColor: "#FAE1EF",
+      marginTop: 7,
       marginBottom: 10,
       marginLeft: 10,
-      marginRight: 10,
+      marginRight: 14,
       alignItems: "center",
       justifyContent: "center",
-      borderRadius: 20,
+      borderTopEndRadius: 60,
+      borderTopStartRadius: 12, 
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12, 
+      elevation: 15, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
 
     existingQrBody2: {
@@ -169,15 +201,22 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       justifyContent: "center",
       alignItems: "center",
       bottom: "5%",
+      borderRadius: 20
     },
 
     blockContainer: {
       marginTop: "2%",
+      marginLeft: "4%",
+      marginBottom: "5%",
       width: 380,
       height: 150,
-      backgroundColor: "#E6E6E6",
-      borderWidth: 3,
-      borderRadius: 20,
+      backgroundColor: "#F0E0FF",
+      borderTopEndRadius: 60,
+      borderTopStartRadius: 12, 
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12, 
+      elevation: 11, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
 
     mesaj: {
@@ -200,13 +239,16 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     body1: {
       flex: 1.5,
       flexDirection: "row",
-      borderTopWidth: 3,
-      borderBottomWidth: 3,
+      backgroundColor: "#FAE5EF", 
+      borderBottomStartRadius: 25,
+      borderBottomEndRadius: 25, 
+      elevation: 10, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
 
     body2: {
       flex: 4.5,
-      alignItems: "center"
+   
     },
 
     editScreenBody: {
@@ -227,15 +269,24 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     button: {
       width: 100,
       height: 24,
-      backgroundColor: "gray",
+      backgroundColor: "#FAE1AF",
+      marginTop: "15%",
       marginLeft: "25%",
       bottom: "2%",
       borderRadius: 20,
+      elevation: 12,
+      shadowColor: 'rgba(5,5,255,6)' 
     },
 
     picker: {
-      width: 170,
+      width: 160,
+      height: 30,
+      top: "9%",
       left: "12%",
+      borderRadius: 20,
+      elevation: 12,
+      shadowColor: 'rgba(5,5,255,6)',
+      backgroundColor: "#FAE1AF", 
     },
   
     buttonText: {
@@ -373,7 +424,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     },
 
     qrCreationScreenQrAdi: {
-      height: 60,
+      height: 40,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -384,6 +435,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       width: 120,
       height: 120,
       alignSelf: "center",
+      backgroundColor: "transparent"
     },
 
     messageBlockContainer: {

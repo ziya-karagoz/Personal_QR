@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   TextInput,
   FlatList,
+  useWindowDimensions,
   KeyboardAvoidingView
 } from "react-native";
-
+ 
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import QrName from "../components/molecules/QrName";
@@ -35,7 +36,7 @@ const Item = (props) => {
   setData(messageOne, messageTwo)
 
   return (
-    <View style={styles.blockContainer}>
+    <View style={styles.blockContainer} >
         <View
           style={{
             flex: 1,
@@ -60,13 +61,6 @@ const Item = (props) => {
           </View>
   
           <View style={{ flex: 1 }}>
-            <TouchableOpacity>
-              <Image
-                style={styles.editIcon}
-                resizeMode='contain'
-                source={require("../Assets/Images/editIcon.png")}
-              ></Image>
-            </TouchableOpacity>
           </View>
         </View>
   
@@ -74,7 +68,6 @@ const Item = (props) => {
           style={{
             flex: 1,
             flexDirection: "row",
-            borderTopWidth: 3,
           }}
         >
           <View style={{ flex: 1 }}>
@@ -115,9 +108,7 @@ function QRCreationScreen({ navigation }) {
     else if (lenght< quantity){
     for (let i = lenght; i < quantity; i++) {
       DATA.push({index: i, messageOne: "", messageTwo: ""})
-    }}
-    console.log("QUANTİTY: "+ quantity);
-    console.log("PUSHLU MU?: "+ JSON.stringify(DATA));
+    }};
   }
 
   if(DATA.length == 0){
@@ -131,6 +122,9 @@ function QRCreationScreen({ navigation }) {
     qrGenerate(navigation, user, qrName, createdMessages);
     DATA = []
   };
+
+  const windowHeight = useWindowDimensions().height;
+  const minHeight = Math.round(windowHeight)
   
   const renderItem = (item) => {
     return(
@@ -138,7 +132,7 @@ function QRCreationScreen({ navigation }) {
   )};
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: "#E5E4F2" } } minHeight= {minHeight}>
       <CreationHeaderBar></CreationHeaderBar>
 
       <View style={styles.body1}>
@@ -147,13 +141,32 @@ function QRCreationScreen({ navigation }) {
             style={styles.qrCreationScreenImage}
             resizeMode='contain'
             source={require("../Assets/Images/QR.png")}
-          ></Image>
+          />
         </View>
         <View style={{ flex: 1 }}>
           <View style={styles.qrCreationScreenQrAdi}>
-            <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
+            <Text style={{ marginTop: "10%", fontSize: 15 }}>Qr Adı:</Text>
             <QrName setQrName={setQrName}></QrName>
           </View>
+          <View style={styles.picker}>
+            <Picker
+              style = {{width: 170, top: "-40%"}}
+              mode = {"dropdown"}
+              dropdownIconColor = "black"
+              
+              onValueChange={(itemValue, itemIndex) => {
+                setMessageQuantity(itemValue)
+                quantitySetter(itemValue)
+                }}
+                selectedValue={messageQuantity}
+              >
+              <Picker.Item label="Mesaj Sayısı: 1" value= {1} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 2" value= {2} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 3" value= {3} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 4" value= {4} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 5" value= {5} style = {{fontSize: 14.5}}/>
+            </Picker>
+          </View>       
           <TouchableOpacity
             style={styles.button}
             onPress={addMessageButtonHandler}
@@ -164,32 +177,16 @@ function QRCreationScreen({ navigation }) {
               </View>
             </View>
           </TouchableOpacity>
-          <Picker
-            style={styles.picker}
-            mode = {"dropdown"}
-            dropdownIconColor = "gray"
-            
-            onValueChange={(itemValue, itemIndex) => {
-              setMessageQuantity(itemValue)
-              quantitySetter(itemValue)
-              }}
-              selectedValue={messageQuantity}
-            >
-            <Picker.Item label="Mesaj Sayısı: 1" value= {1} />
-            <Picker.Item label="Mesaj Sayısı: 2" value= {2} />
-            <Picker.Item label="Mesaj Sayısı: 3" value= {3} />
-            <Picker.Item label="Mesaj Sayısı: 4" value= {4} />
-            <Picker.Item label="Mesaj Sayısı: 5" value= {5} />
-          </Picker>
         </View>
       </View>
 
-      <SafeAreaView style={styles.body2}>
+      <KeyboardAvoidingView style={styles.body2} behavior = {"padding"}  keyboardVerticalOffset = {-240}>
         <FlatList
         data={DATA}       
         renderItem={(item) => renderItem(item)}
+        numColumns = {1}
         />
-      </SafeAreaView>
+      </KeyboardAvoidingView>
 
       <FooterBar></FooterBar>
     </View>
