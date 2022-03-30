@@ -1,32 +1,17 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text } from "react-native";
 
 import FooterBarNav from "../components/molecules/FooterBarNav";
 import HeaderBar from "../components/molecules/HeaderBar";
 
 function AppSettingScreen(){
     return(
-        <View style={styles.container}>
-            <HeaderBar style = {styles.header}></HeaderBar>
-            <View style = {styles.body}>
+        <View style={{flex: 8}}>
+            <HeaderBar ></HeaderBar>
+            <View style = {{flex: 6}}>
                 <Text >BURASI UYGULAMA AYALARI</Text>
             </View>
-            <FooterBarNav style = {styles.footer}></FooterBarNav>
+            <FooterBarNav></FooterBarNav>
         </View>
     )
 } export default AppSettingScreen
-
-const styles = StyleSheet.create({
-    container:{
-        flex:8
-    },
-    body:{
-        flex:6
-    },
-    footer:{
-        flex:1
-    },
-    header:{
-        flex:1
-    }
-})

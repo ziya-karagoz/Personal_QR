@@ -2,41 +2,27 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { TextInput as Input } from "react-native-paper";
 import { theme } from "../../core/theme";
+import allStyles from "./Styles";
+
+
+const styles = allStyles
 
 export default function TextInput({ errorText, description, ...props }) {
   return (
-    <View style={styles.container}>
+    <View style={styles.textInputLoginContainer}>
       <Input
-        style={styles.input}
+        style={styles.textInputLoginInput}
         selectionColor={theme.colors.primary}
         underlineColor='transparent'
         mode='outlined'
         {...props}
       />
       {description && !errorText ? (
-        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.textInputLoginDescription}>{description}</Text>
       ) : null}
-      {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+      {errorText ? <Text style={styles.textInputLoginError}>{errorText}</Text> : null}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    marginVertical: 12,
-  },
-  input: {
-    backgroundColor: theme.colors.surface,
-  },
-  description: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-    paddingTop: 8,
-  },
-  error: {
-    fontSize: 13,
-    color: theme.colors.error,
-    paddingTop: 8,
-  },
-});
+

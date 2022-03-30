@@ -1,34 +1,18 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Button as PaperButton } from "react-native-paper";
-import { theme } from "../../core/theme";
-import Background from "./Background";
+import allStyles from "./Styles";
+
+const styles = allStyles
 
 export default function Button({ mode, ...props }) {
   return (
     <PaperButton
-      style={[
-        styles.button,
-        
-      ]}
-      labelStyle={styles.text}
-      
+      style={styles.button2}
+      labelStyle={styles.buttonText2}    
       {...props}
     />
   );
 }
 
-const styles = StyleSheet.create({
-  button: {
-    width: "100%",
-    marginVertical: 10,
-    paddingVertical: 2,
-    backgroundColor: "gray"
-  },
-  text: {
-    fontWeight: "bold",
-    fontSize: 15,
-    lineHeight: 26,
-    color: "#000000"
-  },
-});
+ 

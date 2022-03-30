@@ -7,6 +7,9 @@ import {
   FlatList
 } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import allStyles from "./Styles";
+
+const styles= allStyles;
 
 const DATA =[
   {qrAdi: 'Arabam için',
@@ -32,21 +35,21 @@ const DATA =[
 ]
 
 const Item = ({qrAdi, kullanici, bildirim, tarih}) => (
-  <View style={styles.container}>
+  <View style={styles.notificationBlockContainer}>
 
         <View style={{flexDirection:"row", flex:1}}>
 
-            <Text style = {styles.text1}>QR: {qrAdi}</Text>
+            <Text style = {styles.notificationBlockText1}>QR: {qrAdi}</Text>
 
             <TouchableOpacity style = {{flex:1}}>
-                <Icon name = "trash-can-outline" style = {styles.icon}></Icon>
+                <Icon name = "trash-can-outline" style = {styles.notificationBlockIcon}></Icon>
             </TouchableOpacity>
 
         </View>
 
         <View style={{flexDirection:"column", flex:4, alignItems:"center"}}>
 
-          <Text style={styles.text2 }>{kullanici}: {bildirim}</Text>
+          <Text style={styles.notificationBlockText2 }>{kullanici}: {bildirim}</Text>
           <Text style={{left: 300, bottom: 5, position:"absolute", flex:1}}>{tarih}</Text>
         </View>
 
@@ -57,7 +60,7 @@ const renderItem = ({item}) => (
   <Item qrAdi={item.qrAdi} bildirim={item.bildirim} kullanici={item.kullanici} tarih={item.tarih}></Item>
 )
 
-function NotificationBlock(props) {
+function NotificationBlock() {
   return (
     <FlatList data={DATA}
     renderItem={renderItem}
@@ -66,28 +69,6 @@ function NotificationBlock(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: "2%",
-    width: 380,
-    height: 150,
-    backgroundColor: "#E6E6E6",
-  },
-
-  icon: {
-    flex:1,
-    alignSelf: "center",
-    fontSize: 30
-  },
-  text1: {
-      left: "35%",
-      top: "1%",
-      flex:10
-  },
-  text2:{
-    flex:5,
-    top:"3.5%",
-  }
-});
+ 
 
 export default NotificationBlock;

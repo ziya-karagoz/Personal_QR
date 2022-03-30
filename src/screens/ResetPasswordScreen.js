@@ -23,9 +23,9 @@ export default function ResetPasswordScreen({ navigation }) {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header>Restore Password</Header>
+      <Header>Şifreni Öğren</Header>
       <TextInputLogin
-        label='E-mail address'
+        label='E-posta adresi'
         returnKeyType='done'
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: "" })}
@@ -35,14 +35,13 @@ export default function ResetPasswordScreen({ navigation }) {
         autoCompleteType='email'
         textContentType='emailAddress'
         keyboardType='email-address'
-        description='You will receive email with password reset link.'
+        description='Şifrenizi yenilemeye yönelik bir e-mail alacaksınız.'
       />
       <Button
         mode='contained'
         onPress={sendResetPasswordEmail}
-        style={{ marginTop: 16 }}
       >
-        Send Instructions
+        Bilgileri Gönder
       </Button>
     </Background>
   );

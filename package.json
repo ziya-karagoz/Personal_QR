@@ -9,6 +9,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/drawer": "^6.1.8",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
@@ -20,14 +21,12 @@
     "expo-intent-launcher": "~10.0.3",
     "expo-media-library": "~13.0.3",
     "expo-notifications": "~0.13.3",
-    "expo-permissions": "^13.1.1",
     "expo-sharing": "~10.0.3",
     "expo-splash-screen": "~0.13.3",
     "expo-status-bar": "~1.1.0",
     "expo-updates": "~0.10.5",
     "ip": "^1.1.5",
     "mongodb": "^4.2.2",
-    "native-notify": "^2.0.2",
     "nodemon": "^2.0.14",
     "react": "17.0.2",
     "react-dom": "17.0.1",
@@ -39,20 +38,23 @@
     "react-native-material-drawer": "0.0.5",
     "react-native-navbar": "^2.1.0",
     "react-native-paper": "^4.11.1",
+    "react-native-picker-select": "^8.0.4",
     "react-native-qrcode-svg": "^6.1.1",
     "react-native-reanimated": "~2.2.0",
     "react-native-responsive-screen": "^1.4.2",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-status-bar-height": "^2.6.0",
     "react-native-svg": "^12.1.1",
-    "react-native-thermal-printer": "^2.3.1",
     "react-native-web": "0.17.1",
-    "valtio": "^1.2.7",
-    "expo-device": "~4.0.3"
+    "styled-components": "^5.3.3",
+    "styled-system": "^5.1.5",
+    "valtio": "^1.2.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "babel-plugin-styled-components": "^2.0.2"
   },
   "private": true
 }

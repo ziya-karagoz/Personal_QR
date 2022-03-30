@@ -1,38 +1,42 @@
 import React, { Component, useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   Image,
   SafeAreaView,
   TouchableOpacity,
   TextInput,
-  FlatList
+  FlatList,
+  useWindowDimensions,
+  KeyboardAvoidingView
 } from "react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
-
+ 
 import CreationHeaderBar from "../components/molecules/CreationHeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import QrName from "../components/molecules/QrName";
-import AddMessageButton from "../components/molecules/AddMessageButton";
 import userState from "../store/userState";
 import { useSnapshot } from "valtio";
-import qrState from "../store/qrState";
 import { qrGenerate } from "../store/qrState";
+import allStyles from "../components/molecules/Styles";
+import {Picker} from '@react-native-picker/picker';
 
-let DATA;
+let DATA = [];
+const styles = allStyles;
 
 const Item = (props) => {
   const [messageOne, setMessageOne] = useState("");
   const [messageTwo, setMessageTwo] = useState("");
-  const callBackFunction = props.callBackFunction;
+  let index = DATA.indexOf(props.item.item);
 
+
+  function setData(messageOne, messageTwo) {
+    DATA[index].messageOne = messageOne;
+    DATA[index].messageTwo = messageTwo;
+  }
+  setData(messageOne, messageTwo)
 
   return (
-    <View style={styles.container2}>
+    <View style={styles.blockContainer} >
         <View
           style={{
             flex: 1,
@@ -51,19 +55,12 @@ const Item = (props) => {
               style={styles.mesaj}
               onChangeText={(value) => {
               setMessageOne(value);
-              callBackFunction(messageOne, messageTwo);
+
             }}
             ></TextInput>
           </View>
   
           <View style={{ flex: 1 }}>
-            <TouchableOpacity>
-              <Image
-                style={styles.icon}
-                resizeMode='contain'
-                source={require("../Assets/Images/editIcon.png")}
-              ></Image>
-            </TouchableOpacity>
           </View>
         </View>
   
@@ -71,7 +68,6 @@ const Item = (props) => {
           style={{
             flex: 1,
             flexDirection: "row",
-            borderTopWidth: 3,
           }}
         >
           <View style={{ flex: 1 }}>
@@ -84,10 +80,9 @@ const Item = (props) => {
               multiline
               numberOfLines={10}
               placeholder= "___________"
-              style={styles.yanit}
+              style={styles.cevap}
               onChangeText={(value) => {
               setMessageTwo(value);
-              callBackFunction(messageOne, messageTwo);
             }}
             ></TextInput>
           </View>
@@ -100,52 +95,84 @@ const Item = (props) => {
 function QRCreationScreen({ navigation }) {
   const { user } = useSnapshot(userState);
   const [qrName, setQrName] = useState("");
-  let messageOne
-  let messageTwo
-
-  const addMessageButtonHandler = () => {
-    qrGenerate(navigation, user, qrName, messageOne, messageTwo);
-  };
-
-  const callBackFunction = (itemMessageOne, itemMessageTwo) => {
-    messageOne = itemMessageOne,
-    messageTwo = itemMessageTwo
+  const [messageQuantity, setMessageQuantity] = useState(1);
+  let createdMessages = []
+  
+  const quantitySetter = (quantity = 1) => {
+    const lenght = DATA.length;
+    if (quantity< lenght){
+      for (let i = quantity; i < lenght; i++) {
+        DATA.pop();       
+      }
+    }
+    else if (lenght< quantity){
+    for (let i = lenght; i < quantity; i++) {
+      DATA.push({index: i, messageOne: "", messageTwo: ""})
+    }};
   }
 
-  DATA = [
-    1,
-  ]
+  if(DATA.length == 0){
+  quantitySetter(messageQuantity);
+  }
 
+  const addMessageButtonHandler = () => {
+    for (let i = 0; i < DATA.length; i++) {
+      createdMessages.push({messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})     
+    }
+    qrGenerate(navigation, user, qrName, createdMessages);
+    DATA = []
+  };
+
+  const windowHeight = useWindowDimensions().height;
+  const minHeight = Math.round(windowHeight)
   
-
-  const renderItem = (item, callBackFunction) => {
+  const renderItem = (item) => {
     return(
-    <Item callBackFunction = {callBackFunction}></Item>
-  );}
+    <Item item = {item}></Item>
+  )};
 
   return (
-    <View style={styles.container}>
-      <CreationHeaderBar style={styles.headerBar}></CreationHeaderBar>
+    <View style={{flex: 1, backgroundColor: "#E5E4F2" } } minHeight= {minHeight}>
+      <CreationHeaderBar></CreationHeaderBar>
 
       <View style={styles.body1}>
         <View style={{ flex: 1, justifyContent: "center" }}>
           <Image
-            style={styles.image}
+            style={styles.qrCreationScreenImage}
             resizeMode='contain'
             source={require("../Assets/Images/QR.png")}
-          ></Image>
+          />
         </View>
         <View style={{ flex: 1 }}>
-          <View style={styles.qrAdi}>
-            <Text style={{ marginTop: "10%" }}>Qr Adı:</Text>
+          <View style={styles.qrCreationScreenQrAdi}>
+            <Text style={{ marginTop: "10%", fontSize: 15 }}>Qr Adı:</Text>
             <QrName setQrName={setQrName}></QrName>
           </View>
+          <View style={styles.picker}>
+            <Picker
+              style = {{width: 170, top: "-40%"}}
+              mode = {"dropdown"}
+              dropdownIconColor = "black"
+              
+              onValueChange={(itemValue, itemIndex) => {
+                setMessageQuantity(itemValue)
+                quantitySetter(itemValue)
+                }}
+                selectedValue={messageQuantity}
+              >
+              <Picker.Item label="Mesaj Sayısı: 1" value= {1} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 2" value= {2} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 3" value= {3} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 4" value= {4} style = {{fontSize: 14.5}}/>
+              <Picker.Item label="Mesaj Sayısı: 5" value= {5} style = {{fontSize: 14.5}}/>
+            </Picker>
+          </View>       
           <TouchableOpacity
-            style={styles.btn}
+            style={styles.button}
             onPress={addMessageButtonHandler}
           >
             <View>
-              <View style={styles.btnText}>
+              <View style={styles.buttonText}>
                 <Text>Kaydet</Text>
               </View>
             </View>
@@ -153,119 +180,17 @@ function QRCreationScreen({ navigation }) {
         </View>
       </View>
 
-      <SafeAreaView style={styles.body2}>
+      <KeyboardAvoidingView style={styles.body2} behavior = {"padding"}  keyboardVerticalOffset = {-240}>
         <FlatList
         data={DATA}       
-        renderItem={(item) => renderItem(item, callBackFunction)}
-        contentContainerStyle = {{alignItems:"center"}}
+        renderItem={(item) => renderItem(item)}
+        numColumns = {1}
         />
-      </SafeAreaView>
+      </KeyboardAvoidingView>
 
-      <FooterBar style={styles.footerBar}></FooterBar>
+      <FooterBar></FooterBar>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    height: hp("100"),
-    width: wp("100"),
-  },
-
-  container2: {
-    marginTop: "2%",
-    width: 380,
-    height: 150,
-    backgroundColor: "#E6E6E6",
-    borderRadius : 20,
-    borderWidth: 3,
-  },
-
-  headerBar: {
-    flex: 1,
-  },
-
-  footerBar: {
-    flex: 1,
-  },
-
-  body1: {
-    flex: 1.5,
-    flexDirection: "row",
-    borderTopWidth: 3,
-    borderBottomWidth: 3,
-  },
-
-  body2: {
-    flex: 4.5,
-  },
-
-  icon: {
-    color: "rgba(128,128,128,1)",
-    fontSize: 40,
-  },
-
-  qrAdi: {
-    height: 60,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  image: {
-    top: "3%",
-    width: 120,
-    height: 120,
-    alignSelf: "center",
-  },
-
-  btn: {
-    width: 100,
-    height: 24,
-    backgroundColor: "gray",
-    marginLeft: "25%",
-    top: "32%",
-    borderRadius : 20,
-  },
-
-  btnText: {
-    height: 24,
-    width: 100,
-    color: "black",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  msgbody: {
-    width: 100,
-    height: 30,
-    marginLeft: "1.5%",
-  },
-
-  textInput: {
-    color: "#121212",
-    height: 50,
-    width: 100,
-  },
-
-  mesaj: {
-    color: "#121212",
-    bottom: "26%"
-
-  },
-
-  yanit: {
-    color: "#121212",
-    bottom: "32%"
-  },
-
-  icon: {
-    height: "65%",
-    width: "65%",
-    alignSelf: "center",
-    top: "7%",
-  },
-  
-});
 
 export default QRCreationScreen;
