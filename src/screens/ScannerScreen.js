@@ -42,6 +42,18 @@ export default function ScannerScreen({ navigation }) {
     if (res.status === 200) {
       const { message, qrOwner } = res.data;
       console.log("owner: ", qrOwner);
+      if (qrOwner != "") {
+        await axios.post(
+          `https://app.nativenotify.com/api/indie/notification`,
+          {
+            subID: qrOwner,
+            appId: 2374,
+            appToken: "a2GpbyQUY6ZIixvld1muE8",
+            title: "Bildirim geldi amk",
+            message: "sonunda basardim",
+          }
+        );
+      }
       setMessageFromServer(message);
       navigation.navigate("Scanned", {
         messageFromServer: messageFromServer,

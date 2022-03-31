@@ -1,4 +1,4 @@
 const localIP = "192.168.1.100";
-const ngrokServer = "https://70e3-85-101-28-239.ngrok.io";
+const ngrokServer = "https://e1ba-159-146-45-11.ngrok.io";
 
 export { localIP, ngrokServer };
