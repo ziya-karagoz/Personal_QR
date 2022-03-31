@@ -16,11 +16,21 @@ const Item = (props) => {
   let msj1 = props.msj1;
   let msj2 = props.msj2;
   let index = props.index;
-  const [message, setMessage] = useState({messageOne:msj1, messageTwo:msj2});
+  console.log("msj1:" + JSON.stringify(msj1));
+  console.log("msj2:" + JSON.stringify(msj2));
+  const [message, setMessage] = useState({
+    messageOne: msj1,
+    messageTwo: msj2,
+  });
   const qrId = props.qrId;
 
   const addMessageButtonHandler = async () => {
-    const res = await qrEdit(qrId, message.messageOne, message.messageTwo, index);
+    const res = await qrEdit(
+      qrId,
+      message.messageOne,
+      message.messageTwo,
+      index
+    );
     ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
@@ -40,8 +50,8 @@ const Item = (props) => {
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-                if(value === "") setMessage({...message, messageOne: msj1});
-                else setMessage({...message, messageOne: value});
+              if (value === "") setMessage({ ...message, messageOne: msj1 });
+              else setMessage({ ...message, messageOne: value });
             }}
             placeholder={msj1}
             style={styles.mesaj}
@@ -59,9 +69,7 @@ const Item = (props) => {
         </View>
       </View>
 
-      <View
-        style={styles.messageBlockContainer}
-      >
+      <View style={styles.messageBlockContainer}>
         <View style={{ flex: 1 }}>
           <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
         </View>
@@ -71,8 +79,8 @@ const Item = (props) => {
             multiline
             numberOfLines={10}
             onChangeText={(value) => {
-              if(value === "") setMessage({...message, messageTwo: msj2});
-              else  setMessage({...message, messageTwo: value});
+              if (value === "") setMessage({ ...message, messageTwo: msj2 });
+              else setMessage({ ...message, messageTwo: value });
             }}
             placeholder={msj2}
             style={styles.cevap}
@@ -88,25 +96,30 @@ const Item = (props) => {
 function MessageBlock({ mesajlar, qrId }) {
   let DATA = mesajlar.mesajlar;
   let qrIds = qrId.qrId;
-  let dataArray= [];
+  let dataArray = [];
 
   for (let i = 0; i < DATA.length; i++) {
-    dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})    
+    dataArray.push({
+      index: i,
+      messageOne: DATA[i].messageOne,
+      messageTwo: DATA[i].messageTwo,
+    });
   }
 
   const renderItem = ({ item }, qrId) => {
     return (
-      <Item msj1={item.messageOne} msj2={item.messageTwo} qrId={qrId} index = {item.index}></Item>
+      <Item
+        msj1={item.messageOne}
+        msj2={item.messageTwo}
+        qrId={qrId}
+        index={item.index}
+      ></Item>
     );
   };
 
   return (
-    <FlatList
-      data={dataArray}
-      renderItem={(item) => renderItem(item, qrIds)}
-    />
+    <FlatList data={dataArray} renderItem={(item) => renderItem(item, qrIds)} />
   );
 }
- 
 
 export default MessageBlock;
