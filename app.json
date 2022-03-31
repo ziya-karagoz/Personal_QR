@@ -3,7 +3,10 @@
     "name": "Personal_QR",
     "slug": "PersonalQR",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"]
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "softwareKeyboardLayoutMode": "pan"
+    }
   },
 
   "name": "Personal_QR"
