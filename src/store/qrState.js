@@ -7,13 +7,10 @@ const qrState = proxy({
   loading: false,
 });
 
-const qrGenerate = async (navigation, user, qrName, messageOne, messageTwo) => {
+const qrGenerate = async (navigation, user, qrName, createdMessages) => {
   let res = await axios
     .post(`${ngrokServer}/api/qr/qrgenerate`, {
-      message: {
-        messageOne: messageOne,
-        messageTwo: messageTwo,
-      },
+      message: createdMessages,
       user,
       qrName,
     })
