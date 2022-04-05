@@ -26,6 +26,7 @@ const login = async (email, password, navigation) => {
     .catch((err) => {
       userState.loading = false;
       console.log("ERR :", err);
+      alert("Kullanici bilgileri yanlış veya böyle bir hesap bulunmamaktadır!");
     });
 };
 
