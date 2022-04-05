@@ -16,11 +16,13 @@ const Item = (props) => {
   let msj1 = props.msj1;
   let msj2 = props.msj2;
   let index = props.index;
+ 
   const [message, setMessage] = useState({messageOne:msj1, messageTwo:msj2});
   const qrId = props.qrId;
 
   const addMessageButtonHandler = async () => {
     const res = await qrEdit(qrId, message.messageOne, message.messageTwo, index);
+    console.log(index)
     ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
@@ -91,12 +93,12 @@ function MessageBlock({ mesajlar, qrId }) {
   let qrIds = qrId.qrId;
   let dataArray= [];
 
-  console.log("DATAA: " + JSON.stringify(DATA))
+  
   for (let i = 0; i < DATA.length; i++) {
     dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})  
   }
 
-  console.log(dataArray.length)
+
   const renderItem = ({ item }, qrId) => {
     return (
       <Item msj1={item.messageOne} msj2={item.messageTwo} qrId={qrId} index = {item.index}></Item>

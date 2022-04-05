@@ -16,7 +16,6 @@ const styles = allStyles;
 
 function QREditScreen({ route }) {
   const { qrAdi, qrId, mesajlar } = route.params;
-  console.log(JSON.stringify(mesajlar))
   return (
     <View style={{flex: 1}}>
       <CreationHeaderBar ></CreationHeaderBar>

@@ -10,7 +10,6 @@ const MessageBlock = require("../model/messageBlock");
 
 qrRoute.post("/qrgenerate", (req, res) => {
   let { user, message, qrName } = req.body;
-  console.log("generating message: ", message);
   MessageBlock.create({ messages: message }).then((mb) => {
     Qr.create({ qrName, messageBlock: mb._id }).then((qr) => {
       User.findOne(user).then((usr) => {
@@ -68,7 +67,8 @@ qrRoute.post("/scanQr", (req, res) => {
 });
 
 qrRoute.post("/qrEdit", (req, res) => {
-  const { qrId, messageOne, messageTwo, index } = req.body;
+  const { qrId, messageOne, messageTwo, index} = req.body;
+  console.log(index)
   Qr.findById(qrId)
     .exec()
     .then((qrr) => {

@@ -43,13 +43,14 @@ const displayQrList = (user) => {
     });
 };
 
-const qrEdit = (qrId, messageOne, messageTwo) => {
+const qrEdit = (qrId, messageOne, messageTwo, index) => {
   qrState.loading = true;
   axios
     .post(`${ngrokServer}/api/qr/qrEdit`, {
       qrId,
       messageOne,
       messageTwo,
+      index
     })
     .then((response) => {
       qrState.loading = false;
