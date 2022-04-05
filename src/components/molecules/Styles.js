@@ -167,6 +167,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 
     existingQrContainer: {
       marginTop: "2%",
+      marginBottom: "5%",
       width: 180,
       height: 190,
       backgroundColor: "#F0E0FF",
@@ -230,10 +231,10 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     },
 
     editIcon: {
-      height: "65%",
-      width: "65%",
+      height: "57%",
       alignSelf: "center",
-      top: "7%",
+      top: "15%",
+      right: "10%"
     },
   
     body1: {
@@ -441,8 +442,8 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     messageBlockContainer: {
       flex: 1,
       flexDirection: "row",
-      borderTopColor: "black",
-      borderTopWidth: 3,
+      borderTopColor: "#FFE0FF",
+      borderTopWidth: 2,
     }
   });
 

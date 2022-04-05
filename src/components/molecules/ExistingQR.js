@@ -27,6 +27,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
   const [qrSVG, setQrSVG] = useState("");
   const [imageSource, setImageSource] = useState("");
 
+
   const handlePress = async () => {
     await qrSVG.toDataURL((data) => {
       setImageSource(data);
@@ -93,6 +94,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
 function ExistingQR({ props }) {
   const { user } = useSnapshot(userState);
   const { qrs } = useSnapshot(qrState);
+  
 
   useEffect(() => {
     displayQrList(user);
@@ -102,7 +104,7 @@ function ExistingQR({ props }) {
     <Item
       qrName={item.qrName}
       qrId={item._id}
-      mesajlar={item.messageBlock.messages}
+      mesajlar={item.messageBlock.messages[0].messageOne}
     ></Item>
   );
   return <FlatList data={DATA} renderItem={renderItem} numColumns={2} />;

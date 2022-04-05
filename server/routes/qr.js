@@ -67,15 +67,14 @@ qrRoute.post("/scanQr", (req, res) => {
 });
 
 qrRoute.post("/qrEdit", (req, res) => {
-  const { qrId, messageOne, messageTwo } = req.body;
+  const { qrId, messageOne, messageTwo, index } = req.body;
   Qr.findById(qrId)
     .exec()
     .then((qrr) => {
-      console.log("qrr: ", qrr);
       MessageBlock.findByIdAndUpdate(qrr.messageBlock, {
         $set: {
-          "messages.0.messageOne": messageOne,
-          "messages.0.messageTwo": messageTwo,
+          [`messages.${index}.messageOne`]: messageOne,
+          [`messages.${index}.messageTwo`]: messageTwo,
         },
       })
         .exec()

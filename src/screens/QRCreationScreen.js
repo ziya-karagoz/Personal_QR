@@ -115,10 +115,12 @@ function QRCreationScreen({ navigation }) {
   quantitySetter(messageQuantity);
   }
 
+  
   const addMessageButtonHandler = () => {
     for (let i = 0; i < DATA.length; i++) {
       createdMessages.push({messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})     
     }
+    console.log(JSON.stringify(createdMessages))
     qrGenerate(navigation, user, qrName, createdMessages);
     DATA = []
   };

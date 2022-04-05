@@ -74,7 +74,7 @@ const Item = (props) => {
               if(value === "") setMessage({...message, messageTwo: msj2});
               else  setMessage({...message, messageTwo: value});
             }}
-            placeholder={msj2}
+           placeholder={msj2}
             style={styles.cevap}
           ></TextInput>
         </View>
@@ -86,14 +86,17 @@ const Item = (props) => {
 };
 
 function MessageBlock({ mesajlar, qrId }) {
+  console.log(JSON.stringify(mesajlar))
   let DATA = mesajlar.mesajlar;
   let qrIds = qrId.qrId;
   let dataArray= [];
 
+  console.log("DATAA: " + JSON.stringify(DATA))
   for (let i = 0; i < DATA.length; i++) {
-    dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})    
+    dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})  
   }
 
+  console.log(dataArray.length)
   const renderItem = ({ item }, qrId) => {
     return (
       <Item msj1={item.messageOne} msj2={item.messageTwo} qrId={qrId} index = {item.index}></Item>
