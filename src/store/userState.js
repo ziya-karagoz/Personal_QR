@@ -1,6 +1,6 @@
 import { proxy } from "valtio";
 import axios from "axios";
-import { localIP, ngrokServer } from "../constants";
+import { localIP, serverURL } from "../constants";
 
 const userState = proxy({
   user: {},
@@ -10,7 +10,7 @@ const login = async (email, password, navigation) => {
   userState.loading = true;
 
   axios
-    .post(`${ngrokServer}/api/user/login`, {
+    .post(`${serverURL}/api/user/login`, {
       email,
       password,
     })
@@ -32,7 +32,7 @@ const login = async (email, password, navigation) => {
 const register = (username, email, password, navigation) => {
   userState.loading = true;
   axios
-    .post(`${ngrokServer}/api/user/register`, {
+    .post(`${serverURL}/api/user/register`, {
       username,
       email,
       password,

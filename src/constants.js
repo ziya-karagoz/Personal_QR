@@ -1,4 +1,4 @@
 const localIP = "192.168.1.100";
-const ngrokServer = "https://b4ad-159-146-14-171.ngrok.io";
+const serverURL = "https://pqrserver.herokuapp.com";
 
-export { localIP, ngrokServer };
+export { localIP, serverURL };

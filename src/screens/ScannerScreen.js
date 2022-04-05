@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { localIP, ngrokServer } from "../constants";
+import { localIP, serverURL } from "../constants";
 import allStyles from "../components/molecules/Styles";
 
 const styles = allStyles;
@@ -37,7 +37,7 @@ export default function ScannerScreen({ navigation }) {
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     console.log("Data: ", data);
-    let res = await axios.post(`${ngrokServer}/api/qr/scanQr`, {
+    let res = await axios.post(`${serverURL}/api/qr/scanQr`, {
       data,
     });
     if (res.status === 200) {
