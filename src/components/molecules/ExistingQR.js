@@ -19,6 +19,7 @@ import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
 import allStyles from "./Styles";
 
+
 let DATA;
 const styles = allStyles;
 
