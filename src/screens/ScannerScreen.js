@@ -8,7 +8,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { localIP, ngrokServer } from "../constants";
 import allStyles from "../components/molecules/Styles";
-
+import { useFocusEffect } from '@react-navigation/native';
 const styles = allStyles;
 
 export default function ScannerScreen({ navigation }) {
@@ -31,13 +31,7 @@ export default function ScannerScreen({ navigation }) {
 
   // What happens when we scan the bar code
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      setScanned(false);
-      handleBarCodeScanned;
-    })
-    return unsubscribe;
-  }, [navigation])
+ 
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
