@@ -21,11 +21,6 @@ export default function ScannerScreen({ navigation }) {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const [messageFromServer, setMessageFromServer] = useState({});
-  const [reset, setReset] = useState(false);
-
-  useEffect(() => {
-    setReset(false);
-  });
 
   useEffect(() => {
     (async () => {
@@ -78,10 +73,9 @@ export default function ScannerScreen({ navigation }) {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && reset && (
+      {scanned && (
         <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
-      <Button title='Bas bakim' onPress={() => setReset(true)} />
     </View>
   );
 }
