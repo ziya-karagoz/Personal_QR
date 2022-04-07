@@ -6,12 +6,12 @@ import NotificationBlock from "../components/molecules/NotificationBlock";
 
 function NotificationScreen(props) {
   return (
-    <View style={{flex: 8}}>
+    <View style={{flex: 1, backgroundColor: "#E5E4F2"}}>
       <NotificationHeaderBar></NotificationHeaderBar>
 
-      <SafeAreaView style={{flex: 6}}>
+      <View style={{flex: 6}}>
         <NotificationBlock></NotificationBlock>
-      </SafeAreaView>
+      </View>
 
       <FooterBar></FooterBar>
     </View>

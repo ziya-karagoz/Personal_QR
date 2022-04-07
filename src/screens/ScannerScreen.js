@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Text,
   View,
-  FlatList,
   Button,
-  Modal,
-  Pressable,
-  Alert,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
@@ -34,6 +30,15 @@ export default function ScannerScreen({ navigation }) {
   }, []);
 
   // What happens when we scan the bar code
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      setScanned(false);
+      handleBarCodeScanned;
+    })
+    return unsubscribe;
+  }, [navigation])
+
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
     let res = await axios.post(`${ngrokServer}/api/qr/scanQr`, {
@@ -98,7 +103,6 @@ export default function ScannerScreen({ navigation }) {
         <Button
           title={"Go Back"}
           onPress={() => {
-            setScanned(false);
             navigation.reset({
               index: 0,
               routes: [{ name: "Home" }],

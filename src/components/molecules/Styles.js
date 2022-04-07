@@ -312,9 +312,16 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 
     notificationBlockContainer: {
       marginTop: "2%",
+      marginBottom: "6%",
       width: 380,
       height: 150,
-      backgroundColor: "#E6E6E6",
+      backgroundColor: "#F0E0FF",
+      borderTopEndRadius: 60,
+      borderTopStartRadius: 12, 
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12, 
+      elevation: 11, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
   
     notificationBlockIcon: {
