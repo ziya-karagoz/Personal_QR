@@ -7,10 +7,11 @@ import {
   Modal,
   Pressable,
   Alert,
+  StyleSheet,
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { localIP, ngrokServer } from "../constants";
+import { serverURL } from "../constants";
 import allStyles from "../components/molecules/Styles";
 
 const styles = allStyles;
@@ -21,26 +22,22 @@ export default function ScannerScreen({ navigation }) {
   const [text, setText] = useState("Not yet scanned");
   const [messageFromServer, setMessageFromServer] = useState({});
 
-  const askForCameraPermission = () => {
+  useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
     })();
-  };
-
-  // Request Camera Permission
-  useEffect(() => {
-    askForCameraPermission();
   }, []);
 
-  // What happens when we scan the bar code
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    let res = await axios.post(`${ngrokServer}/api/qr/scanQr`, {
+    console.log("Data: ", data);
+    let res = await axios.post(`${serverURL}/api/qr/scanQr`, {
       data,
     });
     if (res.status === 200) {
       const { message, qrOwner } = res.data;
+      console.log("message: ", message);
       console.log("owner: ", qrOwner);
       if (qrOwner != "") {
         await axios.post(
@@ -49,63 +46,35 @@ export default function ScannerScreen({ navigation }) {
             subID: qrOwner,
             appId: 2374,
             appToken: "a2GpbyQUY6ZIixvld1muE8",
-            title: "Bildirim geldi amk",
-            message: "sonunda basardim",
+            title: "Your QR scanned",
+            message: "Someone Scanned your QR",
           }
         );
+        setMessageFromServer(message);
+        navigation.navigate("Scanned", {
+          messageFromServer: message,
+        });
       }
-      setMessageFromServer(message);
-      navigation.navigate("Scanned", {
-        messageFromServer: messageFromServer,
-      });
     } else {
       alert("Hata : ", res.data);
     }
   };
 
-  // Check permissions and return the screens
   if (hasPermission === null) {
-    return (
-      <View style={styles.scannerScreenContainer}>
-        <Text>Requesting for camera permission</Text>
-      </View>
-    );
+    return <Text>Requesting for camera permission</Text>;
   }
   if (hasPermission === false) {
-    return (
-      <View style={styles.scannerScreenContainer}>
-        <Text style={{ margin: 10 }}>No access to camera</Text>
-        <Button
-          title={"Allow Camera"}
-          onPress={() => askForCameraPermission()}
-        />
-      </View>
-    );
+    return <Text>No access to camera</Text>;
   }
 
-  // Return the View
   return (
     <View style={styles.scannerScreenContainer}>
-      <View style={styles.scannerScreenBarcodebox}>
-        <BarCodeScanner
-          onBarCodeScanned={handleBarCodeScanned}
-          style={{ height: 400, width: 400 }}
-        />
-      </View>
-      <Text style={styles.scannerScreenMaintext}>{text}</Text>
-
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
       {scanned && (
-        <Button
-          title={"Go Back"}
-          onPress={() => {
-            setScanned(false);
-            navigation.reset({
-              index: 0,
-              routes: [{ name: "Home" }],
-            });
-          }}
-          color='#616161'
-        />
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
       )}
     </View>
   );
