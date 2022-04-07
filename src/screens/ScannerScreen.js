@@ -9,6 +9,7 @@ import {
   Alert,
   StyleSheet,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { serverURL } from "../constants";
@@ -21,6 +22,34 @@ export default function ScannerScreen({ navigation }) {
   const [scanned, setScanned] = useState(false);
   const [text, setText] = useState("Not yet scanned");
   const [messageFromServer, setMessageFromServer] = useState({});
+  const [reset, setReset] = useState(false);
+
+  const doSomething = () => {
+    return (
+      <View>
+        <BarCodeScanner
+          onBarCodeScanned={handleBarCodeScanned}
+          style={StyleSheet.absoluteFillObject}
+        />
+        {scanned && (
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => setScanned(false)}
+          />
+        )}
+      </View>
+    );
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      console.log("SCANNED: ", scanned);
+      setScanned(false);
+      console.log("SCANNED: ", scanned);
+      doSomething();
+      return () => {};
+    }, [])
+  );
 
   useEffect(() => {
     (async () => {
@@ -66,16 +95,5 @@ export default function ScannerScreen({ navigation }) {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
-  return (
-    <View style={styles.scannerScreenContainer}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )}
-    </View>
-  );
+  return <View style={styles.scannerScreenContainer}>{}</View>;
 }
