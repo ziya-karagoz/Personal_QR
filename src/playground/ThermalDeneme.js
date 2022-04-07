@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { View, TouchableOpacity, Text } from "react-native";
 import ThermalPrinterModule from "react-native-thermal-printer";
+
 function ThermalDeneme() {
   const DoSomething = async () => {
     // inside async function

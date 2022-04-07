@@ -1,6 +1,6 @@
 import { proxy } from "valtio";
 import axios from "axios";
-import { localIP, ngrokServer } from "../constants";
+import { serverURL } from "../constants";
 
 const qrState = proxy({
   qrs: [],
@@ -9,8 +9,16 @@ const qrState = proxy({
 
 const qrGenerate = async (navigation, user, qrName, createdMessages) => {
   let res = await axios
+<<<<<<< HEAD
     .post(`${ngrokServer}/api/qr/qrgenerate`, {
       message: createdMessages,
+=======
+    .post(`${serverURL}/api/qr/qrgenerate`, {
+      message: {
+        messageOne: messageOne,
+        messageTwo: messageTwo,
+      },
+>>>>>>> NotifFeature
       user,
       qrName,
     })
@@ -29,7 +37,7 @@ const qrGenerate = async (navigation, user, qrName, createdMessages) => {
 const displayQrList = (user) => {
   qrState.loading = true;
   axios
-    .post(`${ngrokServer}/api/qr/displayQrs`, {
+    .post(`${serverURL}/api/qr/displayQrs`, {
       user,
     })
     .then((response) => {
@@ -46,7 +54,7 @@ const displayQrList = (user) => {
 const qrEdit = (qrId, messageOne, messageTwo, index) => {
   qrState.loading = true;
   axios
-    .post(`${ngrokServer}/api/qr/qrEdit`, {
+    .post(`${serverURL}/api/qr/qrEdit`, {
       qrId,
       messageOne,
       messageTwo,
