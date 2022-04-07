@@ -1,55 +1,23 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  Button,
-  Modal,
-  Pressable,
-  Alert,
-  StyleSheet,
-} from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
+import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { serverURL } from "../constants";
-import allStyles from "../components/molecules/Styles";
 
-const styles = allStyles;
-
-export default function ScannerScreen({ navigation }) {
+export default function App({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [text, setText] = useState("Not yet scanned");
-  const [messageFromServer, setMessageFromServer] = useState({});
-  const [reset, setReset] = useState(false);
+  const [messageFromServer, setMessageFromServer] = useState();
 
-  const doSomething = () => {
-    return (
-      <View>
-        <BarCodeScanner
-          onBarCodeScanned={handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-        />
-        {scanned && (
-          <Button
-            title={"Tap to Scan Again"}
-            onPress={() => setScanned(false)}
-          />
-        )}
-      </View>
-    );
-  };
+  useEffect(() => {
+    console.log("SCANNED: ", scanned);
+    setScanned(false);
 
-  useFocusEffect(
-    React.useCallback(() => {
+    return () => {
       console.log("SCANNED: ", scanned);
-      setScanned(false);
-      console.log("SCANNED: ", scanned);
-      doSomething();
-      return () => {};
-    }, [])
-  );
+      setScanned(true);
+    };
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -95,5 +63,25 @@ export default function ScannerScreen({ navigation }) {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-  return <View style={styles.scannerScreenContainer}>{}</View>;
+
+  return (
+    <View style={styles.container}>
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
+
+      {scanned && (
+        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+      )}
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+  },
+});
