@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
-import { localIP, serverURL } from "../constants";
+import { serverURL } from "../constants";
 import allStyles from "../components/molecules/Styles";
 
 const styles = allStyles;

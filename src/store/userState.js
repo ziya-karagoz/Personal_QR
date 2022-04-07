@@ -1,6 +1,6 @@
 import { proxy } from "valtio";
 import axios from "axios";
-import { localIP, serverURL } from "../constants";
+import { serverURL } from "../constants";
 
 const userState = proxy({
   user: {},
