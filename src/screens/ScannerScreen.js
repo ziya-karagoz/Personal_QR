@@ -4,6 +4,7 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import axios from "axios";
 import { serverURL } from "../constants";
 import { Camera } from 'expo-camera';
+import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function App({ navigation }) {
 
@@ -11,6 +12,7 @@ export default function App({ navigation }) {
   const [messageFromServer, setMessageFromServer] = useState();
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
 
   useEffect(() => {
     (async () => {
@@ -58,25 +60,31 @@ export default function App({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{flex:1}}>
       <Camera 
-      style={styles.camera} 
+      style={{flex:1}} 
       type={type} 
       barCodeScannerSettings={{barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr]}}
       onBarCodeScanned={handleBarCodeScanned}
+      flashMode={flash}
       >
+      <View style={{flex:0.7}}/>
+      <MaterialCommunityIconsIcon  name='scan-helper' style={{fontSize:250, alignSelf:"center", bottom:"15%"}}/>
+      <View style={{flex:0.6, flexDirection:"row", opacity:0.65, backgroundColor:"white"}}>
+        <TouchableOpacity style={{flex:1, justifyContent:"center", opacity:1}} 
+            onPress ={()=>{
+              if(flash == Camera.Constants.FlashMode.off){setFlash(Camera.Constants.FlashMode.torch)}
+              else setFlash(Camera.Constants.FlashMode.off)
+              }}>
+          <MaterialCommunityIconsIcon  name='flashlight' style={{fontSize:75, alignSelf:"center"}}/>
+        </TouchableOpacity>
+        <TouchableOpacity style={{flex:1, justifyContent:"center"}} onPress={() => {
+          navigation.navigate("Home")
+        }} >
+          <MaterialCommunityIconsIcon  name='arrow-left-circle' style={{fontSize:75, alignSelf:"center"}}/>
+        </TouchableOpacity>
+      </View>
       </Camera>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-  },
-  camera: {
-    flex: 1
-  }
-});

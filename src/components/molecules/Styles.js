@@ -167,6 +167,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 
     existingQrContainer: {
       marginTop: "2%",
+      marginBottom:"4%",
       width: 180,
       height: 190,
       backgroundColor: "#F0E0FF",
