@@ -10,13 +10,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Component Imports
 import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
-import YeniUiDeneme from "./src/screens/YeniUiDeneme";
 
 export default function App() {
   return (
     <NavigationContainer>
       <StackNavigatorLogin></StackNavigatorLogin>
     </NavigationContainer>
-    // <YeniUiDeneme></YeniUiDeneme>
   );
 }
