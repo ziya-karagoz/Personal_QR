@@ -8,7 +8,6 @@ import { useSnapshot } from "valtio";
 import userState from "../store/userState";
 
 import { registerIndieID } from "native-notify";
-import axios from "axios";
 
 function HomeScreen() {
   const { user } = useSnapshot(userState);
@@ -23,6 +22,7 @@ function HomeScreen() {
       <View style={{ flex: 6 }}>
         <ExistingQR></ExistingQR>
       </View>
+
       <FooterBar></FooterBar>
     </View>
   );

@@ -44,7 +44,7 @@ function FooterBar() {
         onPress={() =>
           navigation.reset({
             index: 1,
-            routes: [{ name: "Home" }, { name: "Notification" }],
+            routes: [{ name: "Home" }, { name: "Login" }],
           })
         }
         style={styles.btnWrapper}
