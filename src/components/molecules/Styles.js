@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet} from "react-native";
 import { theme } from "../../core/theme.js";
 import { getStatusBarHeight } from "react-native-status-bar-height";
+import { borderRadius } from 'styled-system';
 
   const allStyles = StyleSheet.create({
 
@@ -201,7 +202,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       flex: 3,
       justifyContent: "center",
       alignItems: "center",
-      bottom: "5%",
+      bottom: "2%",
       borderRadius: 20
     },
 
@@ -212,7 +213,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       width: 380,
       height: 150,
       backgroundColor: "#F0E0FF",
-      borderTopEndRadius: 60,
+      borderTopEndRadius: 50,
       borderTopStartRadius: 12, 
       borderBottomStartRadius: 12,
       borderBottomEndRadius: 12, 
@@ -222,12 +223,19 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
 
     mesaj: {
       color: "#121212",
-      bottom: "26%",
+      top: "5%",
+      borderRadius: 15,
+      backgroundColor: "#DCDAFF",
+      elevation: 1
     },
 
     cevap: {
       color: "#121212",
-      bottom: "32%",
+      top: "3%",
+      backgroundColor: "#F0ECFF",
+      borderRadius: 15,
+      elevation: 1
+
     },
 
     editIcon: {
@@ -235,6 +243,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
       width: "65%",
       alignSelf: "center",
       top: "7%",
+      opacity: 0.8
     },
   
     body1: {
@@ -307,7 +316,7 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     editScreenQrImage: {
       flex: 1, 
       justifyContent: "center", 
-      left: "25%"
+      left: "25%",
     },
 
     notificationBlockContainer: {
@@ -456,9 +465,32 @@ import { getStatusBarHeight } from "react-native-status-bar-height";
     messageBlockContainer: {
       flex: 1,
       flexDirection: "row",
-      borderTopColor: "black",
-      borderTopWidth: 3,
+    },
+
+    anchorStyle: {
+      top: "25%",
+      backgroundColor:"#FAE1AF"
+
+    },
+    triggerOuterWrapper:{
+      elevation:3,
+      borderRadius: 100,
+      alignItems: "center",
+      height:25,
+      width: 25,
+      alignSelf: "center",
+      backgroundColor: "#FAE0AF",
+    },
+
+    triggerWrapper: {
+      borderRadius: 100,
+      alignItems: "center",
+      height:25,
+      width: 25,
+      alignSelf: "center",
+      
     }
+  
   });
 
 export default allStyles;

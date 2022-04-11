@@ -9,6 +9,10 @@ import userState from "../store/userState";
 
 import { registerIndieID } from "native-notify";
 
+import {
+  MenuProvider
+} from 'react-native-popup-menu';
+
 function HomeScreen() {
   const { user } = useSnapshot(userState);
   useEffect(() => {
@@ -20,7 +24,9 @@ function HomeScreen() {
     <View style={{ flex: 1, backgroundColor: "#E5E4F2" }}>
       <MainHeaderBar></MainHeaderBar>
       <View style={{ flex: 6 }}>
+        <MenuProvider >
         <ExistingQR></ExistingQR>
+        </MenuProvider>
       </View>
 
       <FooterBar></FooterBar>

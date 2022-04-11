@@ -21,7 +21,7 @@ function QREditScreen({ route }) {
       <CreationHeaderBar ></CreationHeaderBar>
       <View style={styles.body1}>
         <View style={styles.editScreenQrImage}>
-          <QRCode value={qrId} />
+          <QRCode value={qrId} backgroundColor = "#FAE5EF"/>
         </View>
         <View style={{ flex: 1 }}>
           <View style={styles.editScreenQrAdi}>

@@ -44,14 +44,15 @@ const Item = (props) => {
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text style={{ marginTop: "10%", marginLeft: "15%" }}>Mesaj:</Text>
+            <Text style={{marginTop: "42%", marginLeft: "15%", textDecorationLine: "underline" }}>Mesaj:</Text>
           </View>
   
           <View style={{ flex: 4 }}>
           <TextInput
               multiline
-              numberOfLines={10}
-              placeholder= "___________"
+              numberOfLines={4}
+              maxLength={108}
+              placeholder= "   -------"
               style={styles.mesaj}
               onChangeText={(value) => {
               setMessageOne(value);
@@ -71,15 +72,15 @@ const Item = (props) => {
           }}
         >
           <View style={{ flex: 1 }}>
-            <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
+            <Text style={{ left: "11%", top: "36%", textDecorationLine: "underline" }}>Cevap:</Text>
           </View>
   
           
           <View style={{ flex: 4 }}>
           <TextInput
               multiline
-              numberOfLines={10}
-              placeholder= "___________"
+              numberOfLines={4}
+              placeholder= "   -------"
               style={styles.cevap}
               onChangeText={(value) => {
               setMessageTwo(value);
