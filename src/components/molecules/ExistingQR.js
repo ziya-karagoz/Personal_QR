@@ -13,8 +13,8 @@ import {
   MenuOptions,
   MenuOption,
   MenuTrigger,
-  renderers
-} from 'react-native-popup-menu';
+  renderers,
+} from "react-native-popup-menu";
 
 import QRCode from "react-native-qrcode-svg";
 import * as FileSystem from "expo-file-system";
@@ -27,7 +27,7 @@ import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
 import allStyles from "./Styles";
 import { bottom } from "styled-system";
-
+import * as Clipboard from "expo-clipboard";
 
 let DATA;
 const styles = allStyles;
@@ -71,13 +71,13 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     });
   };
 
-  const edit = () =>{
+  const edit = () => {
     navigation.navigate("QREdit", {
       qrAdi: qrName,
       qrId: qrId,
       mesajlar: mesajlar,
-    })
-  }
+    });
+  };
 
   const save = async () => {
     const qrImagesDirectory = FileSystem.documentDirectory + "qrImages/";
@@ -85,27 +85,53 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     saveQRAsImage(qrImagesDirectory, fileName, imageSource);
   };
 
+  const handleYazdir = async () => {
+    Clipboard.setString(qrId);
+    const text = await Clipboard.getStringAsync();
+    console.log(text);
+  };
+
   return (
-    <View  
-      style={styles.existingQrContainer}
-    >
+    <View style={styles.existingQrContainer}>
       <View style={styles.existingQrBody1}>
-      <Menu renderer={renderers.SlideInMenu}  style={{ bottom:"5%", right:"35%", height:3}}>
-        <MenuTrigger    customStyles={{triggerOuterWrapper: styles.triggerOuterWrapper, triggerWrapper: styles.triggerWrapper }} />
-        <MenuOptions style={{backgroundColor:"#FAE1AF"}} >
-          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => edit()} text='Değiştir' />
-          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => save()} text='İndir' />
-          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => alert(`Yazdır`)} text='Yazdır' />
-        </MenuOptions>
-      </Menu>
-        <Text style={{color: "black"}}>{qrName}</Text>
+        <Menu
+          renderer={renderers.SlideInMenu}
+          style={{ bottom: "5%", right: "35%", height: 3 }}
+        >
+          <MenuTrigger
+            customStyles={{
+              triggerOuterWrapper: styles.triggerOuterWrapper,
+              triggerWrapper: styles.triggerWrapper,
+            }}
+          />
+          <MenuOptions style={{ backgroundColor: "#FAE1AF" }}>
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={() => edit()}
+              text='Değiştir'
+            />
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={() => save()}
+              text='İndir'
+            />
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={handleYazdir}
+              text='Yazdır'
+            />
+          </MenuOptions>
+        </Menu>
+        <Text style={{ color: "black" }}>{qrName}</Text>
       </View>
       <View style={styles.existingQrBody2}>
-        <QRCode value={qrId} getRef={(c) => setQrSVG(c)} backgroundColor = "#F9E6FF" />
+        <QRCode
+          value={qrId}
+          getRef={(c) => setQrSVG(c)}
+          backgroundColor='#F9E6FF'
+        />
       </View>
-      
     </View>
-    
   );
 };
 
@@ -122,12 +148,9 @@ function ExistingQR({ props }) {
       qrName={item.qrName}
       qrId={item._id}
       mesajlar={item.messageBlock.messages}
-    >
-    </Item>
+    ></Item>
   );
   return <FlatList data={DATA} renderItem={renderItem} numColumns={2} />;
 }
-
-
 
 export default ExistingQR;

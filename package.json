@@ -57,7 +57,9 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5",
-    "valtio": "^1.2.7"
+    "uninstall": "^0.0.0",
+    "valtio": "^1.2.7",
+    "expo-clipboard": "~2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

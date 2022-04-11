@@ -1,38 +1,32 @@
-import React, { useEffect } from "react";
-import { View, TouchableOpacity, Text } from "react-native";
-import ThermalPrinterModule from "react-native-thermal-printer";
+import React, { useCallback } from "react";
+import { Alert, Button, Linking, StyleSheet, View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import * as Clipboard from "expo-clipboard";
 
-function ThermalDeneme() {
-  const DoSomething = async () => {
-    // inside async function
-    try {
-      await ThermalPrinterModule.printBluetooth({
-        payload: "hello world",
-        printerNbrCharactersPerLine: 38,
-      });
-    } catch (err) {
-      //error handling
-      console.log(err.message);
-    }
-  };
+const deneme = async () => {
+  Clipboard.setString("hello world");
+  const text = await Clipboard.getStringAsync();
+  console.log(text);
+};
 
-  ThermalPrinterModule.defaultConfig = {
-    ...ThermalPrinterModule.defaultConfig,
-    ip: "192.168.100.246",
-    port: 9100,
-    autoCut: false,
-    timeout: 30000, // in milliseconds (version >= 2.2.0)
-  };
+const ThermalDeneme = () => {
   return (
-    <View>
-      <TouchableOpacity
-        style={{ marginTop: 80, marginBottom: 80, marginLeft: 50 }}
-        onPress={DoSomething}
-      >
-        <Text>Dokun</Text>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={deneme}>
+        <Text>Bas</Text>
       </TouchableOpacity>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  button: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: "#ff00ff",
+    padding: 10,
+  },
+});
 
 export default ThermalDeneme;
