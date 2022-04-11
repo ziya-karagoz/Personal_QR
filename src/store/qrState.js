@@ -9,16 +9,9 @@ const qrState = proxy({
 
 const qrGenerate = async (navigation, user, qrName, createdMessages) => {
   let res = await axios
-<<<<<<< HEAD
-    .post(`${ngrokServer}/api/qr/qrgenerate`, {
-      message: createdMessages,
-=======
+
     .post(`${serverURL}/api/qr/qrgenerate`, {
-      message: {
-        messageOne: messageOne,
-        messageTwo: messageTwo,
-      },
->>>>>>> NotifFeature
+      message: createdMessages,
       user,
       qrName,
     })
@@ -58,7 +51,7 @@ const qrEdit = (qrId, messageOne, messageTwo, index) => {
       qrId,
       messageOne,
       messageTwo,
-      index
+      index,
     })
     .then((response) => {
       qrState.loading = false;

@@ -16,15 +16,7 @@ const Item = (props) => {
   let msj1 = props.msj1;
   let msj2 = props.msj2;
   let index = props.index;
-<<<<<<< HEAD
- 
-  const [message, setMessage] = useState({messageOne:msj1, messageTwo:msj2});
-  const qrId = props.qrId;
 
-  const addMessageButtonHandler = async () => {
-    const res = await qrEdit(qrId, message.messageOne, message.messageTwo, index);
-    console.log(index)
-=======
   console.log("msj1:" + JSON.stringify(msj1));
   console.log("msj2:" + JSON.stringify(msj2));
   const [message, setMessage] = useState({
@@ -40,7 +32,6 @@ const Item = (props) => {
       message.messageTwo,
       index
     );
->>>>>>> NotifFeature
     ToastAndroid.show("Başarılı", ToastAndroid.SHORT);
   };
   return (
@@ -92,7 +83,7 @@ const Item = (props) => {
               if (value === "") setMessage({ ...message, messageTwo: msj2 });
               else setMessage({ ...message, messageTwo: value });
             }}
-           placeholder={msj2}
+            placeholder={msj2}
             style={styles.cevap}
           ></TextInput>
         </View>
@@ -104,24 +95,18 @@ const Item = (props) => {
 };
 
 function MessageBlock({ mesajlar, qrId }) {
-  console.log(JSON.stringify(mesajlar))
+  console.log(JSON.stringify(mesajlar));
   let DATA = mesajlar.mesajlar;
   let qrIds = qrId.qrId;
   let dataArray = [];
 
-  
   for (let i = 0; i < DATA.length; i++) {
-<<<<<<< HEAD
-    dataArray.push({index: i, messageOne: DATA[i].messageOne, messageTwo: DATA[i].messageTwo})  
-=======
     dataArray.push({
       index: i,
       messageOne: DATA[i].messageOne,
       messageTwo: DATA[i].messageTwo,
     });
->>>>>>> NotifFeature
   }
-
 
   const renderItem = ({ item }, qrId) => {
     return (
