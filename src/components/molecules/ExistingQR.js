@@ -39,6 +39,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
 
   const handlePress = async () => {
     await qrSVG.toDataURL((data) => {
+      console.log("first");
       setImageSource(data);
     });
   };
@@ -95,6 +96,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     <View style={styles.existingQrContainer}>
       <View style={styles.existingQrBody1}>
         <Menu
+          onOpen={handlePress}
           renderer={renderers.SlideInMenu}
           style={{ bottom: "5%", right: "35%", height: 3 }}
         >
