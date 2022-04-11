@@ -42,7 +42,7 @@ const Item = ({qrAdi, kullanici, bildirim, tarih}) => (
             <Text style = {styles.notificationBlockText1}>QR: {qrAdi}</Text>
 
             <TouchableOpacity style = {{flex:1}}>
-                <Icon name = "trash-can-outline" style = {styles.notificationBlockIcon}></Icon>
+                {/* <Icon name = "trash-can-outline" style = {styles.notificationBlockIcon}></Icon> */}
             </TouchableOpacity>
 
         </View>
