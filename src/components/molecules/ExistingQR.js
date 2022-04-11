@@ -19,7 +19,6 @@ import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
 import allStyles from "./Styles";
 
-
 let DATA;
 const styles = allStyles;
 
@@ -82,10 +81,14 @@ const Item = ({ qrName, qrId, mesajlar }) => {
       onPressIn={handlePress}
     >
       <View style={styles.existingQrBody1}>
-        <Text style={{color: "black"}}>{qrName}</Text>
+        <Text style={{ color: "black" }}>{qrName}</Text>
       </View>
       <View style={styles.existingQrBody2}>
-        <QRCode value={qrId} getRef={(c) => setQrSVG(c)} backgroundColor = "#F9E6FF" />
+        <QRCode
+          value={qrId}
+          getRef={(c) => setQrSVG(c)}
+          backgroundColor='#F9E6FF'
+        />
       </View>
     </TouchableOpacity>
   );
@@ -108,7 +111,5 @@ function ExistingQR({ props }) {
   );
   return <FlatList data={DATA} renderItem={renderItem} numColumns={2} />;
 }
-
-
 
 export default ExistingQR;
