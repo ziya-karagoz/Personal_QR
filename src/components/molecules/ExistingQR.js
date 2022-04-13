@@ -19,6 +19,7 @@ import {
 import QRCode from "react-native-qrcode-svg";
 import * as FileSystem from "expo-file-system";
 import * as IntentLauncher from "expo-intent-launcher";
+import * as Linking from 'expo-linking';
 
 import { useNavigation } from "@react-navigation/native";
 import userState from "../../store/userState";
@@ -71,6 +72,10 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     });
   };
 
+  // _handleOpenWithLinking = () => {
+  //   Linking.openURL('external://system/android/data/com.getir');
+  // };
+
   const edit = () =>{
     navigation.navigate("QREdit", {
       qrAdi: qrName,
@@ -94,8 +99,8 @@ const Item = ({ qrName, qrId, mesajlar }) => {
         <MenuTrigger    customStyles={{triggerOuterWrapper: styles.triggerOuterWrapper, triggerWrapper: styles.triggerWrapper }} />
         <MenuOptions style={{backgroundColor:"#FAE1AF"}} >
           <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => edit()} text='Değiştir' />
-          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => save()} text='İndir' />
-          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={() => alert(`Yazdır`)} text='Yazdır' />
+          <MenuOption style={{width:"100%", alignItems:"center"}} onSelect={save} text='İndir' />
+          <MenuOption style={{width:"100%", alignItems:"center"}}  text='Yazdır' />
         </MenuOptions>
       </Menu>
         <Text style={{color: "black"}}>{qrName}</Text>
