@@ -8,7 +8,6 @@ import { useSnapshot } from "valtio";
 import userState from "../store/userState";
 
 import { registerIndieID } from "native-notify";
-import axios from "axios";
 
 import {
   MenuProvider
@@ -29,6 +28,7 @@ function HomeScreen() {
         <ExistingQR></ExistingQR>
         </MenuProvider>
       </View>
+
       <FooterBar></FooterBar>
     </View>
   );

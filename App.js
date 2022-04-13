@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Component Imports
 import StackNavigatorLogin from "./src/navigation/StackNavigatorLogin";
+import ThermalDeneme from "./src/playground/ThermalDeneme";
 
 export default function App() {
   return (
@@ -17,4 +18,5 @@ export default function App() {
       <StackNavigatorLogin></StackNavigatorLogin>
     </NavigationContainer>
   );
+  // return <ThermalDeneme />;
 }

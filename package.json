@@ -9,6 +9,7 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.3",
     "@react-native-picker/picker": "^2.1.0",
     "@react-navigation/drawer": "^6.1.8",
     "@react-navigation/native": "^6.0.6",
@@ -56,8 +57,9 @@
     "react-native-web": "0.17.1",
     "styled-components": "^5.3.3",
     "styled-system": "^5.1.5",
+    "uninstall": "^0.0.0",
     "valtio": "^1.2.7",
-    "expo-linking": "~2.4.2"
+    "expo-clipboard": "~2.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
