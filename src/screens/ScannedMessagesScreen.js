@@ -28,7 +28,7 @@ const Item = (props) => {
             <View style={styles.scannerScreenModalView}>
               <Text style={styles.scannerScreenModalText}>Cevap: {messageTwo}</Text>
               <Pressable
-                style={styles.scannerScreenPressableMessage}
+                style={styles.scannerScreenPressableButton}
                 onPress={() => setModalVisible(!modalVisible)}
               >
                 <Text style={styles.scannerScreenTextStyle}>Kapat</Text>
@@ -52,7 +52,7 @@ function ScannedMessagesScreen({route}) {
   )};
 
   return (
-      <View style={{flex:1}}>
+      <View style={{flex:1, backgroundColor: "#E5E4F2"}}>
         <View style={{flex:10}} >
           <FlatList 
           data={messageFromServer}

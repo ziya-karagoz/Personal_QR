@@ -58,10 +58,10 @@ function FooterBar() {
       </TouchableOpacity>
       <TouchableOpacity onPress={handleLogout} style={styles.btnWrapper}>
         <MaterialCommunityIconsIcon
-          name='bell-ring'
+          name='logout'
           style={styles.iconFooter}
         ></MaterialCommunityIconsIcon>
-        <Text style={styles.iconText}>Bildirimler</Text>
+        <Text style={styles.iconText}>Çıkış</Text>
       </TouchableOpacity>
     </View>
   );

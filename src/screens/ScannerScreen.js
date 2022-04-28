@@ -31,10 +31,10 @@ export default function App({ navigation }) {
     setScanned(true);
     console.log("Data: ", data);
     let res = await axios.post(`${serverURL}/api/qr/scanQr`, {
-      data,
+      data:data.trim(),
     });
     if (res.status === 200) {
-      const { message, qrOwner } = res.data;
+      const { message, qrOwner, qrName } = res.data;
       console.log("owner: ", qrOwner);
       if (qrOwner == "") {
         setScanned(false);
@@ -46,11 +46,11 @@ export default function App({ navigation }) {
             subID: qrOwner,
             appId: 2374,
             appToken: "a2GpbyQUY6ZIixvld1muE8",
-            title: "Your QR scanned",
-            message: "Someone Scanned your QR",
+            title: "Bir QR'ınız taratıldı.",
+            message: "QR adı: " + qrName,
           }
         );
-        setMessageFromServer(message);
+        console.log("1: "+message)
         navigation.navigate("Scanned", {
           messageFromServer: message,
         });

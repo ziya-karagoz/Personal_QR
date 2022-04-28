@@ -1,18 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "../screens/HomeScreen";
-import QRCreationScreen from "../screens/QRCreationScreen";
+
 import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
-import NotificationScreen from "../screens/NotificationScreen";
-import PaletteScreen from "../screens/PaletteScreen";
-import ScannerScreen from "../screens/ScannerScreen";
-import QREditScreen from "../screens/QREditScreen"
 import StackNavigator from "./StackNavigator";
-import NavBar from "../components/molecules/NavBar";
 
 
 const Stack = createStackNavigator();
@@ -27,7 +21,7 @@ function StackNavigatorLogin() {
             />
             <Stack.Screen
             name='Home'
-            component={NavBar}
+            component={StackNavigator}
             options={{ headerShown: false }}
             ></Stack.Screen>
             <Stack.Screen

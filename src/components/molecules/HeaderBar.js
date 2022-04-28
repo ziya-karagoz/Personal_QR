@@ -12,13 +12,7 @@ function HeaderBar(props) {
 
   return (
     <View style={styles.barContainer}>
-      <TouchableOpacity onPress={() =>     
-      navigation.dispatch(DrawerActions.openDrawer())} style={styles.btnWrapper}>
-        <MaterialCommunityIconsIcon
-          name='account-outline'
-          style={ styles.iconHeader}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
+      <TouchableOpacity style={ styles.btnWrapper}/>
       <TouchableOpacity style={styles.btnWrapper}>
         <MaterialCommunityIconsIcon
           name='qrcode-edit'

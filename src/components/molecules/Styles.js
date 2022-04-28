@@ -250,10 +250,11 @@ import { borderRadius } from 'styled-system';
       flex: 1.5,
       flexDirection: "row",
       backgroundColor: "#FAE5EF", 
+      elevation: 10, 
+      shadowColor: 'rgba(5,5,255,6)',
       borderBottomStartRadius: 25,
       borderBottomEndRadius: 25, 
-      elevation: 10, 
-      shadowColor: 'rgba(5,5,255,6)'
+      
     },
 
     body2: {
@@ -388,11 +389,9 @@ import { borderRadius } from 'styled-system';
 
     scannerScreenModalView: {
       margin: 20,
-      backgroundColor: "white",
       borderRadius: 20,
       padding: 35,
       alignItems: "center",
-      shadowColor: "#000",
       shadowOffset: {
         width: 0,
         height: 2,
@@ -400,6 +399,8 @@ import { borderRadius } from 'styled-system';
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 8,
+      backgroundColor: "#FAE5EF", 
+      shadowColor: 'rgba(5,5,255,6)',
     },
 
     scannerScreenModalView2: {
@@ -428,23 +429,38 @@ import { borderRadius } from 'styled-system';
 
     scannerScreenPressableMessage: {
       padding: 15,
-      backgroundColor: "gray",
       borderRadius: 20,
-      backgroundColor: "#616161",
       marginTop: "8%",
       marginLeft: "8%",
-      marginRight: "8%"
+      marginRight: "8%",
+      marginBottom: "5%",
+      backgroundColor: "#F0E0FF", 
+      elevation: 11, 
+      shadowColor: 'rgba(5,5,255,6)'
+    },
+
+    scannerScreenPressableButton: {
+      padding: 15,
+      borderRadius: 20,
+      marginTop: "8%",
+      marginLeft: "8%",
+      marginRight: "8%",
+      marginBottom: "5%",
+      backgroundColor: "#FAE1AF", 
+      elevation: 11, 
+      shadowColor: 'rgba(5,5,255,6)'
     },
 
     scannerScreenTextStyle: {
-      color: "white",
+      color: "black",
       fontWeight: "bold",
-      textAlign: "center",
+      textAlign: "center", 
     },
 
     scannerScreenModalText: {
       marginBottom: 15,
       textAlign: "center",
+      fontWeight: "bold",
     },
 
     qrCreationScreenQrAdi: {

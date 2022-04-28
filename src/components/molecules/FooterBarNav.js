@@ -30,7 +30,7 @@ function FooterBarNav(props) {
         <Text style={styles.iconText}>Ana Sayfa</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Notification")}
+        
         style={styles.btnWrapper}
       >
         <MaterialCommunityIconsIcon

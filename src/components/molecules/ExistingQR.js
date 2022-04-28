@@ -39,7 +39,6 @@ const Item = ({ qrName, qrId, mesajlar }) => {
 
   const handlePress = async () => {
     await qrSVG.toDataURL((data) => {
-      console.log("first");
       setImageSource(data);
     });
   };

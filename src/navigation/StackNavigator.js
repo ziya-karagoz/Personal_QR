@@ -7,7 +7,7 @@ import StartScreen from "../screens/StartScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
-import NotificationScreen from "../screens/NotificationScreen";
+
 import PaletteScreen from "../screens/PaletteScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 import QREditScreen from "../screens/QREditScreen";
@@ -29,11 +29,6 @@ function StackNavigator() {
             component={QRCreationScreen}
             options={{ headerShown: false }}
             ></Stack.Screen>
-            <Stack.Screen
-            name='Notification'
-            component={NotificationScreen}
-            options={{ headerShown: false }}
-            />
             <Stack.Screen
             name='Palette'
             component={PaletteScreen}
