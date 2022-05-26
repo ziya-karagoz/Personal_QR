@@ -43,28 +43,30 @@ const Item = (props) => {
         }}
       >
         <View style={{ flex: 1 }}>
-          <Text style={{ marginTop: "10%", marginLeft: "15%" }}>Mesaj:</Text>
+          <Text style={{ marginTop: "40%", marginLeft: "15%", textDecorationLine: "underline" }}>Mesaj:</Text>
         </View>
 
         <View style={{ flex: 4 }}>
           <TextInput
-            multiline
-            numberOfLines={10}
+            multiline = {true}
+            numberOfLines={4}
+            maxLength={108}
             onChangeText={(value) => {
               if (value === "") setMessage({ ...message, messageOne: msj1 });
               else setMessage({ ...message, messageOne: value });
             }}
             placeholder={msj1}
             style={styles.mesaj}
+            disableFullscreenUI={true}
           ></TextInput>
         </View>
 
         <View style={{ flex: 1 }}>
-          <TouchableOpacity onPress={addMessageButtonHandler}>
+          <TouchableOpacity onPress={addMessageButtonHandler} style = {{top: "25%"}}>
             <Image
               style={styles.editIcon}
               resizeMode='contain'
-              source={require("../../Assets/Images/editIcon.png")}
+              source={require("../../Assets/Images/edit.png")}
             ></Image>
           </TouchableOpacity>
         </View>
@@ -72,13 +74,13 @@ const Item = (props) => {
 
       <View style={styles.messageBlockContainer}>
         <View style={{ flex: 1 }}>
-          <Text style={{ left: "11%", top: "2%" }}>Cevap:</Text>
+          <Text style={{ left: "11%", top: "34%", textDecorationLine: "underline" }}>Cevap:</Text>
         </View>
 
         <View style={{ flex: 4 }}>
           <TextInput
             multiline
-            numberOfLines={10}
+            numberOfLines={4}
             onChangeText={(value) => {
               if (value === "") setMessage({ ...message, messageTwo: msj2 });
               else setMessage({ ...message, messageTwo: value });
@@ -88,7 +90,15 @@ const Item = (props) => {
           ></TextInput>
         </View>
 
-        <View style={{ flex: 1 }}></View>
+        <View style={{ flex: 1 }}>
+        <TouchableOpacity style = {{top: "14%", right:"2%"}}>
+            <Image
+              style={styles.editIcon}
+              resizeMode='contain'
+              source={require("../../Assets/Images/delete.png")}
+            ></Image>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

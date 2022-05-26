@@ -1,31 +1,41 @@
-import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import React from "react";
+import { View, TouchableOpacity } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-import allStyles from "./Styles"
+import allStyles from "./Styles";
 
 function HeaderBar(props) {
-
+  const { name, index, routes } = props;
   const navigation = useNavigation();
-  const styles = allStyles
+  const styles = allStyles;
 
   return (
     <View style={styles.barContainer}>
-      <TouchableOpacity onPress={() =>     
-      navigation.dispatch(DrawerActions.openDrawer())} style={styles.btnWrapper}>
-        <MaterialCommunityIconsIcon
-          name='account-outline'
-          style={ styles.iconHeader}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
+      <TouchableOpacity style={styles.btnWrapper} />
       <TouchableOpacity style={styles.btnWrapper}>
         <MaterialCommunityIconsIcon
           name='qrcode-edit'
           style={styles.iconHeader}
         ></MaterialCommunityIconsIcon>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.btnWrapper}></TouchableOpacity>
+      <View style={styles.btnWrapper}>
+        {name && (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.reset({
+                index: index,
+                routes: routes,
+              })
+            }
+          >
+            <MaterialCommunityIconsIcon
+              name={name}
+              style={styles.iconHeader}
+            ></MaterialCommunityIconsIcon>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }

@@ -8,6 +8,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+  renderers,
+} from "react-native-popup-menu";
+
 import QRCode from "react-native-qrcode-svg";
 import * as FileSystem from "expo-file-system";
 import * as IntentLauncher from "expo-intent-launcher";
@@ -18,6 +26,8 @@ import { displayQrList } from "../../store/qrState";
 import { useSnapshot } from "valtio";
 import qrState from "../../store/qrState";
 import allStyles from "./Styles";
+import { bottom } from "styled-system";
+import * as Clipboard from "expo-clipboard";
 
 let DATA;
 const styles = allStyles;
@@ -61,26 +71,58 @@ const Item = ({ qrName, qrId, mesajlar }) => {
     });
   };
 
-  const handleLongPress = async () => {
+  const edit = () => {
+    navigation.navigate("QREdit", {
+      qrAdi: qrName,
+      qrId: qrId,
+      mesajlar: mesajlar,
+    });
+  };
+
+  const save = async () => {
     const qrImagesDirectory = FileSystem.documentDirectory + "qrImages/";
     const fileName = qrName + ".png";
     saveQRAsImage(qrImagesDirectory, fileName, imageSource);
   };
 
+  const handleYazdir = async () => {
+    Clipboard.setString(qrId);
+    const text = await Clipboard.getStringAsync();
+    console.log(text);
+  };
+
   return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate("QREdit", {
-          qrAdi: qrName,
-          qrId: qrId,
-          mesajlar: mesajlar,
-        })
-      }
-      style={styles.existingQrContainer}
-      onLongPress={handleLongPress}
-      onPressIn={handlePress}
-    >
+    <View style={styles.existingQrContainer}>
       <View style={styles.existingQrBody1}>
+        <Menu
+          onOpen={handlePress}
+          renderer={renderers.SlideInMenu}
+          style={{ bottom: "5%", right: "35%", height: 3 }}
+        >
+          <MenuTrigger
+            customStyles={{
+              triggerOuterWrapper: styles.triggerOuterWrapper,
+              triggerWrapper: styles.triggerWrapper,
+            }}
+          />
+          <MenuOptions style={{ backgroundColor: "#FAE1AF" }}>
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={() => edit()}
+              text='Değiştir'
+            />
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={() => save()}
+              text='İndir'
+            />
+            <MenuOption
+              style={{ width: "100%", alignItems: "center" }}
+              onSelect={handleYazdir}
+              text='Yazdır'
+            />
+          </MenuOptions>
+        </Menu>
         <Text style={{ color: "black" }}>{qrName}</Text>
       </View>
       <View style={styles.existingQrBody2}>
@@ -90,7 +132,7 @@ const Item = ({ qrName, qrId, mesajlar }) => {
           backgroundColor='#F9E6FF'
         />
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

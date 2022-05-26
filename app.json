@@ -3,11 +3,13 @@
     "name": "Personal_QR",
     "slug": "PersonalQR",
     "version": "1.0.0",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "android": {
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.ziya72893.PersonalQR"
     }
   },
-
   "name": "Personal_QR"
 }

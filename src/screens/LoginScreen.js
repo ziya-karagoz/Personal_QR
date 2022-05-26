@@ -12,12 +12,17 @@ import { passwordValidator } from "../helpers/passwordValidator";
 import { login } from "../store/userState";
 import allStyles from "../components/molecules/Styles";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const styles = allStyles
+const styles = allStyles;
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState({ value: "", error: "" });
   const [password, setPassword] = useState({ value: "", error: "" });
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const onLoginPressed = () => {
     const emailError = emailValidator(email.value);
@@ -28,9 +33,30 @@ export default function LoginScreen({ navigation }) {
       setPassword({ ...password, error: passwordError });
       return;
     }
+    storeData({ email: email.value, password: password.value });
     login(email.value, password.value, navigation);
   };
 
+  const storeData = async (userLoginInfo) => {
+    try {
+      const jsonUserLoginInfo = JSON.stringify(userLoginInfo);
+      await AsyncStorage.setItem("@user", jsonUserLoginInfo);
+    } catch (e) {
+      console.log("ERR: ", e);
+    }
+  };
+  const getData = async () => {
+    try {
+      const stringifiedValue = await AsyncStorage.getItem("@user");
+      value = JSON.parse(stringifiedValue);
+      if (value !== null) {
+        console.log("ASD: ", value.email);
+        login(value.email, value.password, navigation);
+      }
+    } catch (e) {
+      // error reading value
+    }
+  };
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
@@ -67,11 +93,10 @@ export default function LoginScreen({ navigation }) {
       </Button>
       <View style={styles.row}>
         <Text>Hesabınız yok mu? </Text>
-        <TouchableOpacity onPress={() => navigation.replace("Register")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text style={styles.link}>Kayıt ol</Text>
         </TouchableOpacity>
       </View>
     </Background>
   );
 }
-

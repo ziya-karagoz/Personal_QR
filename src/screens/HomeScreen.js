@@ -1,27 +1,34 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 
-import MainHeaderBar from "../components/molecules/MainHeaderBar";
+import HeaderBar from "../components/molecules/HeaderBar";
 import FooterBar from "../components/molecules/FooterBar";
 import ExistingQR from "../components/molecules/ExistingQR";
 import { useSnapshot } from "valtio";
 import userState from "../store/userState";
 
 import { registerIndieID } from "native-notify";
-import axios from "axios";
+
+import { MenuProvider } from "react-native-popup-menu";
 
 function HomeScreen() {
   const { user } = useSnapshot(userState);
   useEffect(() => {
     const pushToken = user._id;
-    registerIndieID(pushToken, 2374, "a2GpbyQUY6ZIixvld1muE8");
+    registerIndieID(pushToken, 2786, "vQqx6BXvC3v73S40ZXbub3");
   }, []);
 
   return (
     <View style={{ flex: 1, backgroundColor: "#E5E4F2" }}>
-      <MainHeaderBar></MainHeaderBar>
+      <HeaderBar
+        index={1}
+        routes={[{ name: "Home" }, { name: "QRCreation" }]}
+        name={"qrcode-plus"}
+      ></HeaderBar>
       <View style={{ flex: 6 }}>
-        <ExistingQR></ExistingQR>
+        <MenuProvider>
+          <ExistingQR></ExistingQR>
+        </MenuProvider>
       </View>
       <FooterBar></FooterBar>
     </View>
