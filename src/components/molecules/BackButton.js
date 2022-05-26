@@ -1,9 +1,8 @@
 import React from "react";
-import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { TouchableOpacity, Image } from "react-native";
 import allStyles from "./Styles";
 
-
-const styles = allStyles
+const styles = allStyles;
 
 export default function BackButton({ goBack }) {
   return (

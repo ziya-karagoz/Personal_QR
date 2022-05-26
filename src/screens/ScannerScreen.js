@@ -29,9 +29,9 @@ export default function App({ navigation }) {
 
   const handleBarCodeScanned = async ({ type, data }) => {
     setScanned(true);
-    console.log("Data: ", data);
+    console.log("Datasa: ", data);
     let res = await axios.post(`${serverURL}/api/qr/scanQr`, {
-      data:data.trim(),
+      data: data.trim(),
     });
     if (res.status === 200) {
       const { message, qrOwner, qrName } = res.data;
@@ -44,13 +44,13 @@ export default function App({ navigation }) {
           `https://app.nativenotify.com/api/indie/notification`,
           {
             subID: qrOwner,
-            appId: 2374,
-            appToken: "a2GpbyQUY6ZIixvld1muE8",
+            appId: 2786,
+            appToken: "vQqx6BXvC3v73S40ZXbub3",
             title: "Bir QR'ınız taratıldı.",
             message: "QR adı: " + qrName,
           }
         );
-        console.log("1: "+message)
+        console.log("1: " + message);
         navigation.navigate("Scanned", {
           messageFromServer: message,
         });

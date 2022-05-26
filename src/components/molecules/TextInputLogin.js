@@ -1,11 +1,10 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, Text } from "react-native";
 import { TextInput as Input } from "react-native-paper";
 import { theme } from "../../core/theme";
 import allStyles from "./Styles";
 
-
-const styles = allStyles
+const styles = allStyles;
 
 export default function TextInput({ errorText, description, ...props }) {
   return (
@@ -20,9 +19,9 @@ export default function TextInput({ errorText, description, ...props }) {
       {description && !errorText ? (
         <Text style={styles.textInputLoginDescription}>{description}</Text>
       ) : null}
-      {errorText ? <Text style={styles.textInputLoginError}>{errorText}</Text> : null}
+      {errorText ? (
+        <Text style={styles.textInputLoginError}>{errorText}</Text>
+      ) : null}
     </View>
   );
 }
-
-

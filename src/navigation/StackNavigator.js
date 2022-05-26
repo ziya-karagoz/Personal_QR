@@ -8,48 +8,42 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
 
-import PaletteScreen from "../screens/PaletteScreen";
 import ScannerScreen from "../screens/ScannerScreen";
 import QREditScreen from "../screens/QREditScreen";
 import ScannedMessagesScreen from "../screens/ScannedMessagesScreen";
 
-
 const Stack = createStackNavigator();
 
 function StackNavigator() {
-    return (
-        <Stack.Navigator initialRouteName='Home'>
-            <Stack.Screen
-            name='Home'
-            component={HomeScreen}
-            options={{ headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-            name='QRCreation'
-            component={QRCreationScreen}
-            options={{ headerShown: false }}
-            ></Stack.Screen>
-            <Stack.Screen
-            name='Palette'
-            component={PaletteScreen}
-            options={{ headerShown: false }}
-            />
-            <Stack.Screen
-            name='Scanner'
-            component={ScannerScreen}
-            options={{ headerShown: false }}
-            />
-            <Stack.Screen 
-            name='QREdit'
-            component={QREditScreen} 
-            options={{ headerShown: false }}
-            />
-            <Stack.Screen 
-            name='Scanned'
-            component={ScannedMessagesScreen} 
-            options={{ headerShown: false }}
-            />
+  return (
+    <Stack.Navigator initialRouteName='Home'>
+      <Stack.Screen
+        name='Home'
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name='QRCreation'
+        component={QRCreationScreen}
+        options={{ headerShown: false }}
+      ></Stack.Screen>
+      <Stack.Screen
+        name='Scanner'
+        component={ScannerScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='QREdit'
+        component={QREditScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='Scanned'
+        component={ScannedMessagesScreen}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
-);}
+  );
+}
 
-export default  StackNavigator;
+export default StackNavigator;

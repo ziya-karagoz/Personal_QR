@@ -93,7 +93,7 @@ export default function LoginScreen({ navigation }) {
       </Button>
       <View style={styles.row}>
         <Text>Hesabınız yok mu? </Text>
-        <TouchableOpacity onPress={() => navigation.replace("Register")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text style={styles.link}>Kayıt ol</Text>
         </TouchableOpacity>
       </View>

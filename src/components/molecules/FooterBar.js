@@ -12,8 +12,8 @@ function FooterBar() {
   const handleLogout = () => {
     storeData();
     navigation.reset({
-      index: 1,
-      routes: [{ name: "Home" }, { name: "Login" }],
+      index: 0,
+      routes: [{ name: "Login" }],
     });
   };
   const storeData = async () => {
